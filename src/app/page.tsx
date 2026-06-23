@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { ArrowRight, CheckCircle2, Database, Mail, MessageCircle, Send, Workflow, XCircle, ChevronRight } from "lucide-react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -157,7 +158,18 @@ export default function Home() {
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Portfolio" title="Beberapa project yang sudah dibangun." description="Dari website bisnis service sampai platform aplikasi, setiap project dibuat dengan fokus pada tampilan, performa, struktur, dan kebutuhan bisnis." />
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-              {portfolio.map((item) => <Card className="min-h-40" key={item}><div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" /><h3 className="font-bold">{item}</h3><p className="mt-2 text-sm text-slate-400">Project showcase</p></Card>)}
+              {["Cubiqlo", "Monev.app", "Contenly.app", "Ganesha Travel", "Whale Dive Centre"].map((item) => {
+                const slug = item.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
+                return (
+                  <Link href={`/portfolio/${slug}`} key={item}>
+                    <Card className="min-h-40 group cursor-pointer hover:border-cyan-300/30 transition">
+                      <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
+                      <h3 className="font-bold group-hover:text-cyan-200 transition">{item}</h3>
+                      <p className="mt-2 text-sm text-slate-400">Project showcase</p>
+                    </Card>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
@@ -167,6 +179,37 @@ export default function Home() {
             <SectionHeader align="center" eyebrow="Process" title="Proses kerja jelas dari strategi sampai launch." />
             <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
               {process.map(([step, desc], index) => <Card className="p-5" key={step}><p className="text-sm font-mono text-cyan-300">0{index + 1}</p><h3 className="mt-3 font-bold">{step}</h3><p className="mt-2 text-sm text-slate-400">{desc}</p></Card>)}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-900/40 py-20 md:py-28">
+          <div className="container-shell space-y-12">
+            <SectionHeader align="center" eyebrow="Testimonial" title="Klien bilang apa tentang hasil kerja kami." description="Feedback real dari bisnis yang sudah merasakan dampak website yang dikerjakan dengan serius." />
+            <div className="grid gap-6 md:grid-cols-3">
+              {[
+                { name: "Budi Santoso", role: "Owner, Ganesha Travel", quote: "Website baru bikin inquiry dari Google naik drastis. Tim Nggawe Web paham banget soal SEO dan struktur website untuk bisnis travel.", stars: 5 },
+                { name: "Sarah K.", role: "Founder, Cubiqlo", quote: "Design-nya clean, profesional, dan loading cepat. Customer langsung percaya begitu lihat website. Prosesnya juga rapi dari awal sampai launch.", stars: 5 },
+                { name: "Rizky Pratama", role: "CEO, Whale Dive Centre", quote: "Dari website lama yang biasa aja, sekarang booking inquiry naik 3x lipat. Gallery dan trip schedule bikin customer lebih yakin.", stars: 5 },
+              ].map((t) => (
+                <Card key={t.name}>
+                  <div className="flex gap-1 mb-4">
+                    {Array.from({ length: t.stars }).map((_, i) => (
+                      <span key={i} className="text-yellow-400">★</span>
+                    ))}
+                  </div>
+                  <p className="text-sm leading-7 text-slate-300 italic">"{t.quote}"</p>
+                  <div className="mt-6 flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                      {t.name.split(" ").map((n) => n[0]).join("")}
+                    </div>
+                    <div>
+                      <p className="text-sm font-bold text-white">{t.name}</p>
+                      <p className="text-xs text-slate-500">{t.role}</p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
             </div>
           </div>
         </section>

@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod/v4";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
+import { analytics } from "@/lib/analytics";
 
 const briefSchema = z.object({
   name: z.string().min(2, "Nama wajib diisi"),
@@ -62,6 +63,7 @@ export function BriefForm() {
       });
       if (!res.ok) throw new Error("Gagal mengirim");
       setSubmitted(true);
+      analytics.formSubmit("brief_project");
     } catch {
       setSubmitError("Gagal mengirim. Coba lagi atau hubungi via WhatsApp.");
     }

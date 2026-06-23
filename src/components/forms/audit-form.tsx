@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod/v4";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
+import { analytics } from "@/lib/analytics";
 
 const auditSchema = z.object({
   name: z.string().min(2, "Nama wajib diisi"),
@@ -45,6 +46,7 @@ export function AuditForm() {
       });
       if (!res.ok) throw new Error("Gagal mengirim");
       setSubmitted(true);
+      analytics.formSubmit("audit_request");
     } catch {
       setSubmitError("Gagal mengirim. Coba lagi atau hubungi via WhatsApp.");
     }
