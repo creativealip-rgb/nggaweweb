@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 
 const data = {
   eyebrow: "Jasa Business Automation",
-  h1: "Kurangi kerja manual, rapikan lead, dan percepat follow-up.",
+  h1: "Jasa Automation Bisnis untuk Merapikan Lead, CRM, dan Workflow.",
   subheadline:
-    "Kami bantu hubungkan form, website, database, email, spreadsheet, dan notifikasi agar proses bisnis berjalan lebih otomatis.",
+    "Kami bantu otomatisasi bisnis, WhatsApp automation, CRM sederhana, n8n workflow, form, database, email, spreadsheet, dan notifikasi agar proses bisnis berjalan lebih otomatis.",
   primaryCta: { label: "Audit Workflow Gratis", href: "/audit-gratis" },
   secondaryCta: { label: "Lihat Demo Automation", href: whatsappHref },
   problems: [
@@ -55,7 +55,7 @@ const data = {
     { name: "Internal Tools", description: "Workflow automation untuk lead intake, reporting, dan follow-up." },
   ],
   pillarSections: [
-    { title: "Apa itu jasa automation bisnis?", body: "Jasa automation bisnis adalah layanan membuat alur kerja otomatis agar tugas berulang tidak selalu dikerjakan manual. Contohnya lead dari website otomatis masuk spreadsheet, tim dapat notifikasi, customer menerima balasan, dan follow-up dibuat sebagai reminder.", points: ["Mengurangi input data manual.", "Mempercepat respons ke calon pelanggan.", "Merapikan data lead dan aktivitas follow-up.", "Membuat laporan lebih konsisten."] },
+    { title: "Apa itu jasa automation bisnis dan otomatisasi bisnis?", body: "Jasa automation bisnis adalah layanan membuat alur kerja otomatis agar tugas berulang tidak selalu dikerjakan manual. Otomatisasi bisnis bisa menghubungkan website, WhatsApp automation, CRM, spreadsheet, email, dan notifikasi. Contohnya lead dari website otomatis masuk spreadsheet, tim dapat notifikasi, customer menerima balasan, dan follow-up dibuat sebagai reminder.", points: ["Mengurangi input data manual.", "Mempercepat respons ke calon pelanggan.", "Merapikan data lead dan aktivitas follow-up.", "Membuat laporan lebih konsisten."] },
     { title: "Workflow yang paling cepat memberi dampak", body: "Automation paling efektif dimulai dari proses yang sering berulang dan punya dampak langsung ke revenue. Untuk UMKM dan bisnis jasa, area paling umum adalah lead intake, WhatsApp notification, CRM sederhana, invoice, reminder pembayaran, dan report mingguan.", points: ["Form website ke WhatsApp atau Telegram.", "Lead masuk otomatis ke Google Sheets, Airtable, atau CRM.", "Follow-up reminder untuk sales.", "Email autoresponder setelah form diisi."] },
     { title: "Tools yang bisa dipakai", body: "Automation bisa dibuat dengan banyak tools. n8n cocok untuk workflow fleksibel dan self-hosted. Make dan Zapier cocok untuk integrasi cepat. Google Sheets bisa jadi database awal untuk UMKM. Pilihan tools tergantung budget, kompleksitas, dan kebutuhan keamanan data.", points: ["n8n untuk workflow custom dan self-hosted.", "Make/Zapier untuk integrasi cepat tanpa banyak setup server.", "Google Sheets/Airtable untuk database sederhana.", "WhatsApp API, Telegram, dan email untuk notifikasi."] },
     { title: "Cara mulai tanpa bikin sistem terlalu kompleks", body: "Kesalahan umum adalah langsung ingin mengotomasi semua proses. Cara aman adalah mulai dari satu workflow yang jelas, ukur hasilnya, lalu tambah alur lain. Automation harus membantu tim, bukan membuat proses makin sulit dipahami.", points: ["Pilih satu proses yang paling banyak makan waktu.", "Buat flow sederhana: trigger, action, notification, log.", "Test dengan skenario real.", "Dokumentasikan cara pakai dan cara memperbaiki error." ] },
@@ -83,6 +83,10 @@ const data = {
     { question: "Bisnis kecil cocok pakai automation?", answer: "Sangat cocok. Justru bisnis kecil yang paling untung karena bisa hemat waktu dan tidak perlu hire orang tambahan." },
     { question: "Berapa biaya automation?", answer: "Mulai dari Rp5 juta untuk workflow sederhana. Workflow kompleks dengan banyak integrasi akan menyesuaikan scope." },
     { question: "Apakah perlu coding?", answer: "Tidak. n8n dan Make pakai visual workflow builder. Kami yang setup, kamu yang pakai." },
+    { question: "Apa itu otomatisasi bisnis?", answer: "Otomatisasi bisnis adalah proses menghubungkan tools dan alur kerja agar tugas berulang seperti input data, notifikasi, follow-up, dan laporan berjalan otomatis." },
+    { question: "Apakah WhatsApp automation aman untuk bisnis?", answer: "Aman jika dipakai untuk respons, notifikasi, dan follow-up yang relevan. Hindari spam broadcast tanpa izin karena bisa merusak trust dan berisiko pada akun." },
+    { question: "Apakah automation cocok untuk UMKM?", answer: "Cocok. UMKM bisa mulai dari workflow sederhana seperti form ke spreadsheet, notifikasi WhatsApp, CRM sederhana, reminder follow-up, dan automation UMKM yang fokus menghemat waktu operasional." },
+    { question: "Apakah n8n bisa dihubungkan ke website?", answer: "Bisa. n8n bisa menerima webhook dari website, memproses data form, mengirim notifikasi, menyimpan data ke CRM, dan menjalankan workflow lanjutan." },
   ],
   relatedServices: [
     { label: "Jasa Pembuatan Website", href: "/jasa-pembuatan-website", description: "Website profesional yang bikin bisnis terlihat kredibel dan siap dapat lead." },

@@ -15,9 +15,9 @@ export const metadata: Metadata = {
 
 const data = {
   eyebrow: "Jasa SEO",
-  h1: "Bantu calon customer menemukan bisnis kamu di Google.",
+  h1: "Jasa SEO untuk Bisnis agar Lebih Mudah Ditemukan di Google.",
   subheadline:
-    "Nggawe Web bantu susun fondasi SEO dari struktur website, keyword map, technical setup, service pages, sampai strategi konten lokal.",
+    "Kami bantu optimasi SEO website lewat audit teknis, riset keyword, SEO on-page, content cluster, local SEO, dan tracking Google Search Console agar traffic organik lebih terarah.",
   primaryCta: { label: "Audit SEO Gratis", href: "/audit-gratis" },
   secondaryCta: { label: "Lihat SEO Plan", href: whatsappHref },
   problems: [
@@ -57,7 +57,7 @@ const data = {
   ],
   pillarSections: [
     { title: "Apa itu jasa SEO dan kenapa bisnis membutuhkannya?", body: "Jasa SEO adalah layanan optimasi website agar lebih mudah ditemukan di Google untuk keyword yang dicari calon pelanggan. SEO mencakup technical SEO, struktur halaman, riset keyword, optimasi konten, internal link, local SEO, dan monitoring performa.", points: ["SEO membantu bisnis mendapatkan traffic organik tanpa terus bergantung pada iklan.", "SEO membangun aset jangka panjang lewat konten dan struktur website.", "SEO mempertemukan halaman layanan dengan search intent calon pelanggan."] },
-    { title: "Komponen utama SEO modern", body: "SEO modern tidak cukup dengan memasang plugin. Google menilai kualitas konten, pengalaman pengguna, struktur internal link, kecepatan, mobile usability, schema, dan sinyal kepercayaan. Untuk bisnis jasa, halaman layanan dan artikel pendukung harus saling terhubung dalam topic cluster.", points: ["Technical SEO: speed, sitemap, canonical, robots, indexability.", "On-page SEO: title, heading, keyword, konten, FAQ, CTA.", "Content SEO: blog cluster yang menjawab pertanyaan calon pelanggan.", "Local SEO: Google Business Profile, review, lokasi, dan NAP konsisten."] },
+    { title: "Komponen utama optimasi SEO modern", body: "Optimasi SEO modern tidak cukup dengan memasang plugin. Google menilai kualitas konten, pengalaman pengguna, struktur internal link, kecepatan, mobile usability, schema, dan sinyal kepercayaan. Untuk bisnis jasa, halaman layanan dan artikel pendukung harus saling terhubung dalam topic cluster.", points: ["Technical SEO: speed, sitemap, canonical, robots, indexability.", "SEO on-page: title, heading, keyword, konten, FAQ, CTA.", "Content SEO: blog cluster yang menjawab pertanyaan calon pelanggan.", "Local SEO: Google Business Profile, review, lokasi, dan NAP konsisten."] },
     { title: "Strategi SEO untuk dapat lead", body: "Tujuan SEO bisnis bukan traffic kosong. Targetnya adalah visitor yang punya intent jelas: mencari vendor, membandingkan harga, mencari solusi, atau butuh konsultasi. Karena itu keyword harus dipetakan ke halaman yang tepat: service page untuk keyword transaksional, artikel untuk keyword informasional.", points: ["Keyword transaksional diarahkan ke halaman layanan.", "Keyword informasional dibuat sebagai artikel pendukung.", "Artikel cluster link balik ke halaman jasa SEO.", "CTA ditempatkan setelah edukasi dan FAQ."] },
     { title: "Cara mengukur keberhasilan SEO", body: "SEO perlu diukur dengan data, bukan feeling. Gunakan Google Search Console untuk melihat query, impression, CTR, posisi rata-rata, dan halaman yang mulai naik. Halaman yang sudah muncul di posisi 8-20 biasanya jadi prioritas optimasi karena paling dekat ke page 1.", points: ["Pantau indexed pages dan coverage issue.", "Optimasi artikel yang ranking page 2.", "Naikkan CTR dengan title dan meta description lebih kuat.", "Tambahkan internal link dari halaman yang sudah punya traffic."] },
     { title: "Paket SEO dan estimasi biaya", body: "Biaya jasa SEO bergantung pada kondisi website, jumlah keyword, tingkat kompetisi, kebutuhan konten, dan target lokasi. SEO setup biasanya fokus pada audit, metadata, sitemap, schema, dan struktur halaman. SEO bulanan mencakup riset keyword, konten, internal link, optimasi halaman yang sudah ranking, dan laporan performa.", points: ["SEO setup: cocok untuk website baru yang butuh fondasi.", "SEO bulanan: cocok untuk bisnis yang ingin growth organik konsisten.", "Local SEO: cocok untuk bisnis berbasis area dan Google Maps.", "Content SEO: cocok untuk membangun topical authority."] },
@@ -86,6 +86,10 @@ const data = {
     { question: "Apakah SEO dijamin page 1 Google?", answer: "Tidak ada yang bisa jamin page 1. Tapi kami bantu fondasi sekuat mungkin agar website lebih siap bersaing." },
     { question: "Apakah perlu blog?", answer: "Blog sangat membantu SEO karena bisa target banyak keyword. Kami bantu siapkan topic plan dan template." },
     { question: "Berapa biaya jasa SEO?", answer: "Tergantung scope. SEO basic setup mulai dari Rp5 juta. Monthly SEO retainer bisa dibahas sesuai kebutuhan." },
+    { question: "Apa bedanya SEO setup dan SEO bulanan?", answer: "SEO setup fokus membangun fondasi teknis dan struktur halaman. SEO bulanan fokus pada konten, optimasi ranking, internal link, monitoring GSC, dan growth traffic." },
+    { question: "Berapa lama optimasi SEO mulai terlihat?", answer: "Keyword low competition bisa mulai terlihat dalam beberapa minggu setelah index. Keyword medium-high biasanya butuh 3 sampai 12 bulan tergantung kompetisi dan authority website." },
+    { question: "Apakah jasa SEO menjamin page 1?", answer: "Tidak ada SEO sehat yang bisa menjamin page 1 karena ranking ditentukan Google dan kompetisi terus berubah. Yang bisa dijamin adalah proses, transparansi, dan optimasi berbasis data." },
+    { question: "Apakah SEO cocok untuk UMKM?", answer: "Cocok, terutama UMKM yang ingin mendapat lead organik dari Google, Google Maps, dan artikel edukasi tanpa bergantung penuh pada iklan." },
   ],
   relatedServices: [
     { label: "Jasa Pembuatan Website", href: "/jasa-pembuatan-website", description: "Website profesional yang bikin bisnis terlihat kredibel dan siap dapat lead." },
