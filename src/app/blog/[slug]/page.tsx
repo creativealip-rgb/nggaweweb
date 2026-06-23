@@ -6,7 +6,7 @@ import { LinkButton } from "@/components/ui/button";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { blogPosts } from "@/content/blog";
-import { whatsappHref } from "@/content/site";
+import { whatsappHref, siteConfig } from "@/content/site";
 import { ArrowRight, Clock } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -36,8 +36,20 @@ export default async function BlogDetailPage({ params }: Props) {
 
   const related = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 3);
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.publishedAt,
+    author: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
+    publisher: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
+    mainEntityOfPage: { "@type": "WebPage", "@id": `${siteConfig.url}/blog/${post.slug}` },
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <SiteHeader />
       <main>
         <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
@@ -58,14 +70,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
         <section className="py-20 md:py-28">
           <div className="container-shell max-w-3xl">
-            <article className="prose prose-invert prose-slate max-w-none">
-              <p className="text-lg leading-8 text-slate-300">
-                Artikel ini sedang dalam proses penulisan. Konten lengkap akan segera tersedia.
-              </p>
-              <p className="text-lg leading-8 text-slate-300">
-                Sambil menunggu, kamu bisa konsultasi langsung tentang kebutuhan website, SEO, atau automation bisnis kamu.
-              </p>
-            </article>
+            <article className="prose prose-invert prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
 
             <div className="mt-12 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8">
               <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>

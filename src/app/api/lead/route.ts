@@ -55,7 +55,7 @@ export async function POST(request: Request) {
           Authorization: `Bearer ${resendKey}`,
         },
         body: JSON.stringify({
-          from: "Nggawe Web <halo@nggaweweb.com>",
+          from: "Nggawe Web <halo@nggawe.web.id>",
           to: body.email,
           subject:
             body.type === "audit_request"

@@ -1,4 +1,9 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { LinkButton } from "@/components/ui/button";
 import { whatsappHref } from "@/content/site";
 
@@ -11,15 +16,24 @@ const nav = [
 ];
 
 export function SiteHeader() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/70 backdrop-blur-xl">
       <div className="container-shell flex h-20 items-center justify-between">
         <Link className="font-heading text-xl font-black tracking-[-0.04em]" href="/">
           Nggawe<span className="text-cyan-300">Web</span>
         </Link>
+
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-7 text-sm font-semibold text-slate-300 lg:flex">
           {nav.map((item) => (
-            <Link className="transition hover:text-white" href={item.href} key={item.href}>
+            <Link
+              className={`transition hover:text-white ${pathname === item.href ? "text-cyan-300" : ""}`}
+              href={item.href}
+              key={item.href}
+            >
               {item.label}
             </Link>
           ))}
@@ -27,10 +41,62 @@ export function SiteHeader() {
         <div className="hidden lg:block">
           <LinkButton href={whatsappHref}>Konsultasi Gratis</LinkButton>
         </div>
-        <Link className="rounded-full border border-white/10 px-4 py-2 text-sm font-bold lg:hidden" href={whatsappHref}>
-          Chat
-        </Link>
+
+        {/* Mobile: hamburger + chat */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <Link className="rounded-full border border-white/10 px-4 py-2 text-sm font-bold" href={whatsappHref}>
+            Chat
+          </Link>
+          <button
+            onClick={() => setOpen(!open)}
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-slate-300 transition hover:text-white"
+            aria-label={open ? "Tutup menu" : "Buka menu"}
+          >
+            {open ? (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M18 6 6 18" /><path d="m6 6 12 12" />
+              </svg>
+            ) : (
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="4" x2="20" y1="12" y2="12" /><line x1="4" x2="20" y1="6" y2="6" /><line x1="4" x2="20" y1="18" y2="18" />
+              </svg>
+            )}
+          </button>
+        </div>
       </div>
+
+      {/* Mobile drawer */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl lg:hidden"
+          >
+            <nav className="container-shell flex flex-col gap-1 py-4">
+              {nav.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className={`rounded-lg px-4 py-3 text-sm font-semibold transition hover:bg-white/5 ${
+                    pathname === item.href ? "text-cyan-300" : "text-slate-300"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+              <div className="mt-3 px-4">
+                <LinkButton className="w-full text-center" href={whatsappHref}>
+                  Konsultasi Gratis
+                </LinkButton>
+              </div>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

@@ -30,7 +30,7 @@ export const portfolioItems: PortfolioItem[] = [
     liveUrl: "https://cubiqlo.com",
     year: "2025",
     featured: true,
-    screenshot: "/screenshots/cubiqlo.png",
+    screenshot: "/screenshots/cubiqlo.svg",
   },
   {
     slug: "monev-app",
@@ -46,7 +46,7 @@ export const portfolioItems: PortfolioItem[] = [
     liveUrl: "https://monev.app",
     year: "2025",
     featured: true,
-    screenshot: "/screenshots/monev-app.png",
+    screenshot: "/screenshots/monev-app.svg",
   },
   {
     slug: "contenly-app",
@@ -62,7 +62,7 @@ export const portfolioItems: PortfolioItem[] = [
     liveUrl: "https://contenly.app",
     year: "2025",
     featured: true,
-    screenshot: "/screenshots/contenly-app.png",
+    screenshot: "/screenshots/contenly-app.svg",
   },
   {
     slug: "ganesha-travel",
@@ -78,7 +78,7 @@ export const portfolioItems: PortfolioItem[] = [
     liveUrl: "https://ganeshatravel.com",
     year: "2025",
     featured: false,
-    screenshot: "/screenshots/ganesha-travel.png",
+    screenshot: "/screenshots/ganesha-travel.svg",
   },
   {
     slug: "whale-dive-centre",
@@ -94,6 +94,6 @@ export const portfolioItems: PortfolioItem[] = [
     liveUrl: "https://whaledivecentre.com",
     year: "2025",
     featured: false,
-    screenshot: "/screenshots/whale-dive-centre.png",
+    screenshot: "/screenshots/whale-dive-centre.svg",
   },
 ];

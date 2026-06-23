@@ -22,9 +22,32 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness"],
+  name: "Nggawe Web",
+  url: siteConfig.url,
+  description: siteConfig.description,
+  email: siteConfig.email,
+  telephone: `+${siteConfig.whatsappNumber}`,
+  areaServed: "ID",
+  serviceType: ["Website Development", "SEO Optimization", "Business Automation"],
+  sameAs: [
+    "https://instagram.com/nggaweweb",
+    "https://linkedin.com/company/nggaweweb",
+    "https://github.com/nggaweweb",
+  ],
+};
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="id" className={`${inter.variable} ${sora.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         <Analytics />
         {children}

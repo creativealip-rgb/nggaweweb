@@ -5,12 +5,23 @@ services:
       dockerfile: Dockerfile
     container_name: nggaweweb
     restart: unless-stopped
-    ports:
-      - "3003:3000"
+    expose:
+      - "3000"
     env_file:
       - .env
     networks:
       - dokploy-network
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=dokploy-network
+      - traefik.http.routers.nggawe-web.rule=Host(`nggawe.web.id`)
+      - traefik.http.routers.nggawe-web.entrypoints=websecure
+      - traefik.http.routers.nggawe-web.tls.certresolver=letsencrypt
+      - traefik.http.routers.nggawe-web-http.rule=Host(`nggawe.web.id`)
+      - traefik.http.routers.nggawe-web-http.entrypoints=web
+      - traefik.http.routers.nggawe-web-http.middlewares=nggawe-web-redirect
+      - traefik.http.middlewares.nggawe-web-redirect.redirectscheme.scheme=https
+      - traefik.http.services.nggawe-web.loadbalancer.server.port=3000
 
 networks:
   dokploy-network:
