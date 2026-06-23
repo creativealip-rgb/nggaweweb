@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { blogPosts } from "@/content/blog";
+import { getPublishedPosts } from "@/lib/blog-store";
 import { ArrowRight, Clock } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -33,7 +33,7 @@ export default function BlogPage() {
         <section className="py-20 md:py-28">
           <div className="container-shell">
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {blogPosts.map((post) => (
+              {getPublishedPosts().map((post) => (
                 <Link href={`/blog/${post.slug}`} key={post.slug}>
                   <Card className="group flex h-full flex-col">
                     <div className="mb-4 h-40 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
