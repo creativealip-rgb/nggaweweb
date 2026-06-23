@@ -17,6 +17,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.url,
   },
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || "",
+  },
   openGraph: {
     title: "Nggawe Web — Jasa Website, SEO, dan Automation untuk Bisnis",
     description: siteConfig.description,

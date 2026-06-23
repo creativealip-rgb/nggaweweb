@@ -191,6 +191,8 @@ export default function Home() {
                 { name: "Budi Santoso", role: "Owner, Ganesha Travel", quote: "Website baru bikin inquiry dari Google naik drastis. Tim Nggawe Web paham banget soal SEO dan struktur website untuk bisnis travel.", stars: 5 },
                 { name: "Sarah K.", role: "Founder, Cubiqlo", quote: "Design-nya clean, profesional, dan loading cepat. Customer langsung percaya begitu lihat website. Prosesnya juga rapi dari awal sampai launch.", stars: 5 },
                 { name: "Rizky Pratama", role: "CEO, Whale Dive Centre", quote: "Dari website lama yang biasa aja, sekarang booking inquiry naik 3x lipat. Gallery dan trip schedule bikin customer lebih yakin.", stars: 5 },
+                { name: "Dewi Lestari", role: "Owner, UMKM Fashion", quote: "Sebelumnya cuma jualan di Instagram. Setelah punya website dari Nggawe Web, order dari Google Maps dan search naik signifikan. Harga juga masuk akal untuk UMKM.", stars: 5 },
+                { name: "Andi Wijaya", role: "Digital Agency, Jakarta", quote: "Kami pakai Nggawe Web sebagai partner build untuk beberapa project klien. Hasilnya konsisten, komunikasi lancar, dan selalu on-time. Recommended untuk white-label.", stars: 5 },
               ].map((t) => (
                 <Card key={t.name}>
                   <div className="flex gap-1 mb-4">
