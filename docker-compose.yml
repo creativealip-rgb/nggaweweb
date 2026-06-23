@@ -1,0 +1,17 @@
+services:
+  nggaweweb:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nggaweweb
+    restart: unless-stopped
+    ports:
+      - "3003:3000"
+    env_file:
+      - .env
+    networks:
+      - dokploy-network
+
+networks:
+  dokploy-network:
+    external: true

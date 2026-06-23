@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2, Database, Mail, MessageCircle, Send, Workflow } from "lucide-react";
+import { ArrowRight, CheckCircle2, Database, Mail, MessageCircle, Send, Workflow, XCircle, ChevronRight } from "lucide-react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +16,14 @@ const painPoints = [
 ];
 
 const portfolio = ["Cubiqlo", "Monev.app", "Contenly.app", "Ganesha Travel", "Whale Dive Centre"];
-const process = ["Discovery", "Strategy", "Design", "Build", "Automation", "Launch"];
+const process: [string, string][] = [
+  ["Discovery", "Pahami bisnis, target, dan kebutuhan."],
+  ["Strategy", "Rancang struktur, konten, dan SEO plan."],
+  ["Design", "Buat UI/UX yang profesional dan rapi."],
+  ["Build", "Develop website dengan performa tinggi."],
+  ["Automation", "Setup form, notifikasi, dan workflow."],
+  ["Launch", "Deploy, test, dan go-live."],
+];
 
 export default function Home() {
   return (
@@ -84,7 +91,7 @@ export default function Home() {
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {painPoints.map(([title, body]) => (
                 <Card key={title}>
-                  <CheckCircle2 className="mb-5 text-cyan-300" />
+                  <XCircle className="mb-5 text-red-400" />
                   <h3 className="font-heading text-xl font-bold tracking-[-0.03em]">{title}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">{body}</p>
                 </Card>
@@ -118,18 +125,31 @@ export default function Home() {
         <section className="py-20 md:py-28">
           <div className="container-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             <SectionHeader eyebrow="Automation" title="Bayangkan lead dari website langsung masuk ke sistem kamu." description="Saat calon customer isi form, data otomatis tersimpan, tim dapat notifikasi, email balasan terkirim, dan follow-up lebih cepat." />
-            <Card className="grid gap-4 md:grid-cols-2">
+            <div className="space-y-3">
               {[
-                [MessageCircle, "Form Website"],
-                [Database, "Lead Database"],
-                [Send, "Telegram/WhatsApp Notification"],
-                [Mail, "Email Autoresponder"],
-                [Workflow, "Follow-up Task"],
-              ].map(([Icon, label]) => {
+                [MessageCircle, "Form Website", "Customer isi form di website"],
+                [Database, "Lead Database", "Data tersimpan otomatis di sistem"],
+                [Send, "Telegram/WhatsApp Notification", "Tim langsung dapat notifikasi"],
+                [Mail, "Email Autoresponder", "Customer dapat email balasan"],
+                [Workflow, "Follow-up Task", "Task follow-up terbuat otomatis"],
+              ].map(([Icon, label, desc], i, arr) => {
                 const NodeIcon = Icon as typeof MessageCircle;
-                return <div className="flex items-center gap-3 rounded-2xl border border-cyan-300/15 bg-cyan-300/5 p-4" key={label as string}><NodeIcon className="text-cyan-300" size={20} /><span className="font-semibold">{label as string}</span></div>;
+                return (
+                  <div key={label as string}>
+                    <div className="flex items-center gap-4 rounded-2xl border border-cyan-300/15 bg-cyan-300/5 p-4">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-300/10">
+                        <NodeIcon className="text-cyan-300" size={20} />
+                      </div>
+                      <div>
+                        <p className="font-semibold">{label as string}</p>
+                        <p className="text-sm text-slate-400">{desc as string}</p>
+                      </div>
+                    </div>
+                    {i < arr.length - 1 && <div className="flex justify-center py-1"><ChevronRight className="rotate-90 text-cyan-300/40" size={20} /></div>}
+                  </div>
+                );
               })}
-            </Card>
+            </div>
           </div>
         </section>
 
@@ -146,7 +166,7 @@ export default function Home() {
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Process" title="Proses kerja jelas dari strategi sampai launch." />
             <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-              {process.map((step, index) => <Card className="p-5" key={step}><p className="text-sm font-mono text-cyan-300">0{index + 1}</p><h3 className="mt-3 font-bold">{step}</h3></Card>)}
+              {process.map(([step, desc], index) => <Card className="p-5" key={step}><p className="text-sm font-mono text-cyan-300">0{index + 1}</p><h3 className="mt-3 font-bold">{step}</h3><p className="mt-2 text-sm text-slate-400">{desc}</p></Card>)}
             </div>
           </div>
         </section>

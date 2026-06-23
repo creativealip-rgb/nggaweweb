@@ -5,7 +5,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { whatsappHref } from "@/content/site";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type ServicePageData = {
@@ -73,7 +73,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {data.problems.map((p) => (
                 <Card key={p.title}>
-                  <CheckCircle2 className="mb-5 text-cyan-300" />
+                  <XCircle className="mb-5 text-red-400" />
                   <h3 className="font-heading text-xl font-bold tracking-[-0.03em]">{p.title}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">{p.body}</p>
                 </Card>
