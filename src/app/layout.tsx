@@ -3,6 +3,8 @@ import { Geist_Mono, Inter, Sora } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/content/site";
 import { Analytics } from "@/components/analytics/analytics-provider";
+import { WhatsAppFloat } from "@/components/layout/whatsapp-float";
+import { BackToTop } from "@/components/layout/back-to-top";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 const sora = Sora({ variable: "--font-sora", subsets: ["latin"] });
@@ -43,6 +45,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="id" className={`${inter.variable} ${sora.variable} ${geistMono.variable} antialiased`}>
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="alternate" type="application/rss+xml" title="Nggawe Web Blog" href="/feed.xml" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -51,6 +55,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <body>
         <Analytics />
         {children}
+        <WhatsAppFloat />
+        <BackToTop />
       </body>
     </html>
   );

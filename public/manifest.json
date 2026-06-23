@@ -1,0 +1,20 @@
+{
+  "name": "Nggawe Web — Jasa Website, SEO, dan Automation",
+  "short_name": "Nggawe Web",
+  "description": "Jasa pembuatan website profesional, SEO-ready, dan automation untuk bisnis.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#020617",
+  "theme_color": "#0891b2",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "id",
+  "dir": "ltr"
+}

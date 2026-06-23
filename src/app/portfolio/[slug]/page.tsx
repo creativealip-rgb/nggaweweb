@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
@@ -67,7 +68,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
             </div>
             <div className="rounded-[2rem] border border-white/15 bg-slate-900/80 p-6 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
               <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950">
-                <img src={item.screenshot} alt={`${item.name} screenshot`} className="w-full object-cover" />
+                <Image src={item.screenshot} alt={`${item.name} screenshot`} width={800} height={450} className="w-full object-cover" />
               </div>
             </div>
           </div>

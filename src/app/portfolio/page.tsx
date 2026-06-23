@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { LinkButton } from "@/components/ui/button";
@@ -61,8 +62,8 @@ export default function PortfolioPage() {
               {portfolioItems.map((item) => (
                 <Link href={`/portfolio/${item.slug}`} key={item.slug}>
                   <Card className="group flex h-full flex-col">
-                    <div className="mb-5 h-40 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10">
-                      <img src={item.screenshot} alt={`${item.name} screenshot`} className="h-full w-full object-cover object-top" />
+                    <div className="relative mb-5 h-40 overflow-hidden rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10">
+                      <Image src={item.screenshot} alt={`${item.name} screenshot`} fill className="object-cover object-top" sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <Badge>{item.projectType}</Badge>

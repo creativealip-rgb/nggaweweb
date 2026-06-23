@@ -25,8 +25,30 @@ export type ServicePageData = {
 };
 
 export function ServicePage({ data }: { data: ServicePageData }) {
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: data.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: { "@type": "Answer", text: faq.answer },
+    })),
+  };
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: data.eyebrow,
+    description: data.subheadline,
+    provider: { "@type": "Organization", name: "Nggawe Web", url: "https://nggawe.web.id" },
+    areaServed: "ID",
+    serviceType: data.eyebrow,
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }} />
       <SiteHeader />
       <main>
         {/* Hero */}
