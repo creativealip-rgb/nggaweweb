@@ -10,6 +10,8 @@ import type { LucideIcon } from "lucide-react";
 
 export type ServicePageData = {
   relatedServices?: { label: string; href: string; description: string }[];
+  pillarSections?: { title: string; body: string; points?: string[] }[];
+  clusterLinks?: { label: string; href: string }[];
   eyebrow: string;
   h1: string;
   subheadline: string;
@@ -164,6 +166,50 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             </div>
           </div>
         </section>
+
+
+        {/* Pillar Content */}
+        {data.pillarSections && data.pillarSections.length > 0 && (
+          <section className="py-20 md:py-28">
+            <div className="container-shell space-y-12">
+              <SectionHeader align="center" eyebrow="Panduan Lengkap" title={`Panduan ${data.eyebrow} untuk bisnis`} />
+              <div className="mx-auto max-w-4xl space-y-10">
+                {data.pillarSections.map((section) => (
+                  <Card key={section.title} className="p-7 md:p-9">
+                    <h2 className="font-heading text-2xl font-black tracking-[-0.04em] text-white md:text-3xl">{section.title}</h2>
+                    <p className="mt-4 text-base leading-8 text-slate-300">{section.body}</p>
+                    {section.points && section.points.length > 0 && (
+                      <ul className="mt-6 space-y-3">
+                        {section.points.map((point) => (
+                          <li className="flex gap-3 text-slate-300" key={point}>
+                            <CheckCircle2 className="mt-0.5 shrink-0 text-cyan-300" size={18} />
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Cluster Links */}
+        {data.clusterLinks && data.clusterLinks.length > 0 && (
+          <section className="bg-slate-900/40 py-20 md:py-28">
+            <div className="container-shell space-y-12">
+              <SectionHeader align="center" eyebrow="Topic Cluster" title="Artikel pendukung untuk mendalami topik ini" />
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {data.clusterLinks.map((link) => (
+                  <a key={link.href} href={link.href} className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-cyan-400/40">
+                    <span className="text-sm font-semibold text-slate-300 group-hover:text-cyan-300">{link.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* FAQ */}
         <section className="py-20 md:py-28">
