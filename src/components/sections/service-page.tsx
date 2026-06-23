@@ -9,6 +9,7 @@ import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type ServicePageData = {
+  relatedServices?: { label: string; href: string; description: string }[];
   eyebrow: string;
   h1: string;
   subheadline: string;
@@ -25,6 +26,8 @@ export type ServicePageData = {
 };
 
 export function ServicePage({ data }: { data: ServicePageData }) {
+  const toSlug = (name: string) => name.toLowerCase().replace(/\s+/g, "-");
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -150,11 +153,13 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <SectionHeader align="center" eyebrow="Portfolio" title="Project terkait" />
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
               {data.portfolioItems.map((item) => (
-                <Card key={item.name}>
-                  <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
-                  <h3 className="font-bold">{item.name}</h3>
-                  <p className="mt-2 text-sm text-slate-400">{item.description}</p>
-                </Card>
+                <a key={item.name} href={`/portfolio/${toSlug(item.name)}`} className="group block">
+                  <Card className="transition group-hover:border-cyan-400/40">
+                    <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
+                    <h3 className="font-bold group-hover:text-cyan-300 transition">{item.name}</h3>
+                    <p className="mt-2 text-sm text-slate-400">{item.description}</p>
+                  </Card>
+                </a>
               ))}
             </div>
           </div>
@@ -176,6 +181,25 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </section>
 
         {/* Final CTA */}
+        {/* Related Services */}
+        {data.relatedServices && data.relatedServices.length > 0 && (
+          <section className="bg-slate-900/40 py-20 md:py-28">
+            <div className="container-shell space-y-12">
+              <SectionHeader align="center" eyebrow="Lainnya" title="Layanan terkait" />
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {data.relatedServices.map((svc) => (
+                  <a key={svc.href} href={svc.href} className="group block">
+                    <Card className="transition group-hover:border-cyan-400/40">
+                      <h3 className="font-bold group-hover:text-cyan-300 transition">{svc.label}</h3>
+                      <p className="mt-2 text-sm text-slate-400">{svc.description}</p>
+                    </Card>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="pb-20 md:pb-28">
           <div className="container-shell rounded-[2rem] border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">

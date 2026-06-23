@@ -60,6 +60,10 @@ const data = {
     { question: "Berapa biaya automation?", answer: "Mulai dari Rp5 juta untuk workflow sederhana. Workflow kompleks dengan banyak integrasi akan menyesuaikan scope." },
     { question: "Apakah perlu coding?", answer: "Tidak. n8n dan Make pakai visual workflow builder. Kami yang setup, kamu yang pakai." },
   ],
+  relatedServices: [
+    { label: "Jasa Pembuatan Website", href: "/jasa-pembuatan-website", description: "Website profesional yang bikin bisnis terlihat kredibel dan siap dapat lead." },
+    { label: "Jasa SEO", href: "/jasa-seo", description: "Optimasi SEO teknis dan konten agar website bisnis kamu lebih ditemukan di Google." },
+  ],
   finalCta: {
     heading: "Siap kurangi kerja manual dan rapikan sistem lead kamu?",
     body: "Ceritakan proses bisnis kamu saat ini. Kami bantu identifikasi bagian yang bisa diotomasi.",

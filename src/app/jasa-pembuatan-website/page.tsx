@@ -60,6 +60,11 @@ const data = {
     { question: "Apakah sudah SEO-ready?", answer: "Ya. Metadata, sitemap, robots.txt, heading structure, speed optimization, dan schema basic sudah termasuk." },
     { question: "Bisa edit konten sendiri?", answer: "Bisa. Kami bisa setup CMS (blog/portfolio) supaya kamu bisa update konten tanpa developer." },
   ],
+  relatedServices: [
+    { label: "Jasa SEO", href: "/jasa-seo", description: "Optimasi SEO teknis dan konten agar website bisnis kamu lebih ditemukan di Google." },
+    { label: "Jasa Automation", href: "/jasa-automation", description: "Workflow automation untuk hemat waktu dan rapikan proses bisnis." },
+    { label: "Agency Subcontract", href: "/agency-subcontract", description: "Partner white-label untuk agency yang butuh jasa build website." },
+  ],
   finalCta: {
     heading: "Siap punya website yang profesional dan menghasilkan lead?",
     body: "Ceritakan kebutuhan bisnis kamu. Kami bantu rekomendasi solusi yang paling masuk akal.",

@@ -61,6 +61,10 @@ const data = {
     { question: "Apakah perlu blog?", answer: "Blog sangat membantu SEO karena bisa target banyak keyword. Kami bantu siapkan topic plan dan template." },
     { question: "Berapa biaya jasa SEO?", answer: "Tergantung scope. SEO basic setup mulai dari Rp5 juta. Monthly SEO retainer bisa dibahas sesuai kebutuhan." },
   ],
+  relatedServices: [
+    { label: "Jasa Pembuatan Website", href: "/jasa-pembuatan-website", description: "Website profesional yang bikin bisnis terlihat kredibel dan siap dapat lead." },
+    { label: "Jasa Automation", href: "/jasa-automation", description: "Workflow automation untuk hemat waktu dan rapikan proses bisnis." },
+  ],
   finalCta: {
     heading: "Mau website kamu lebih mudah ditemukan di Google?",
     body: "Minta audit SEO gratis atau diskusi langsung tentang strategi organic growth untuk bisnis kamu.",

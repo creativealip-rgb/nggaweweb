@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion } from "framer-motion";
 import { LinkButton } from "@/components/ui/button";
 import { whatsappHref } from "@/content/site";
 
@@ -51,6 +50,7 @@ export function SiteHeader() {
             onClick={() => setOpen(!open)}
             className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-slate-300 transition hover:text-white"
             aria-label={open ? "Tutup menu" : "Buka menu"}
+            aria-expanded={open}
           >
             {open ? (
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -65,38 +65,31 @@ export function SiteHeader() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="overflow-hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl lg:hidden"
-          >
-            <nav className="container-shell flex flex-col gap-1 py-4">
-              {nav.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setOpen(false)}
-                  className={`rounded-lg px-4 py-3 text-sm font-semibold transition hover:bg-white/5 ${
-                    pathname === item.href ? "text-cyan-300" : "text-slate-300"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              ))}
-              <div className="mt-3 px-4">
-                <LinkButton className="w-full text-center" href={whatsappHref}>
-                  Konsultasi Gratis
-                </LinkButton>
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile drawer — CSS transition, no framer-motion */}
+      <div
+        className="overflow-hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-xl transition-all duration-200 ease-in-out lg:hidden"
+        style={{ maxHeight: open ? "400px" : "0px", opacity: open ? 1 : 0 }}
+      >
+        <nav className="container-shell flex flex-col gap-1 py-4">
+          {nav.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setOpen(false)}
+              className={`rounded-lg px-4 py-3 text-sm font-semibold transition hover:bg-white/5 ${
+                pathname === item.href ? "text-cyan-300" : "text-slate-300"
+              }`}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div className="mt-3 px-4">
+            <LinkButton className="w-full text-center" href={whatsappHref}>
+              Konsultasi Gratis
+            </LinkButton>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
