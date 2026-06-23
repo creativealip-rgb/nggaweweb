@@ -8,6 +8,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { getPublishedPosts, getPostBySlug } from "@/lib/blog-store";
 import { whatsappHref, siteConfig } from "@/content/site";
 import { ArrowRight, Clock } from "lucide-react";
+import { ViewCounter } from "@/components/blog/view-counter";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -53,6 +54,7 @@ export default async function BlogDetailPage({ params }: Props) {
 
   return (
     <>
+      <ViewCounter postId={post.id} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       <SiteHeader />
       <main>
@@ -64,6 +66,8 @@ export default async function BlogDetailPage({ params }: Props) {
                 <Clock size={14} /> {post.readTime}
               </span>
               <span className="text-sm text-slate-500">{post.publishedAt}</span>
+              {post.author && <span className="text-sm text-slate-500">· {post.author}</span>}
+              <span className="text-sm text-slate-500">· 👁️ {post.views || 0}</span>
             </div>
             <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-white md:text-5xl">
               {post.title}

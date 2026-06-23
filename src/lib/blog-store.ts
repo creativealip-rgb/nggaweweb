@@ -12,6 +12,9 @@ export type BlogPost = {
   readTime: string;
   status: "draft" | "published";
   content: string;
+  author?: string;
+  views?: number;
+  scheduledAt?: string;
   // SEO fields
   metaTitle?: string;
   metaDescription?: string;
@@ -20,11 +23,16 @@ export type BlogPost = {
 };
 
 const DB_PATH = path.join(process.cwd(), "data", "blog.json");
+const CATEGORIES_PATH = path.join(process.cwd(), "data", "categories.json");
+
+const DEFAULT_CATEGORIES = ["Website", "SEO", "Automation", "Tips", "Tutorial"];
 
 function ensureDir() {
   const dir = path.dirname(DB_PATH);
   if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
 }
+
+// ── Posts ──
 
 export function getAllPosts(): BlogPost[] {
   ensureDir();
@@ -33,11 +41,16 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPublishedPosts(): BlogPost[] {
-  return getAllPosts().filter((p) => p.status === "published");
+  const now = new Date().toISOString();
+  return getAllPosts().filter(
+    (p) =>
+      p.status === "published" &&
+      (!p.scheduledAt || p.scheduledAt <= now)
+  );
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {
-  return getPublishedPosts().find((p) => p.slug === slug);
+  return getAllPosts().find((p) => p.slug === slug);
 }
 
 export function getPostById(id: string): BlogPost | undefined {
@@ -47,7 +60,7 @@ export function getPostById(id: string): BlogPost | undefined {
 export function createPost(data: Omit<BlogPost, "id">): BlogPost {
   const posts = getAllPosts();
   const id = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-  const post: BlogPost = { id, ...data };
+  const post: BlogPost = { id, views: 0, author: "Admin", ...data };
   posts.push(post);
   fs.writeFileSync(DB_PATH, JSON.stringify(posts, null, 2));
   return post;
@@ -71,4 +84,37 @@ export function deletePost(id: string): boolean {
   if (filtered.length === posts.length) return false;
   fs.writeFileSync(DB_PATH, JSON.stringify(filtered, null, 2));
   return true;
+}
+
+export function incrementViews(id: string): void {
+  const posts = getAllPosts();
+  const post = posts.find((p) => p.id === id);
+  if (post) {
+    post.views = (post.views || 0) + 1;
+    fs.writeFileSync(DB_PATH, JSON.stringify(posts, null, 2));
+  }
+}
+
+// ── Categories ──
+
+export function getCategories(): string[] {
+  ensureDir();
+  if (!fs.existsSync(CATEGORIES_PATH)) {
+    fs.writeFileSync(CATEGORIES_PATH, JSON.stringify(DEFAULT_CATEGORIES, null, 2));
+    return DEFAULT_CATEGORIES;
+  }
+  return JSON.parse(fs.readFileSync(CATEGORIES_PATH, "utf-8"));
+}
+
+export function setCategories(categories: string[]): void {
+  ensureDir();
+  fs.writeFileSync(CATEGORIES_PATH, JSON.stringify(categories, null, 2));
+}
+
+// ── Backup / Export ──
+
+export function exportAll(): string {
+  const posts = getAllPosts();
+  const categories = getCategories();
+  return JSON.stringify({ posts, categories, exportedAt: new Date().toISOString() }, null, 2);
 }

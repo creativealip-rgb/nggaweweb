@@ -1,41 +1,33 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import HtmlEditor from "@/components/admin/html-editor";
 
 export default function NewBlogPage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [categories, setCategories] = useState<string[]>(["Website", "SEO", "Automation", "Tips"]);
   const fileRef = useRef<HTMLInputElement>(null);
   const [form, setForm] = useState({
-    title: "",
-    slug: "",
-    excerpt: "",
-    category: "Website",
-    tags: "",
-    readTime: "5 min",
-    status: "draft",
-    content: "",
-    metaTitle: "",
-    metaDescription: "",
-    ogImage: "",
-    focusKeyword: "",
+    title: "", slug: "", excerpt: "", category: "Website", tags: "",
+    readTime: "5 min", status: "draft", content: "",
+    author: "Admin", scheduledAt: "",
+    metaTitle: "", metaDescription: "", ogImage: "", focusKeyword: "",
   });
+
+  useEffect(() => {
+    fetch("/api/admin/categories").then((r) => r.json()).then(setCategories).catch(() => {});
+  }, []);
 
   const update = (field: string, value: string) => {
     setForm((f) => ({ ...f, [field]: value }));
     if (field === "title") {
       setForm((f) => ({
-        ...f,
-        title: value,
-        slug: value
-          .toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, "")
-          .replace(/\s+/g, "-")
-          .replace(/-+/g, "-")
-          .slice(0, 80),
+        ...f, title: value,
+        slug: value.toLowerCase().replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").slice(0, 80),
       }));
     }
   };
@@ -49,9 +41,8 @@ export default function NewBlogPage() {
     const res = await fetch("/api/admin/upload", { method: "POST", body: fd });
     const data = await res.json();
     if (data.url) {
-      // Insert image tag into content at cursor
-      const img = `<img src="${data.url}" alt="${file.name}" class="w-full rounded-xl my-6" />`;
-      setForm((f) => ({ ...f, content: f.content + "\n" + img }));
+      const img = `\n<img src="${data.url}" alt="${file.name}" class="w-full rounded-xl my-6" />\n`;
+      setForm((f) => ({ ...f, content: f.content + img }));
     } else {
       alert(data.error || "Upload gagal");
     }
@@ -66,18 +57,13 @@ export default function NewBlogPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         ...form,
-        tags: form.tags
-          .split(",")
-          .map((t) => t.trim())
-          .filter(Boolean),
+        tags: form.tags.split(",").map((t) => t.trim()).filter(Boolean),
         publishedAt: new Date().toISOString().split("T")[0],
+        scheduledAt: form.scheduledAt || undefined,
       }),
     });
-    if (res.ok) {
-      router.push("/admin/blog");
-    } else {
-      alert("Gagal menyimpan");
-    }
+    if (res.ok) router.push("/admin/blog");
+    else alert("Gagal menyimpan");
     setSaving(false);
   };
 
@@ -95,38 +81,32 @@ export default function NewBlogPage() {
         {/* Basic Info */}
         <section className="space-y-4">
           <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Info Artikel</h2>
-          <div>
-            <label className="block text-sm text-slate-300 mb-1">Judul</label>
-            <input value={form.title} onChange={(e) => update("title", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="Judul artikel..." />
-          </div>
+          <div><label className="block text-sm text-slate-300 mb-1">Judul</label><input value={form.title} onChange={(e) => update("title", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="Judul artikel..." /></div>
           <div className="grid grid-cols-2 gap-4">
-            <div>
-              <label className="block text-sm text-slate-300 mb-1">Slug</label>
-              <input value={form.slug} onChange={(e) => update("slug", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" />
-            </div>
-            <div>
-              <label className="block text-sm text-slate-300 mb-1">Kategori</label>
+            <div><label className="block text-sm text-slate-300 mb-1">Slug</label><input value={form.slug} onChange={(e) => update("slug", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
+            <div><label className="block text-sm text-slate-300 mb-1">Kategori</label>
               <select value={form.category} onChange={(e) => update("category", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500">
-                <option>Website</option><option>SEO</option><option>Automation</option><option>Tips</option>
+                {categories.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
           </div>
-          <div>
-            <label className="block text-sm text-slate-300 mb-1">Excerpt (ringkasan)</label>
-            <textarea value={form.excerpt} onChange={(e) => update("excerpt", e.target.value)} rows={2} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="Ringkasan singkat..." />
-          </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div><label className="block text-sm text-slate-300 mb-1">Excerpt</label><textarea value={form.excerpt} onChange={(e) => update("excerpt", e.target.value)} rows={2} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="Ringkasan singkat..." /></div>
+          <div className="grid grid-cols-4 gap-4">
             <div><label className="block text-sm text-slate-300 mb-1">Tags (koma)</label><input value={form.tags} onChange={(e) => update("tags", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" placeholder="SEO, website" /></div>
             <div><label className="block text-sm text-slate-300 mb-1">Read Time</label><input value={form.readTime} onChange={(e) => update("readTime", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
+            <div><label className="block text-sm text-slate-300 mb-1">Author</label><input value={form.author} onChange={(e) => update("author", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
             <div><label className="block text-sm text-slate-300 mb-1">Status</label>
               <select value={form.status} onChange={(e) => update("status", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500">
                 <option value="draft">Draft</option><option value="published">Published</option>
               </select>
             </div>
           </div>
+          <div><label className="block text-sm text-slate-300 mb-1">⏰ Schedule Publish <span className="text-slate-600">(opsional, kosong = langsung)</span></label>
+            <input type="datetime-local" value={form.scheduledAt} onChange={(e) => update("scheduledAt", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" />
+          </div>
         </section>
 
-        {/* Content */}
+        {/* Content with Rich Editor */}
         <section className="space-y-3">
           <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Konten</h2>
           <div className="flex items-center gap-3">
@@ -136,46 +116,27 @@ export default function NewBlogPage() {
             </label>
             <span className="text-xs text-slate-500">Max 2MB · JPG, PNG, WebP, GIF</span>
           </div>
-          <textarea value={form.content} onChange={(e) => update("content", e.target.value)} rows={20} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white font-mono text-sm focus:outline-none focus:border-cyan-500" placeholder='<p class="text-lg leading-8 text-slate-300">Tulis konten HTML di sini...</p>' />
-          <p className="text-xs text-slate-500">HTML + Tailwind classes. Upload gambar otomatis insert ke konten.</p>
+          <HtmlEditor value={form.content} onChange={(val) => update("content", val)} />
         </section>
 
         {/* SEO */}
         <section className="space-y-4">
           <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">🔍 SEO Settings</h2>
-          <div>
-            <label className="block text-sm text-slate-300 mb-1">Focus Keyword</label>
-            <input value={form.focusKeyword} onChange={(e) => update("focusKeyword", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="jasa pembuatan website" />
-            <p className="text-xs text-slate-500 mt-1">Keyword utama yang ingin di-rank di Google</p>
-          </div>
-          <div>
-            <label className="block text-sm text-slate-300 mb-1">Meta Title <span className="text-slate-600">(kosong = auto dari judul)</span></label>
-            <input value={form.metaTitle} onChange={(e) => update("metaTitle", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="Custom title untuk Google (max 60 char)" maxLength={60} />
-            <p className="text-xs text-slate-500 mt-1">{form.metaTitle.length}/60 karakter</p>
-          </div>
-          <div>
-            <label className="block text-sm text-slate-300 mb-1">Meta Description <span className="text-slate-600">(kosong = auto dari excerpt)</span></label>
-            <textarea value={form.metaDescription} onChange={(e) => update("metaDescription", e.target.value)} rows={2} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="Deskripsi untuk Google (max 160 char)" maxLength={160} />
-            <p className="text-xs text-slate-500 mt-1">{form.metaDescription.length}/160 karakter</p>
-          </div>
-          <div>
-            <label className="block text-sm text-slate-300 mb-1">OG Image URL <span className="text-slate-600">(kosong = auto)</span></label>
-            <input value={form.ogImage} onChange={(e) => update("ogImage", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="/uploads/blog/cover.jpg atau https://..." />
-            <p className="text-xs text-slate-500 mt-1">Gambar preview saat dibagikan di social media (1200x630px ideal)</p>
-          </div>
+          <div><label className="block text-sm text-slate-300 mb-1">Focus Keyword</label><input value={form.focusKeyword} onChange={(e) => update("focusKeyword", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="jasa pembuatan website" /></div>
+          <div><label className="block text-sm text-slate-300 mb-1">Meta Title</label><input value={form.metaTitle} onChange={(e) => update("metaTitle", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" maxLength={60} /><p className="text-xs text-slate-500 mt-1">{form.metaTitle.length}/60</p></div>
+          <div><label className="block text-sm text-slate-300 mb-1">Meta Description</label><textarea value={form.metaDescription} onChange={(e) => update("metaDescription", e.target.value)} rows={2} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" maxLength={160} /><p className="text-xs text-slate-500 mt-1">{form.metaDescription.length}/160</p></div>
+          <div><label className="block text-sm text-slate-300 mb-1">OG Image URL</label><input value={form.ogImage} onChange={(e) => update("ogImage", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" placeholder="/uploads/blog/cover.jpg" /></div>
         </section>
 
-        {/* Preview */}
-        {form.metaTitle && (
-          <section className="space-y-2">
-            <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Google Preview</h2>
-            <div className="p-4 bg-white rounded-lg">
-              <p className="text-blue-800 text-lg font-medium truncate">{form.metaTitle || form.title}</p>
-              <p className="text-green-700 text-xs">nggawe.web.id/blog/{form.slug}</p>
-              <p className="text-gray-600 text-sm mt-1 line-clamp-2">{form.metaDescription || form.excerpt}</p>
-            </div>
-          </section>
-        )}
+        {/* Google Preview */}
+        <section className="space-y-2">
+          <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Google Preview</h2>
+          <div className="p-4 bg-white rounded-lg">
+            <p className="text-blue-800 text-lg font-medium truncate">{form.metaTitle || form.title || "Judul Artikel"}</p>
+            <p className="text-green-700 text-xs">nggawe.web.id/blog/{form.slug || "slug"}</p>
+            <p className="text-gray-600 text-sm mt-1 line-clamp-2">{form.metaDescription || form.excerpt || "Deskripsi artikel..."}</p>
+          </div>
+        </section>
       </main>
     </div>
   );
