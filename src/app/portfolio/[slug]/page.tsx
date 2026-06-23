@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { portfolioItems, type PortfolioItem } from "@/content/portfolio";
 import { whatsappHref } from "@/content/site";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -46,6 +47,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
         <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
           <div className="container-shell grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-6">
+              <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Portfolio", href: "/portfolio" }, { label: item.name }]} />
               <div className="flex flex-wrap gap-2">
                 <Badge>{item.projectType}</Badge>
                 <Badge className="border-purple-400/20 bg-purple-400/10 text-purple-100">{item.industry}</Badge>

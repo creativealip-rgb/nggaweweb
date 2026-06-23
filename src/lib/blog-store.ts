@@ -13,6 +13,7 @@ export type BlogPost = {
   status: "draft" | "published";
   content: string;
   author?: string;
+  image?: string;
   views?: number;
   scheduledAt?: string;
   // SEO fields

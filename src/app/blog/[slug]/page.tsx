@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getPublishedPosts, getPostBySlug } from "@/lib/blog-store";
 import { whatsappHref, siteConfig } from "@/content/site";
 import { ArrowRight, Clock } from "lucide-react";
@@ -50,6 +51,7 @@ export default async function BlogDetailPage({ params }: Props) {
     author: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
     publisher: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${siteConfig.url}/blog/${post.slug}` },
+    ...(post.image && { image: `${siteConfig.url}${post.image}` }),
   };
 
   return (
@@ -60,6 +62,12 @@ export default async function BlogDetailPage({ params }: Props) {
       <main>
         <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
           <div className="container-shell max-w-3xl space-y-6">
+            <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} />
+            {post.image && (
+              <div className="overflow-hidden rounded-2xl border border-white/10">
+                <img src={post.image} alt={post.title} className="w-full object-cover" />
+              </div>
+            )}
             <div className="flex items-center gap-3">
               <Badge>{post.category}</Badge>
               <span className="flex items-center gap-1 text-sm text-slate-400">
@@ -100,6 +108,11 @@ export default async function BlogDetailPage({ params }: Props) {
                   {related.map((r) => (
                     <Link href={`/blog/${r.slug}`} key={r.slug} className="group">
                       <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 transition hover:border-cyan-300/30">
+                        {r.image && (
+                          <div className="mb-3 overflow-hidden rounded-xl">
+                            <img src={r.image} alt={r.title} className="h-28 w-full object-cover" />
+                          </div>
+                        )}
                         <Badge>{r.category}</Badge>
                         <h3 className="mt-3 text-sm font-bold group-hover:text-cyan-200 transition">{r.title}</h3>
                         <div className="mt-3 flex items-center gap-2 text-xs text-cyan-300">

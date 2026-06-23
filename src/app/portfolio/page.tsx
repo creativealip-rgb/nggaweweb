@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { LinkButton } from "@/components/ui/button";
 import { SectionHeader } from "@/components/ui/section-header";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { portfolioItems } from "@/content/portfolio";
@@ -31,6 +32,7 @@ export default function PortfolioPage() {
       <main>
         <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
+            <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Portfolio" }]} />
             <Badge>Portfolio</Badge>
             <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-6xl">
               Project yang menunjukkan design, sistem, dan problem solving.
