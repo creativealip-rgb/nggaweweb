@@ -9,6 +9,9 @@ services:
       - "3000"
     env_file:
       - .env
+    volumes:
+      - nggawe-data:/app/data
+      - nggawe-uploads:/app/public/uploads
     networks:
       - dokploy-network
     labels:
@@ -26,3 +29,7 @@ services:
 networks:
   dokploy-network:
     external: true
+
+volumes:
+  nggawe-data:
+  nggawe-uploads:

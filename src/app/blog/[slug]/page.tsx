@@ -19,12 +19,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const post = getPostBySlug(slug);
   if (!post) return {};
+  const title = post.metaTitle || `${post.title} — Nggawe Web`;
+  const description = post.metaDescription || post.excerpt;
   return {
-    title: `${post.title} — Nggawe Web`,
-    description: post.excerpt,
+    title,
+    description,
+    keywords: post.focusKeyword ? [post.focusKeyword] : post.tags,
     openGraph: {
-      title: `${post.title} — Nggawe Web`,
-      description: post.excerpt,
+      title,
+      description,
+      ...(post.ogImage && { images: [post.ogImage] }),
     },
   };
 }

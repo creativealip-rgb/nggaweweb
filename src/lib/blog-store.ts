@@ -12,6 +12,11 @@ export type BlogPost = {
   readTime: string;
   status: "draft" | "published";
   content: string;
+  // SEO fields
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: string;
+  focusKeyword?: string;
 };
 
 const DB_PATH = path.join(process.cwd(), "data", "blog.json");
