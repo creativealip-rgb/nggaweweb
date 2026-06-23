@@ -12,6 +12,7 @@ export const metadata: Metadata = {
   title: "Blog Website, SEO, dan Automation — Nggawe Web",
   description:
     "Artikel Nggawe Web tentang pembuatan website, SEO, business automation, lead generation, dan strategi digital untuk bisnis.",
+  alternates: { canonical: "/blog" },
 };
 
 export default function BlogPage() {

@@ -10,6 +10,7 @@ export const metadata: Metadata = {
   title: "FAQ Website, SEO, dan Automation — Nggawe Web",
   description:
     "Jawaban untuk pertanyaan umum tentang biaya website, timeline, SEO, automation, maintenance, dan white-label project di Nggawe Web.",
+  alternates: { canonical: "/faq" },
 };
 
 const faqs = [
@@ -47,9 +48,23 @@ const faqs = [
   },
 ];
 
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: faq.a,
+    },
+  })),
+};
+
 export default function FaqPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <SiteHeader />
       <main>
         <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">

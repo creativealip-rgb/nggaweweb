@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: "Nggawe Web — Jasa Website, SEO, dan Automation untuk Bisnis",
   description: siteConfig.description,
+  alternates: {
+    canonical: siteConfig.url,
+  },
   openGraph: {
     title: "Nggawe Web — Jasa Website, SEO, dan Automation untuk Bisnis",
     description: siteConfig.description,

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Portfolio Website dan Digital Product — Nggawe Web",
   description:
     "Lihat portfolio Nggawe Web: website bisnis, SaaS, platform digital, travel website, tourism website, dan project automation-ready.",
+  alternates: { canonical: "/portfolio" },
   openGraph: {
     title: "Portfolio Website dan Digital Product — Nggawe Web",
     description:
