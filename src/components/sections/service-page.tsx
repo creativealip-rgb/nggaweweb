@@ -11,6 +11,9 @@ import type { LucideIcon } from "lucide-react";
 export type ServicePageData = {
   relatedServices?: { label: string; href: string; description: string }[];
   pillarSections?: { title: string; body: string; points?: string[] }[];
+  fitFor?: { title: string; body: string }[];
+  comparison?: { columns: string[]; rows: string[][] } ;
+  proofBlocks?: { project: string; challenge: string; solution: string; result: string }[];
   clusterLinks?: { label: string; href: string }[];
   eyebrow: string;
   h1: string;
@@ -167,6 +170,74 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           </div>
         </section>
 
+
+
+        {/* Fit For */}
+        {data.fitFor && data.fitFor.length > 0 && (
+          <section className="bg-slate-900/40 py-20 md:py-28">
+            <div className="container-shell space-y-12">
+              <SectionHeader align="center" eyebrow="Cocok untuk siapa" title={`${data.eyebrow} cocok untuk bisnis seperti apa?`} />
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+                {data.fitFor.map((item) => (
+                  <Card key={item.title} className="p-6">
+                    <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-400">{item.body}</p>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Comparison */}
+        {data.comparison && (
+          <section className="py-20 md:py-28">
+            <div className="container-shell space-y-12">
+              <SectionHeader align="center" eyebrow="Perbandingan" title="Pilih opsi yang paling sesuai dengan kebutuhan" />
+              <div className="overflow-x-auto rounded-3xl border border-white/10 bg-slate-950/70">
+                <table className="w-full min-w-[760px] text-left text-sm">
+                  <thead className="bg-white/5 text-slate-200">
+                    <tr>
+                      {data.comparison.columns.map((column) => (
+                        <th className="px-5 py-4 font-semibold" key={column}>{column}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-white/10">
+                    {data.comparison.rows.map((row) => (
+                      <tr key={row.join('-')}>
+                        {row.map((cell, index) => (
+                          <td className={`px-5 py-4 leading-7 ${index === 0 ? 'font-semibold text-white' : 'text-slate-300'}`} key={`${row[0]}-${index}`}>{cell}</td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Proof Blocks */}
+        {data.proofBlocks && data.proofBlocks.length > 0 && (
+          <section className="bg-slate-900/40 py-20 md:py-28">
+            <div className="container-shell space-y-12">
+              <SectionHeader align="center" eyebrow="Proof" title="Bukti kerja: challenge → solution → result" />
+              <div className="grid gap-5 lg:grid-cols-3">
+                {data.proofBlocks.map((item) => (
+                  <Card key={item.project} className="p-7">
+                    <h3 className="font-heading text-xl font-bold text-white">{item.project}</h3>
+                    <div className="mt-5 space-y-4 text-sm leading-7 text-slate-300">
+                      <p><strong className="text-red-300">Challenge:</strong> {item.challenge}</p>
+                      <p><strong className="text-cyan-300">Solution:</strong> {item.solution}</p>
+                      <p><strong className="text-emerald-300">Result:</strong> {item.result}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Pillar Content */}
         {data.pillarSections && data.pillarSections.length > 0 && (

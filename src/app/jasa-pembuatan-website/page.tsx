@@ -81,6 +81,26 @@ const data = {
   clusterLinks: [
     { label: "Biaya Pembuatan Website", href: "/blog/biaya-pembuatan-website" }, { label: "Harga Jasa Pembuatan Website", href: "/blog/harga-jasa-pembuatan-website" }, { label: "Jasa Pembuatan Website UMKM", href: "/blog/jasa-pembuatan-website-umkm" }, { label: "Jasa Pembuatan Website Toko Online", href: "/blog/jasa-pembuatan-website-toko-online" }, { label: "Jasa Pembuatan Website Perusahaan", href: "/blog/jasa-pembuatan-website-perusahaan" }, { label: "Jasa Buat Website", href: "/blog/jasa-buat-website" }, { label: "Contoh Website Company Profile", href: "/blog/contoh-website-company-profile" }, { label: "Contoh Website Toko Online", href: "/blog/contoh-website-toko-online" }, { label: "Cara Membuat Website Bisnis", href: "/blog/cara-membuat-website-bisnis" }, { label: "Website untuk UMKM", href: "/blog/website-untuk-umkm" }, { label: "Manfaat Website untuk Bisnis", href: "/blog/manfaat-website-untuk-bisnis" }, { label: "Website untuk Bisnis Kecil", href: "/blog/website-untuk-bisnis-kecil" }, { label: "Website Company Profile Adalah", href: "/blog/website-company-profile-adalah" }, { label: "Jasa Pembuatan Landing Page", href: "/blog/jasa-pembuatan-landing-page" }, { label: "Cara Membuat Website Toko Online", href: "/blog/cara-membuat-website-toko-online" },
   ],
+  fitFor: [
+    { title: "UMKM", body: "Butuh website UMKM yang terlihat profesional, mudah dipahami, dan siap menerima inquiry dari Google atau WhatsApp." },
+    { title: "Bisnis jasa", body: "Cocok untuk konsultan, agency, kontraktor, klinik, travel, dan layanan yang butuh trust sebelum calon pelanggan menghubungi." },
+    { title: "Toko online", body: "Cocok untuk brand yang ingin punya katalog, halaman produk, checkout, dan channel jualan selain marketplace." },
+    { title: "Perusahaan", body: "Cocok untuk company profile, halaman layanan, portofolio, career page, dan presentasi digital yang kredibel." },
+    { title: "Agency", body: "Cocok untuk agency yang butuh partner build website white-label, landing page campaign, atau technical implementation." },
+  ],
+  comparison: {
+    columns: ["Opsi", "Cocok untuk", "Kelebihan", "Batasan"],
+    rows: [
+      ["Website murah", "Validasi awal, profil sederhana", "Cepat dibuat dan budget ringan", "Template terbatas, SEO dan conversion biasanya minim"],
+      ["Website profesional", "UMKM, bisnis jasa, toko online", "Desain rapi, SEO-ready, CTA jelas, trust lebih kuat", "Butuh brief dan proses lebih matang"],
+      ["Website custom", "Perusahaan, SaaS, sistem internal", "Fitur fleksibel, integrasi API, dashboard, automation", "Biaya dan timeline lebih besar"],
+    ],
+  },
+  proofBlocks: [
+    { project: "Cubiqlo", challenge: "Brand butuh website yang terlihat premium dan mudah dipahami customer baru.", solution: "Kami susun tampilan modern, struktur layanan jelas, visual rapi, dan CTA yang mudah ditemukan.", result: "Website lebih kredibel, loading cepat, dan siap dipakai sebagai pusat trust brand." },
+    { project: "Ganesha Travel", challenge: "Bisnis travel butuh trust tinggi karena customer mempertimbangkan keamanan dan detail layanan.", solution: "Kami buat struktur website dengan fokus layanan, bukti, inquiry, dan informasi yang mudah dipahami.", result: "Inquiry dari website lebih terarah dan calon pelanggan lebih cepat memahami paket travel." },
+    { project: "Whale Dive Centre", challenge: "Bisnis tourism perlu visual kuat dan informasi trip yang meyakinkan visitor internasional.", solution: "Kami rapikan presentasi visual, CTA booking, dan struktur informasi layanan.", result: "Website lebih meyakinkan untuk calon customer yang mencari pengalaman diving." },
+  ],
   faqs: [
     { question: "Berapa biaya membuat website?", answer: "Mulai dari Rp3,5 juta untuk website starter. Scope lebih besar akan menyesuaikan kebutuhan dan fitur." },
     { question: "Berapa lama prosesnya?", answer: "Website sederhana 5–10 hari kerja. Website custom dengan CMS dan fitur khusus bisa 2–4 minggu." },

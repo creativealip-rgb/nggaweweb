@@ -81,6 +81,26 @@ const data = {
   clusterLinks: [
     { label: "Jasa SEO Bulanan", href: "/blog/jasa-seo-bulanan" }, { label: "Jasa SEO UMKM", href: "/blog/jasa-seo-umkm" }, { label: "Jasa SEO Website", href: "/blog/jasa-seo-website" }, { label: "Cara agar Website Muncul di Google", href: "/blog/cara-website-muncul-di-google" }, { label: "Optimasi SEO Website", href: "/blog/optimasi-seo-website" }, { label: "Strategi SEO untuk Bisnis", href: "/blog/strategi-seo-untuk-bisnis" }, { label: "Belajar SEO untuk Pemula", href: "/blog/belajar-seo-untuk-pemula" }, { label: "SEO untuk Toko Online", href: "/blog/seo-untuk-toko-online" }, { label: "SEO Lokal Adalah", href: "/blog/seo-lokal-adalah" }, { label: "Cara Meningkatkan Traffic Website", href: "/blog/cara-meningkatkan-traffic-website" }, { label: "Optimasi Google Maps Bisnis", href: "/blog/optimasi-google-maps-bisnis" }, { label: "Jasa Digital Marketing UMKM", href: "/blog/jasa-digital-marketing-umkm" },
   ],
+  fitFor: [
+    { title: "UMKM", body: "Cocok untuk UMKM yang ingin mendapatkan lead organik dari Google tanpa selalu bergantung pada iklan." },
+    { title: "Bisnis jasa", body: "Cocok untuk bisnis yang calon pelanggannya mencari solusi lewat Google sebelum chat atau booking konsultasi." },
+    { title: "Toko online", body: "Cocok untuk ecommerce yang ingin produk dan kategori lebih mudah ditemukan lewat organic search." },
+    { title: "Perusahaan", body: "Cocok untuk perusahaan yang ingin memperkuat authority brand, service pages, dan konten edukasi." },
+    { title: "Agency/marketing team", body: "Cocok untuk tim marketing yang butuh eksekusi technical SEO, content cluster, dan reporting rutin." },
+  ],
+  comparison: {
+    columns: ["Opsi", "Cocok untuk", "Fokus utama", "Output"],
+    rows: [
+      ["SEO setup", "Website baru atau belum rapi", "Technical SEO, metadata, sitemap, schema, struktur halaman", "Fondasi SEO siap crawl dan index"],
+      ["SEO bulanan", "Bisnis yang ingin growth konsisten", "Konten, internal link, optimasi ranking, GSC monitoring", "Traffic dan ranking tumbuh bertahap"],
+      ["Local SEO", "Bisnis area lokal", "Google Business Profile, review, NAP, keyword lokasi", "Lebih mudah muncul di pencarian lokal dan Maps"],
+    ],
+  },
+  proofBlocks: [
+    { project: "Ganesha Travel", challenge: "Website travel perlu struktur SEO yang menjelaskan layanan dan membangun trust untuk calon customer.", solution: "Kami susun struktur layanan, metadata, internal link, dan konten yang menjawab intent calon pelanggan.", result: "Halaman lebih siap bersaing di pencarian organik dan inquiry lebih terarah." },
+    { project: "Whale Dive Centre", challenge: "Tourism website perlu ditemukan untuk pencarian informasional dan transaksional.", solution: "Kami rapikan technical SEO, struktur halaman, visual, dan CTA booking.", result: "Website lebih kuat sebagai landing hub untuk traffic pencarian dan referral." },
+    { project: "Monev.app", challenge: "Platform SaaS butuh arsitektur halaman yang mudah dipahami mesin pencari dan user.", solution: "Kami bangun struktur Next.js SEO-friendly, routing rapi, metadata, dan halaman yang cepat.", result: "Fondasi teknis lebih siap untuk content expansion dan indexing jangka panjang." },
+  ],
   faqs: [
     { question: "Berapa lama SEO mulai terlihat hasilnya?", answer: "Biasanya 3–6 bulan untuk keyword kompetitif. Keyword lokal/niche bisa lebih cepat, 1–3 bulan." },
     { question: "Apakah SEO dijamin page 1 Google?", answer: "Tidak ada yang bisa jamin page 1. Tapi kami bantu fondasi sekuat mungkin agar website lebih siap bersaing." },

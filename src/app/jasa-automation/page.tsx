@@ -78,6 +78,27 @@ const data = {
   clusterLinks: [
     { label: "Automation Bisnis Adalah", href: "/blog/automation-bisnis-adalah" }, { label: "Otomatisasi WhatsApp Bisnis", href: "/blog/otomatisasi-whatsapp-bisnis" }, { label: "Chatbot WhatsApp untuk Bisnis", href: "/blog/chatbot-whatsapp-untuk-bisnis" }, { label: "CRM untuk UMKM", href: "/blog/crm-untuk-umkm" }, { label: "Otomasi Bisnis", href: "/blog/otomasi-bisnis" }, { label: "Jasa Automation Bisnis", href: "/blog/jasa-automation-bisnis" }, { label: "WhatsApp Automation", href: "/blog/whatsapp-automation" }, { label: "Automation untuk Ecommerce", href: "/blog/automation-untuk-ecommerce" },
   ],
+  fitFor: [
+    { title: "UMKM", body: "Cocok untuk UMKM yang ingin mengurangi input manual, mempercepat balasan, dan merapikan data lead." },
+    { title: "Bisnis jasa", body: "Cocok untuk bisnis dengan banyak inquiry, follow-up, invoice, reminder, dan kebutuhan reporting rutin." },
+    { title: "Toko online", body: "Cocok untuk order notification, update status, reminder pembayaran, dan sinkronisasi data pelanggan." },
+    { title: "Perusahaan", body: "Cocok untuk workflow internal, approval, reporting, sinkronisasi database, dan integrasi antar divisi." },
+    { title: "Agency/marketing team", body: "Cocok untuk lead routing, campaign reporting, WhatsApp automation, CRM, dan integrasi tools marketing." },
+  ],
+  comparison: {
+    columns: ["Opsi", "Cocok untuk", "Kelebihan", "Catatan"],
+    rows: [
+      ["n8n", "Workflow custom dan self-hosted", "Fleksibel, bisa logic kompleks, kontrol data lebih besar", "Butuh setup server dan maintenance"],
+      ["Make", "Automation visual cepat", "Mudah dipakai dan cepat integrasi", "Biaya bisa naik sesuai operasi"],
+      ["Zapier", "Integrasi SaaS sederhana", "Stabil dan banyak template", "Kurang fleksibel untuk logic custom"],
+      ["Custom API", "Sistem internal kompleks", "Paling fleksibel dan bisa dibuat spesifik", "Butuh development lebih serius"],
+    ],
+  },
+  proofBlocks: [
+    { project: "Monev.app", challenge: "Platform monitoring butuh workflow internal yang rapi untuk data, notifikasi, dan proses tim.", solution: "Kami bangun arsitektur aplikasi dan automation flow agar data lebih mudah dipantau.", result: "Proses monitoring lebih sistematis dan siap dikembangkan untuk kebutuhan operasional." },
+    { project: "Contenly.app", challenge: "Platform content/AI perlu pipeline yang bisa menghubungkan proses konten, backend, dan notifikasi.", solution: "Kami rancang workflow automation dan integrasi agar proses produksi konten lebih terstruktur.", result: "Pipeline lebih rapi, repeatable, dan mudah dimonitor." },
+    { project: "Internal Tools", challenge: "Lead intake dan reporting manual membuat follow-up lambat dan data tercecer.", solution: "Kami susun workflow form, spreadsheet/CRM, notifikasi, dan reminder follow-up.", result: "Lead lebih cepat ditangani dan data lebih mudah dilacak." },
+  ],
   faqs: [
     { question: "Apa itu n8n?", answer: "n8n adalah platform automation open-source yang bisa menghubungkan berbagai tools dan service tanpa coding." },
     { question: "Bisnis kecil cocok pakai automation?", answer: "Sangat cocok. Justru bisnis kecil yang paling untung karena bisa hemat waktu dan tidak perlu hire orang tambahan." },
