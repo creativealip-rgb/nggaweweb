@@ -3,13 +3,15 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getPublishedPosts, getPostBySlug } from "@/lib/blog-store";
 import { whatsappHref, siteConfig } from "@/content/site";
-import { ArrowRight, Clock } from "lucide-react";
+import { ArrowRight, Clock, MessageCircle, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/blog/view-counter";
+import { BlogAnalytics } from "@/components/blog/blog-analytics";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -44,8 +46,7 @@ export default async function BlogDetailPage({ params }: Props) {
   const related = getPublishedPosts()
     .filter((p) => p.slug !== post.slug)
     .sort((a, b) => (a.category === post.category ? -1 : 0) - (b.category === post.category ? -1 : 0))
-    .slice(0, 3);
-
+    .slice(0, 4);
 
   const faqMatches = [...post.content.matchAll(/<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/g)].slice(-8);
   const faqJsonLd = faqMatches.length > 0 ? {
@@ -75,16 +76,18 @@ export default async function BlogDetailPage({ params }: Props) {
   return (
     <>
       <ViewCounter postId={post.id} />
+      <BlogAnalytics postId={post.id} slug={post.slug} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
       {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <SiteHeader />
       <main>
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
-          <div className="container-shell max-w-3xl space-y-6">
+        {/* Hero */}
+        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-16 md:py-20">
+          <div className="container-shell max-w-5xl space-y-6">
             <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} />
             {post.image && (
               <div className="overflow-hidden rounded-2xl border border-white/10">
-                <img src={post.image} alt={post.title} className="w-full object-cover" />
+                <img src={post.image} alt={post.title} className="w-full object-cover max-h-[400px]" />
               </div>
             )}
             <div className="flex items-center gap-3">
@@ -96,53 +99,121 @@ export default async function BlogDetailPage({ params }: Props) {
               {post.author && <span className="text-sm text-slate-500">· {post.author}</span>}
               <span className="text-sm text-slate-500">· 👁️ {post.views || 0}</span>
             </div>
-            <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-white md:text-5xl">
+            <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-white md:text-4xl">
               {post.title}
             </h1>
             <p className="text-lg leading-8 text-slate-300">{post.excerpt}</p>
           </div>
         </section>
 
-        <section className="py-20 md:py-28">
-          <div className="container-shell max-w-3xl">
-            <article className="prose prose-invert prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+        {/* Content + Sidebar */}
+        <section className="py-16 md:py-20">
+          <div className="container-shell max-w-5xl">
+            <div className="flex flex-col gap-10 lg:flex-row">
+              {/* Main Article */}
+              <article className="min-w-0 flex-1">
+                <div className="prose prose-invert prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
 
-            <div className="mt-12 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8">
-              <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
-              <p className="mt-3 text-blue-100">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
-              <div className="mt-6 flex gap-3">
-                <LinkButton className="bg-white text-blue-700 shadow-none hover:bg-blue-50" href={whatsappHref}>
-                  Konsultasi Gratis
-                </LinkButton>
-                <LinkButton href="/brief-project" variant="secondary">
-                  Isi Brief
-                </LinkButton>
-              </div>
-            </div>
-
-            {related.length > 0 && (
-              <div className="mt-16 space-y-8">
-                <h2 className="font-heading text-2xl font-bold text-white">Artikel lainnya</h2>
-                <div className="grid gap-5 md:grid-cols-3">
-                  {related.map((r) => (
-                    <Link href={`/blog/${r.slug}`} key={r.slug} className="group">
-                      <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 transition hover:border-cyan-300/30">
-                        {r.image && (
-                          <div className="mb-3 overflow-hidden rounded-xl">
-                            <img src={r.image} alt={r.title} className="h-28 w-full object-cover" />
-                          </div>
-                        )}
-                        <Badge>{r.category}</Badge>
-                        <h3 className="mt-3 text-sm font-bold group-hover:text-cyan-200 transition">{r.title}</h3>
-                        <div className="mt-3 flex items-center gap-2 text-xs text-cyan-300">
-                          Baca <ArrowRight size={12} />
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+                {/* Bottom CTA */}
+                <div className="mt-12 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8">
+                  <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
+                  <p className="mt-3 text-blue-100">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
+                  <div className="mt-6 flex gap-3">
+                    <LinkButton className="bg-white text-blue-700 shadow-none hover:bg-blue-50" href={whatsappHref}>
+                      Konsultasi Gratis
+                    </LinkButton>
+                    <LinkButton href="/brief-project" variant="secondary">
+                      Isi Brief
+                    </LinkButton>
+                  </div>
                 </div>
-              </div>
-            )}
+
+                {/* Related at bottom (mobile visible, desktop hidden) */}
+                {related.length > 0 && (
+                  <div className="mt-16 space-y-8 lg:hidden">
+                    <h2 className="font-heading text-2xl font-bold text-white">Artikel lainnya</h2>
+                    <div className="grid gap-5 md:grid-cols-2">
+                      {related.slice(0, 2).map((r) => (
+                        <Link href={`/blog/${r.slug}`} key={r.slug} className="group">
+                          <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 transition hover:border-cyan-300/30">
+                            {r.image && (
+                              <div className="mb-3 overflow-hidden rounded-xl">
+                                <img src={r.image} alt={r.title} className="h-28 w-full object-cover" />
+                              </div>
+                            )}
+                            <Badge>{r.category}</Badge>
+                            <h3 className="mt-3 text-sm font-bold group-hover:text-cyan-200 transition">{r.title}</h3>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </article>
+
+              {/* Sidebar — desktop only, sticky */}
+              <aside className="hidden lg:block lg:w-[300px] shrink-0">
+                <div className="sticky top-24 space-y-6">
+                  {/* CTA Card */}
+                  <Card className="space-y-4 border-cyan-400/20 bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
+                        <MessageCircle size={20} className="text-emerald-400" />
+                      </div>
+                      <div>
+                        <p className="font-heading text-sm font-bold text-white">Butuh bantuan?</p>
+                        <p className="text-xs text-slate-400">Chat langsung via WhatsApp</p>
+                      </div>
+                    </div>
+                    <LinkButton href={whatsappHref} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-none">
+                      💬 Konsultasi Gratis
+                    </LinkButton>
+                    <LinkButton href="/brief-project" variant="secondary" className="w-full">
+                      <FileText size={16} /> Isi Brief Project
+                    </LinkButton>
+                  </Card>
+
+                  {/* About Card */}
+                  <Card className="space-y-3 p-5">
+                    <p className="font-heading text-sm font-bold text-white">Tentang Nggawe Web</p>
+                    <p className="text-xs leading-6 text-slate-400">
+                      Kami bantu bisnis punya website profesional, ditemukan di Google, dan lebih efisien dengan automation.
+                    </p>
+                    <div className="flex gap-4 text-xs text-slate-500">
+                      <span>🌐 Website</span>
+                      <span>📈 SEO</span>
+                      <span>⚡ Automation</span>
+                    </div>
+                  </Card>
+
+                  {/* Related Articles */}
+                  {related.length > 0 && (
+                    <Card className="space-y-4 p-5">
+                      <p className="font-heading text-sm font-bold text-white">Artikel Terkait</p>
+                      <div className="space-y-3">
+                        {related.map((r) => (
+                          <Link href={`/blog/${r.slug}`} key={r.slug} className="group flex gap-3">
+                            {r.image ? (
+                              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-800">
+                                <img src={r.image} alt={r.title} className="h-full w-full object-cover" />
+                              </div>
+                            ) : (
+                              <div className="h-14 w-14 shrink-0 rounded-lg bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
+                            )}
+                            <div className="min-w-0">
+                              <p className="text-xs font-semibold text-slate-300 line-clamp-2 group-hover:text-cyan-200 transition">
+                                {r.title}
+                              </p>
+                              <span className="text-[10px] text-slate-500">{r.category}</span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </Card>
+                  )}
+                </div>
+              </aside>
+            </div>
           </div>
         </section>
       </main>
