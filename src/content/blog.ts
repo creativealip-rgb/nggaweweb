@@ -30,16 +30,16 @@ export const blogPosts: BlogPost[] = [
 </ul>
 
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Faktor yang Mempengaruhi Harga</h2>
-<h3 class="text-xl font-bold text-cyan-300 mt-6 mb-2">1. Jumlah Halaman</h3>
+<h3 class="text-xl font-bold text-blue-600 mt-6 mb-2">1. Jumlah Halaman</h3>
 <p class="text-slate-600 leading-7">Makin banyak halaman, makin banyak waktu desain dan development. Homepage, About, Services, Portfolio, Kontak — setiap halaman butuh desain dan konten tersendiri.</p>
 
-<h3 class="text-xl font-bold text-cyan-300 mt-6 mb-2">2. Desain Custom vs Template</h3>
+<h3 class="text-xl font-bold text-blue-600 mt-6 mb-2">2. Desain Custom vs Template</h3>
 <p class="text-slate-600 leading-7">Template lebih murah tapi terlihat generik. Desain custom lebih mahal tapi bikin bisnis terlihat profesional dan beda dari kompetitor.</p>
 
-<h3 class="text-xl font-bold text-cyan-300 mt-6 mb-2">3. Fitur dan Integrasi</h3>
+<h3 class="text-xl font-bold text-blue-600 mt-6 mb-2">3. Fitur dan Integrasi</h3>
 <p class="text-slate-600 leading-7">Form kontak biasa murah. Tapi kalau butuh payment gateway, CRM integration, booking system, atau automation — biaya naik karena complexity development.</p>
 
-<h3 class="text-xl font-bold text-cyan-300 mt-6 mb-2">4. SEO Setup</h3>
+<h3 class="text-xl font-bold text-blue-600 mt-6 mb-2">4. SEO Setup</h3>
 <p class="text-slate-600 leading-7">Website tanpa SEO setup itu seperti toko tanpa papan nama. Technical SEO, meta tags, schema markup, dan struktur URL yang benar butuh waktu ekstra tapi hasilnya jangka panjang.</p>
 
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Biaya Tersembunyi yang Sering Dilupakan</h2>
@@ -53,7 +53,7 @@ export const blogPosts: BlogPost[] = [
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Tips Hemat Budget</h2>
 <p class="text-slate-600 leading-7">Mulai dari yang essential. Homepage + layanan + kontak sudah cukup untuk mulai. Tambah halaman lain seiring bisnis berkembang. Yang penting: fondasi SEO harus benar dari awal supaya tidak rebuild nanti.</p>
 
-<p class="text-lg leading-8 text-slate-600 mt-10">Mau estimasi biaya untuk project kamu? Coba <a href="/tools/website-cost-calculator" class="text-cyan-300 underline hover:text-blue-600">Website Cost Calculator</a> kami atau <a href="/brief-project" class="text-cyan-300 underline hover:text-blue-600">isi brief project</a> untuk estimasi gratis.</p>
+<p class="text-lg leading-8 text-slate-600 mt-10">Mau estimasi biaya untuk project kamu? Coba <a href="/tools/website-cost-calculator" class="text-blue-600 underline hover:text-blue-600">Website Cost Calculator</a> kami atau <a href="/brief-project" class="text-blue-600 underline hover:text-blue-600">isi brief project</a> untuk estimasi gratis.</p>
 `,
   },
   {
@@ -72,7 +72,7 @@ export const blogPosts: BlogPost[] = [
 <p class="text-slate-600 leading-7 mt-3"><strong class="text-slate-900">Fix:</strong> Daftar Google Search Console, verifikasi domain, submit sitemap.xml.</p>
 
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">2. Robots.txt Block</h2>
-<p class="text-slate-600 leading-7">File robots.txt yang salah konfigurasi bisa memblokir Google dari meng-crawl website. Cek apakah ada <code class="text-cyan-300">Disallow: /</code> yang memblokir semua halaman.</p>
+<p class="text-slate-600 leading-7">File robots.txt yang salah konfigurasi bisa memblokir Google dari meng-crawl website. Cek apakah ada <code class="text-blue-600">Disallow: /</code> yang memblokir semua halaman.</p>
 
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">3. Tidak Ada Meta Tags yang Relevan</h2>
 <p class="text-slate-600 leading-7">Google butuh title tag dan meta description yang jelas untuk memahami halaman kamu. Tanpa ini, Google tidak tahu halaman ini tentang apa dan untuk siapa.</p>
@@ -88,9 +88,9 @@ export const blogPosts: BlogPost[] = [
 <p class="text-slate-600 leading-7">Google pakai mobile-first indexing. Kalau website tidak responsive di HP, ranking otomatis turun.</p>
 
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Cara Cek Apakah Website Terindex</h2>
-<p class="text-slate-600 leading-7">Ketik <code class="text-cyan-300">site:domainkamu.com</code> di Google. Kalau tidak ada hasil, website belum terindex.</p>
+<p class="text-slate-600 leading-7">Ketik <code class="text-blue-600">site:domainkamu.com</code> di Google. Kalau tidak ada hasil, website belum terindex.</p>
 
-<p class="text-lg leading-8 text-slate-600 mt-10">Butuh bantuan audit SEO? <a href="/audit-gratis" class="text-cyan-300 underline hover:text-blue-600">Gunakan audit gratis</a> kami atau <a href="/jasa-seo" class="text-cyan-300 underline hover:text-blue-600">lihat layanan SEO</a> kami.</p>
+<p class="text-lg leading-8 text-slate-600 mt-10">Butuh bantuan audit SEO? <a href="/audit-gratis" class="text-blue-600 underline hover:text-blue-600">Gunakan audit gratis</a> kami atau <a href="/jasa-seo" class="text-blue-600 underline hover:text-blue-600">lihat layanan SEO</a> kami.</p>
 `,
   },
   {
@@ -138,7 +138,7 @@ export const blogPosts: BlogPost[] = [
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Content Strategy</h2>
 <p class="text-slate-600 leading-7">Website tanpa konten berkala stagnan. Minimal 1-2 artikel per bulan yang relevan dengan bisnis kamu. Fokus pada pertanyaan yang sering ditanyakan customer.</p>
 
-<p class="text-lg leading-8 text-slate-600 mt-10">Mau cek apakah website kamu sudah SEO-friendly? <a href="/audit-gratis" class="text-cyan-300 underline hover:text-blue-600">Gunakan audit gratis</a> kami.</p>
+<p class="text-lg leading-8 text-slate-600 mt-10">Mau cek apakah website kamu sudah SEO-friendly? <a href="/audit-gratis" class="text-blue-600 underline hover:text-blue-600">Gunakan audit gratis</a> kami.</p>
 `,
   },
   {
@@ -171,7 +171,7 @@ export const blogPosts: BlogPost[] = [
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Mulai dari Mana?</h2>
 <p class="text-slate-600 leading-7">Identifikasi 1 proses yang paling makan waktu dan sering diulang. Mulai dari situ. Biasanya: lead management dan follow-up. Dampaknya langsung terasa ke revenue.</p>
 
-<p class="text-lg leading-8 text-slate-600 mt-10">Butuh bantuan setup automation? <a href="/jasa-automation" class="text-cyan-300 underline hover:text-blue-600">Lihat layanan automation</a> kami atau <a href="/kontak" class="text-cyan-300 underline hover:text-blue-600">hubungi langsung</a>.</p>
+<p class="text-lg leading-8 text-slate-600 mt-10">Butuh bantuan setup automation? <a href="/jasa-automation" class="text-blue-600 underline hover:text-blue-600">Lihat layanan automation</a> kami atau <a href="/kontak" class="text-blue-600 underline hover:text-blue-600">hubungi langsung</a>.</p>
 `,
   },
   {
@@ -219,7 +219,7 @@ export const blogPosts: BlogPost[] = [
 <h2 class="font-heading text-2xl font-bold text-slate-900 mt-10 mb-4">Rekomendasi</h2>
 <p class="text-slate-600 leading-7">Kalau baru mulai dan budget terbatas: landing page dulu. Kalau bisnis sudah jalan dan butuh credibility: website lengkap. Yang terbaik: <strong class="text-slate-900">keduanya</strong>. Website sebagai base, landing page untuk campaign spesifik.</p>
 
-<p class="text-lg leading-8 text-slate-600 mt-10">Bingung pilih yang mana? <a href="/brief-project" class="text-cyan-300 underline hover:text-blue-600">Isi brief project</a> kami dan kami bantu rekomendasi yang tepat.</p>
+<p class="text-lg leading-8 text-slate-600 mt-10">Bingung pilih yang mana? <a href="/brief-project" class="text-blue-600 underline hover:text-blue-600">Isi brief project</a> kami dan kami bantu rekomendasi yang tepat.</p>
 `,
   },
 ];

@@ -117,7 +117,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 {/* Bottom CTA */}
                 <div className="mt-12 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8">
                   <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
-                  <p className="mt-3 text-blue-100">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
+                  <p className="mt-3 text-blue-700">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
                   <div className="mt-6 flex gap-3">
                     <LinkButton className="bg-white text-blue-700 shadow-none hover:bg-blue-50" href={whatsappHref}>
                       Konsultasi Gratis
