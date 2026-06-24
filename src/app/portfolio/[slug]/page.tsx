@@ -57,7 +57,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
               <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
                 {item.name}
               </h1>
-              <p className="max-w-xl text-lg leading-8 text-slate-600">{item.summary}</p>
+              <p className="max-w-xl text-lg leading-8 text-slate-700">{item.summary}</p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 {item.liveUrl && (
                   <LinkButton href={item.liveUrl} target="_blank" rel="noopener noreferrer">

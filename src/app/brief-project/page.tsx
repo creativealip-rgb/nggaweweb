@@ -22,7 +22,7 @@ export default function BriefProjectPage() {
               <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
                 Ceritakan project kamu.
               </h1>
-              <p className="max-w-xl text-lg leading-8 text-slate-600">
+              <p className="max-w-xl text-lg leading-8 text-slate-700">
                 Isi brief singkat agar kami bisa memahami kebutuhan, target, budget, dan rekomendasi solusi yang paling masuk akal.
               </p>
               <div className="space-y-4 rounded-2xl border border-slate-200 bg-white/[0.03] p-6">

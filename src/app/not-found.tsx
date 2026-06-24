@@ -13,7 +13,7 @@ export default function NotFound() {
           <h1 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-5xl">
             Halaman tidak ditemukan
           </h1>
-          <p className="text-lg leading-8 text-slate-600">
+          <p className="text-lg leading-8 text-slate-700">
             Halaman yang kamu cari tidak ada atau sudah dipindahkan.
           </p>
           <div className="flex justify-center gap-3">

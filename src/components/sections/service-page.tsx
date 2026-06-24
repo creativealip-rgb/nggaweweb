@@ -68,7 +68,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
                   {data.h1}
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-slate-600">{data.subheadline}</p>
+                <p className="max-w-2xl text-lg leading-8 text-slate-700">{data.subheadline}</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <LinkButton href={data.primaryCta.href}>{data.primaryCta.label} <ArrowRight size={18} /></LinkButton>
@@ -120,7 +120,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-5xl">
                 {data.valueProp.heading}
               </h2>
-              <p className="text-lg leading-8 text-slate-600">{data.valueProp.body}</p>
+              <p className="text-lg leading-8 text-slate-700">{data.valueProp.body}</p>
             </div>
             <Card>
               <h3 className="mb-6 font-heading text-xl font-bold">Yang kamu dapat</h3>
@@ -227,7 +227,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 {data.proofBlocks.map((item) => (
                   <Card key={item.project} className="p-7">
                     <h3 className="font-heading text-xl font-bold text-slate-900">{item.project}</h3>
-                    <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600">
+                    <div className="mt-5 space-y-4 text-sm leading-7 text-slate-700">
                       <p><strong className="text-red-300">Challenge:</strong> {item.challenge}</p>
                       <p><strong className="text-blue-600">Solution:</strong> {item.solution}</p>
                       <p><strong className="text-emerald-300">Result:</strong> {item.result}</p>
@@ -248,7 +248,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 {data.pillarSections.map((section) => (
                   <Card key={section.title} className="p-7 md:p-9">
                     <h2 className="font-heading text-2xl font-black tracking-[-0.04em] text-slate-900 md:text-3xl">{section.title}</h2>
-                    <p className="mt-4 text-base leading-8 text-slate-600">{section.body}</p>
+                    <p className="mt-4 text-base leading-8 text-slate-700">{section.body}</p>
                     {section.points && section.points.length > 0 && (
                       <ul className="mt-6 space-y-3">
                         {section.points.map((point) => (
@@ -323,7 +323,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">{data.finalCta.heading}</h2>
               <p className="text-lg leading-8 text-white">{data.finalCta.body}</p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-white text-blue-700 shadow-none hover:bg-blue-50" href={whatsappHref}>Konsultasi Gratis</LinkButton>
+                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>Konsultasi Gratis</LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">Isi Brief Project</LinkButton>
               </div>
             </div>

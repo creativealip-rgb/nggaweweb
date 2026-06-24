@@ -24,7 +24,7 @@ export default function KontakPage() {
             <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
               Hubungi Nggawe Web.
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="max-w-2xl text-lg leading-8 text-slate-700">
               Punya pertanyaan atau mau mulai project? Hubungi kami lewat channel yang paling nyaman.
             </p>
           </div>

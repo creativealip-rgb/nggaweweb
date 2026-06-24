@@ -102,7 +102,7 @@ export default async function BlogDetailPage({ params }: Props) {
             <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-slate-900 md:text-4xl">
               {post.title}
             </h1>
-            <p className="text-lg leading-8 text-slate-600">{post.excerpt}</p>
+            <p className="text-lg leading-8 text-slate-700">{post.excerpt}</p>
           </div>
         </section>
 
@@ -117,7 +117,7 @@ export default async function BlogDetailPage({ params }: Props) {
                 {/* Bottom CTA */}
                 <div className="mt-12 rounded-2xl border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8">
                   <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
-                  <p className="mt-3 text-blue-700">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
+                  <p className="mt-3 text-white/90">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
                   <div className="mt-6 flex gap-3">
                     <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
                       Konsultasi Gratis
@@ -162,7 +162,7 @@ export default async function BlogDetailPage({ params }: Props) {
                       </div>
                       <div>
                         <p className="font-heading text-sm font-bold text-slate-900">Butuh bantuan?</p>
-                        <p className="text-xs text-slate-500">Chat langsung via WhatsApp</p>
+                        <p className="text-xs text-slate-600">Chat langsung via WhatsApp</p>
                       </div>
                     </div>
                     <LinkButton href={whatsappHref} className="w-full bg-emerald-500 hover:bg-emerald-500 text-slate-900 shadow-none">
@@ -176,7 +176,7 @@ export default async function BlogDetailPage({ params }: Props) {
                   {/* About Card */}
                   <Card className="space-y-3 p-5">
                     <p className="font-heading text-sm font-bold text-slate-900">Tentang Nggawe Web</p>
-                    <p className="text-xs leading-6 text-slate-500">
+                    <p className="text-xs leading-6 text-slate-600">
                       Kami bantu bisnis punya website profesional, ditemukan di Google, dan lebih efisien dengan automation.
                     </p>
                     <div className="flex gap-4 text-xs text-slate-600">

@@ -24,7 +24,7 @@ export default function TentangPage() {
             <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
               Nggawe Web membantu bisnis membangun website dan sistem digital yang lebih rapi.
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="max-w-2xl text-lg leading-8 text-slate-700">
               Kami bukan cuma bikin tampilan. Kami bantu bisnis punya aset digital yang bisa ditemukan Google, membangun trust, dan menangkap lead secara otomatis.
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function TentangPage() {
           <div className="container-shell grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-6">
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-4xl">Kenapa Nggawe Web?</h2>
-              <p className="text-lg leading-8 text-slate-600">
+              <p className="text-lg leading-8 text-slate-700">
                 Banyak agency bikin website yang bagus tapi tidak menghasilkan. Banyak freelancer bikin website cepat tapi tidak sustainable. Nggawe Web ada di tengah: design premium, technical SEO kuat, dan automation yang bikin bisnis jalan lebih efisien.
               </p>
               <ul className="space-y-4">

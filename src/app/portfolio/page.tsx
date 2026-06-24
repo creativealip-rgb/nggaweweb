@@ -38,7 +38,7 @@ export default function PortfolioPage() {
             <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
               Project yang menunjukkan design, sistem, dan problem solving.
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-600">
+            <p className="max-w-2xl text-lg leading-8 text-slate-700">
               Dari website bisnis service sampai platform aplikasi, setiap project dibuat dengan fokus pada tampilan, performa, struktur, dan kebutuhan bisnis.
             </p>
           </div>

@@ -59,7 +59,7 @@ export function SiteFooter() {
         </div>
         <div>
           <h3 className="font-bold text-slate-900">Services</h3>
-          <ul className="mt-4 space-y-3 text-sm text-slate-500">
+          <ul className="mt-4 space-y-3 text-sm text-slate-600">
             <li><Link href="/jasa-pembuatan-website">Website Development</Link></li>
             <li><Link href="/jasa-seo">SEO Optimization</Link></li>
             <li><Link href="/jasa-automation">Business Automation</Link></li>
@@ -67,7 +67,7 @@ export function SiteFooter() {
         </div>
         <div>
           <h3 className="font-bold text-slate-900">Resources</h3>
-          <ul className="mt-4 space-y-3 text-sm text-slate-500">
+          <ul className="mt-4 space-y-3 text-sm text-slate-600">
             <li><Link href="/portfolio">Portfolio</Link></li>
             <li><Link href="/blog">Blog</Link></li>
             <li><Link href="/tools/website-cost-calculator">Cost Calculator</Link></li>
@@ -75,7 +75,7 @@ export function SiteFooter() {
         </div>
         <div>
           <h3 className="font-bold text-slate-900">Contact</h3>
-          <ul className="mt-4 space-y-3 text-sm text-slate-500">
+          <ul className="mt-4 space-y-3 text-sm text-slate-600">
             <li><Link href="/brief-project">Brief Project</Link></li>
             <li><Link href="/audit-gratis">Audit Gratis</Link></li>
             <li><Link href="/kontak">Kontak</Link></li>
@@ -83,7 +83,7 @@ export function SiteFooter() {
         </div>
       </div>
       <div className="border-t border-slate-200">
-        <div className="container-shell flex flex-col items-center justify-between gap-4 py-6 text-sm text-slate-500 md:flex-row">
+        <div className="container-shell flex flex-col items-center justify-between gap-4 py-6 text-sm text-slate-600 md:flex-row">
           <p>&copy; 2026 NggaweWeb. All rights reserved.</p>
           <div className="flex gap-6">
             <Link href="/privacy-policy" className="hover:text-slate-600">Privacy Policy</Link>

@@ -39,7 +39,7 @@ export default function Home() {
                 <h1 className="font-heading text-5xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-7xl">
                   Website premium, <span className="text-gradient">SEO-ready</span>, dan automation buat bisnis yang mau tumbuh lebih rapi.
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
+                <p className="max-w-2xl text-lg leading-8 text-slate-700 md:text-xl">
                   Nggawe Web bantu service business, startup, UMKM, dan agency punya website yang profesional, mudah ditemukan Google, dan siap menangkap lead otomatis.
                 </p>
               </div>
@@ -200,7 +200,7 @@ export default function Home() {
                       <span key={i} className="text-yellow-400">★</span>
                     ))}
                   </div>
-                  <p className="text-sm leading-7 text-slate-600 italic">"{t.quote}"</p>
+                  <p className="text-sm leading-7 text-slate-700 italic">"{t.quote}"</p>
                   <div className="mt-6 flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-slate-900 font-bold text-sm">
                       {t.name.split(" ").map((n) => n[0]).join("")}

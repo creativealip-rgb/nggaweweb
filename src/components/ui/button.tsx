@@ -15,9 +15,9 @@ type LinkButtonProps = SharedProps & AnchorHTMLAttributes<HTMLAnchorElement> & {
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    "bg-gradient-to-r from-blue-600 to-cyan-500 text-slate-900 shadow-[0_16px_44px_rgba(37,99,235,0.34)] hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)]",
+    "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_16px_44px_rgba(37,99,235,0.34)] hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)]",
   secondary:
-    "border border-white/15 bg-white/[0.06] text-slate-900 hover:-translate-y-0.5 hover:border-blue-300 hover:bg-white/[0.09]",
+    "border-2 border-white/40 bg-white/20 text-white backdrop-blur-sm hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/30",
   ghost: "text-blue-700 hover:text-slate-900 hover:bg-white/[0.06]",
 };
 

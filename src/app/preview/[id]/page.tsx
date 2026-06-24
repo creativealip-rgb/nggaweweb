@@ -46,7 +46,7 @@ export default async function PreviewPage({
             <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-slate-900 md:text-5xl">
               {post.title}
             </h1>
-            <p className="text-lg leading-8 text-slate-600">{post.excerpt}</p>
+            <p className="text-lg leading-8 text-slate-700">{post.excerpt}</p>
             {post.focusKeyword && (
               <p className="text-xs text-slate-600">Focus keyword: {post.focusKeyword}</p>
             )}

@@ -16,7 +16,7 @@ export function SectionHeader({ eyebrow, title, description, align = "left", cla
       <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-5xl">
         {title}
       </h2>
-      {description ? <p className="text-base leading-8 text-slate-600 md:text-lg">{description}</p> : null}
+      {description ? <p className="text-base leading-8 text-slate-700 md:text-lg">{description}</p> : null}
     </div>
   );
 }
