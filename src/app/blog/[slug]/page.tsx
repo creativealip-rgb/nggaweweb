@@ -162,7 +162,7 @@ export default async function BlogDetailPage({ params }: Props) {
                       </div>
                       <div>
                         <p className="font-heading text-sm font-bold text-slate-900">Butuh bantuan?</p>
-                        <p className="text-xs text-slate-400">Chat langsung via WhatsApp</p>
+                        <p className="text-xs text-slate-500">Chat langsung via WhatsApp</p>
                       </div>
                     </div>
                     <LinkButton href={whatsappHref} className="w-full bg-emerald-500 hover:bg-emerald-500 text-slate-900 shadow-none">
@@ -176,10 +176,10 @@ export default async function BlogDetailPage({ params }: Props) {
                   {/* About Card */}
                   <Card className="space-y-3 p-5">
                     <p className="font-heading text-sm font-bold text-slate-900">Tentang Nggawe Web</p>
-                    <p className="text-xs leading-6 text-slate-400">
+                    <p className="text-xs leading-6 text-slate-500">
                       Kami bantu bisnis punya website profesional, ditemukan di Google, dan lebih efisien dengan automation.
                     </p>
-                    <div className="flex gap-4 text-xs text-slate-400">
+                    <div className="flex gap-4 text-xs text-slate-600">
                       <span>🌐 Website</span>
                       <span>📈 SEO</span>
                       <span>⚡ Automation</span>
@@ -204,7 +204,7 @@ export default async function BlogDetailPage({ params }: Props) {
                               <p className="text-xs font-semibold text-slate-600 line-clamp-2 group-hover:text-blue-600 transition">
                                 {r.title}
                               </p>
-                              <span className="text-[10px] text-slate-400">{r.category}</span>
+                              <span className="text-[10px] text-slate-500">{r.category}</span>
                             </div>
                           </Link>
                         ))}
