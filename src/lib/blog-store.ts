@@ -9,6 +9,7 @@ export type BlogPost = {
   category: string;
   tags: string[];
   publishedAt: string;
+  updatedAt?: string;
   readTime: string;
   status: "draft" | "published";
   content: string;

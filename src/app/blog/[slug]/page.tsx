@@ -41,7 +41,22 @@ export default async function BlogDetailPage({ params }: Props) {
   const post = getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = getPublishedPosts().filter((p) => p.slug !== post.slug).slice(0, 3);
+  const related = getPublishedPosts()
+    .filter((p) => p.slug !== post.slug)
+    .sort((a, b) => (a.category === post.category ? -1 : 0) - (b.category === post.category ? -1 : 0))
+    .slice(0, 3);
+
+
+  const faqMatches = [...post.content.matchAll(/<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/g)].slice(-8);
+  const faqJsonLd = faqMatches.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqMatches.map((match) => ({
+      "@type": "Question",
+      name: match[1].replace(/<[^>]+>/g, ""),
+      acceptedAnswer: { "@type": "Answer", text: match[2].replace(/<[^>]+>/g, "") },
+    })),
+  } : null;
 
   const articleJsonLd = {
     "@context": "https://schema.org",
@@ -49,6 +64,8 @@ export default async function BlogDetailPage({ params }: Props) {
     headline: post.title,
     description: post.excerpt,
     datePublished: post.publishedAt,
+    dateModified: post.updatedAt || post.publishedAt,
+    keywords: post.tags,
     author: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
     publisher: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${siteConfig.url}/blog/${post.slug}` },
@@ -59,6 +76,7 @@ export default async function BlogDetailPage({ params }: Props) {
     <>
       <ViewCounter postId={post.id} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }} />
+      {faqJsonLd && <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />}
       <SiteHeader />
       <main>
         <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
