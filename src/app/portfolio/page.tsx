@@ -87,16 +87,16 @@ export default function PortfolioPage() {
         </section>
 
         <section className="pb-20 md:pb-28">
-          <div className="container-shell rounded-[2rem] border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8 md:p-14">
+          <div className="container-shell rounded-[2rem] border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
-              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">
+              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">
                 Mau buat project serupa?
               </h2>
-              <p className="text-lg leading-8 text-blue-50">
+              <p className="text-lg leading-8 text-white">
                 Ceritakan kebutuhan project kamu. Kami bantu rekomendasi solusi dan estimasi yang sesuai.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-white text-blue-700 shadow-none hover:bg-blue-50" href={whatsappHref}>
+                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
                   Konsultasi Gratis
                 </LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">

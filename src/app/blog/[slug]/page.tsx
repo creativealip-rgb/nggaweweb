@@ -115,11 +115,11 @@ export default async function BlogDetailPage({ params }: Props) {
                 <div className="prose prose-slate prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
 
                 {/* Bottom CTA */}
-                <div className="mt-12 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8">
+                <div className="mt-12 rounded-2xl border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8">
                   <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
                   <p className="mt-3 text-blue-700">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
                   <div className="mt-6 flex gap-3">
-                    <LinkButton className="bg-white text-blue-700 shadow-none hover:bg-blue-50" href={whatsappHref}>
+                    <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
                       Konsultasi Gratis
                     </LinkButton>
                     <LinkButton href="/brief-project" variant="secondary">
