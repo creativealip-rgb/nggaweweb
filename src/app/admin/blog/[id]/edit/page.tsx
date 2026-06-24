@@ -86,53 +86,53 @@ export default function EditBlogPage() {
     setDeleting(false);
   };
 
-  if (loading) return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">Loading...</div>;
+  if (loading) return <div className="min-h-screen bg-white flex items-center justify-center text-slate-400">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <header className="border-b border-slate-800 px-6 py-4">
+    <div className="min-h-screen bg-white text-slate-900">
+      <header className="border-b border-slate-200 px-6 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link href="/admin/blog" className="text-xl font-bold hover:text-cyan-400">← Edit Artikel</Link>
+          <Link href="/admin/blog" className="text-xl font-bold hover:text-blue-600">← Edit Artikel</Link>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-500">👁️ {form.views} views</span>
-            {form.status === "draft" && <Link href={`/preview/${id}`} target="_blank" className="px-3 py-2 bg-cyan-900 hover:bg-cyan-800 text-cyan-300 text-sm rounded-lg transition">Preview</Link>}
+            <span className="text-sm text-slate-400">👁️ {form.views} views</span>
+            {form.status === "draft" && <Link href={`/preview/${id}`} target="_blank" className="px-3 py-2 bg-cyan-900 hover:bg-cyan-800 text-blue-600 text-sm rounded-lg transition">Preview</Link>}
             <button onClick={handleDelete} disabled={deleting} className="px-4 py-2 bg-red-900 hover:bg-red-800 text-red-200 text-sm rounded-lg transition disabled:opacity-50">{deleting ? "Menghapus..." : "Hapus"}</button>
-            <button onClick={handleSave} disabled={saving} className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-white font-medium rounded-lg transition disabled:opacity-50">{saving ? "Menyimpan..." : "Simpan"}</button>
+            <button onClick={handleSave} disabled={saving} className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-slate-900 font-medium rounded-lg transition disabled:opacity-50">{saving ? "Menyimpan..." : "Simpan"}</button>
           </div>
         </div>
       </header>
       <main className="max-w-4xl mx-auto px-6 py-8 space-y-5">
         {/* Basic Info */}
         <section className="space-y-4">
-          <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Info Artikel</h2>
-          <div><label className="block text-sm text-slate-300 mb-1">Judul</label><input value={form.title} onChange={(e) => update("title", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" /></div>
+          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">Info Artikel</h2>
+          <div><label className="block text-sm text-slate-600 mb-1">Judul</label><input value={form.title} onChange={(e) => update("title", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
           <div className="grid grid-cols-2 gap-4">
-            <div><label className="block text-sm text-slate-300 mb-1">Slug</label><input value={form.slug} onChange={(e) => update("slug", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-300 mb-1">Kategori</label>
-              <select value={form.category} onChange={(e) => update("category", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500">
+            <div><label className="block text-sm text-slate-600 mb-1">Slug</label><input value={form.slug} onChange={(e) => update("slug", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
+            <div><label className="block text-sm text-slate-600 mb-1">Kategori</label>
+              <select value={form.category} onChange={(e) => update("category", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500">
                 {categories.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
           </div>
-          <div><label className="block text-sm text-slate-300 mb-1">Excerpt</label><textarea value={form.excerpt} onChange={(e) => update("excerpt", e.target.value)} rows={2} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" /></div>
+          <div><label className="block text-sm text-slate-600 mb-1">Excerpt</label><textarea value={form.excerpt} onChange={(e) => update("excerpt", e.target.value)} rows={2} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
           <div className="grid grid-cols-4 gap-4">
-            <div><label className="block text-sm text-slate-300 mb-1">Tags (koma)</label><input value={form.tags} onChange={(e) => update("tags", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-300 mb-1">Read Time</label><input value={form.readTime} onChange={(e) => update("readTime", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-300 mb-1">Author</label><input value={form.author} onChange={(e) => update("author", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-300 mb-1">Status</label>
-              <select value={form.status} onChange={(e) => update("status", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500"><option value="draft">Draft</option><option value="published">Published</option></select>
+            <div><label className="block text-sm text-slate-600 mb-1">Tags (koma)</label><input value={form.tags} onChange={(e) => update("tags", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
+            <div><label className="block text-sm text-slate-600 mb-1">Read Time</label><input value={form.readTime} onChange={(e) => update("readTime", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
+            <div><label className="block text-sm text-slate-600 mb-1">Author</label><input value={form.author} onChange={(e) => update("author", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
+            <div><label className="block text-sm text-slate-600 mb-1">Status</label>
+              <select value={form.status} onChange={(e) => update("status", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500"><option value="draft">Draft</option><option value="published">Published</option></select>
             </div>
           </div>
-          <div><label className="block text-sm text-slate-300 mb-1">⏰ Schedule Publish</label>
-            <input type="datetime-local" value={form.scheduledAt} onChange={(e) => update("scheduledAt", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" />
+          <div><label className="block text-sm text-slate-600 mb-1">⏰ Schedule Publish</label>
+            <input type="datetime-local" value={form.scheduledAt} onChange={(e) => update("scheduledAt", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" />
           </div>
         </section>
 
         {/* Content */}
         <section className="space-y-3">
-          <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Konten</h2>
+          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">Konten</h2>
           <div className="flex items-center gap-3">
-            <label className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-sm rounded-lg cursor-pointer transition">
+            <label className="px-4 py-2 bg-slate-100 hover:bg-slate-100 text-sm rounded-lg cursor-pointer transition">
               {uploading ? "Uploading..." : "📷 Upload Gambar"}
               <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
             </label>
@@ -142,16 +142,16 @@ export default function EditBlogPage() {
 
         {/* SEO */}
         <section className="space-y-4">
-          <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">🔍 SEO Settings</h2>
-          <div><label className="block text-sm text-slate-300 mb-1">Focus Keyword</label><input value={form.focusKeyword} onChange={(e) => update("focusKeyword", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" /></div>
-          <div><label className="block text-sm text-slate-300 mb-1">Meta Title</label><input value={form.metaTitle} onChange={(e) => update("metaTitle", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" maxLength={60} /><p className="text-xs text-slate-500 mt-1">{form.metaTitle.length}/60</p></div>
-          <div><label className="block text-sm text-slate-300 mb-1">Meta Description</label><textarea value={form.metaDescription} onChange={(e) => update("metaDescription", e.target.value)} rows={2} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" maxLength={160} /><p className="text-xs text-slate-500 mt-1">{form.metaDescription.length}/160</p></div>
-          <div><label className="block text-sm text-slate-300 mb-1">OG Image URL</label><input value={form.ogImage} onChange={(e) => update("ogImage", e.target.value)} className="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-cyan-500" /></div>
+          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">🔍 SEO Settings</h2>
+          <div><label className="block text-sm text-slate-600 mb-1">Focus Keyword</label><input value={form.focusKeyword} onChange={(e) => update("focusKeyword", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
+          <div><label className="block text-sm text-slate-600 mb-1">Meta Title</label><input value={form.metaTitle} onChange={(e) => update("metaTitle", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" maxLength={60} /><p className="text-xs text-slate-400 mt-1">{form.metaTitle.length}/60</p></div>
+          <div><label className="block text-sm text-slate-600 mb-1">Meta Description</label><textarea value={form.metaDescription} onChange={(e) => update("metaDescription", e.target.value)} rows={2} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" maxLength={160} /><p className="text-xs text-slate-400 mt-1">{form.metaDescription.length}/160</p></div>
+          <div><label className="block text-sm text-slate-600 mb-1">OG Image URL</label><input value={form.ogImage} onChange={(e) => update("ogImage", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
         </section>
 
         {/* Google Preview */}
         <section className="space-y-2">
-          <h2 className="text-lg font-bold text-cyan-400 border-b border-slate-800 pb-2">Google Preview</h2>
+          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">Google Preview</h2>
           <div className="p-4 bg-white rounded-lg">
             <p className="text-blue-800 text-lg font-medium truncate">{form.metaTitle || form.title || "Judul"}</p>
             <p className="text-green-700 text-xs">nggawe.web.id/blog/{form.slug || "slug"}</p>

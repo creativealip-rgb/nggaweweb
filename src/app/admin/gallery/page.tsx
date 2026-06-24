@@ -32,13 +32,13 @@ export default function GalleryPage() {
     alert("URL copied!");
   };
 
-  if (loading) return <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-400">Loading...</div>;
+  if (loading) return <div className="min-h-screen bg-white flex items-center justify-center text-slate-400">Loading...</div>;
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white">
-      <header className="border-b border-slate-800 px-6 py-4">
+    <div className="min-h-screen bg-white text-slate-900">
+      <header className="border-b border-slate-200 px-6 py-4">
         <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/admin" className="text-xl font-bold hover:text-cyan-400">← Image Gallery</Link>
+          <Link href="/admin" className="text-xl font-bold hover:text-blue-600">← Image Gallery</Link>
           <label className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-sm font-medium rounded-lg cursor-pointer transition">
             {uploading ? "Uploading..." : "📷 Upload Baru"}
             <input type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
@@ -46,14 +46,14 @@ export default function GalleryPage() {
         </div>
       </header>
       <main className="max-w-5xl mx-auto px-6 py-8">
-        <p className="text-sm text-slate-500 mb-4">{files.length} file · Klik gambar untuk copy URL</p>
+        <p className="text-sm text-slate-400 mb-4">{files.length} file · Klik gambar untuk copy URL</p>
         {files.length === 0 ? (
-          <p className="text-center text-slate-500 py-16">Belum ada upload</p>
+          <p className="text-center text-slate-400 py-16">Belum ada upload</p>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {files.map((f) => (
-              <div key={f.name} onClick={() => copyUrl(f.url)} className="group cursor-pointer rounded-xl bg-slate-900 border border-slate-800 hover:border-cyan-500/50 overflow-hidden transition">
-                <div className="aspect-square bg-slate-800 flex items-center justify-center">
+              <div key={f.name} onClick={() => copyUrl(f.url)} className="group cursor-pointer rounded-xl bg-white border border-slate-200 hover:border-blue-400 overflow-hidden transition">
+                <div className="aspect-square bg-slate-100 flex items-center justify-center">
                   <img src={f.url} alt={f.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-2">

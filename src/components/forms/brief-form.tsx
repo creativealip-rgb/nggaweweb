@@ -25,8 +25,8 @@ const briefSchema = z.object({
 
 type BriefForm = z.infer<typeof briefSchema>;
 
-const inputClass = "w-full rounded-xl border border-white/10 bg-slate-900/70 px-4 py-3 text-sm text-white placeholder-slate-500 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20";
-const labelClass = "mb-2 block text-sm font-semibold text-slate-300";
+const inputClass = "w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder-slate-500 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20";
+const labelClass = "mb-2 block text-sm font-semibold text-slate-600";
 const errorClass = "mt-1 text-xs text-red-400";
 
 export function BriefForm() {
@@ -73,7 +73,7 @@ export function BriefForm() {
     return (
       <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-8 text-center">
         <h3 className="font-heading text-2xl font-bold text-emerald-300">Brief berhasil dikirim!</h3>
-        <p className="mt-3 text-slate-300">Kami akan review dan menghubungi kamu maksimal 1x24 jam.</p>
+        <p className="mt-3 text-slate-600">Kami akan review dan menghubungi kamu maksimal 1x24 jam.</p>
       </div>
     );
   }
@@ -83,7 +83,7 @@ export function BriefForm() {
       <input type="text" className="hidden" tabIndex={-1} autoComplete="off" {...register("honeypot")} />
 
       <fieldset className="space-y-5">
-        <legend className="font-heading text-lg font-bold text-white">Kontak</legend>
+        <legend className="font-heading text-lg font-bold text-slate-900">Kontak</legend>
         <div className="grid gap-5 md:grid-cols-2">
           <div>
             <label className={labelClass}>Nama *</label>
@@ -113,8 +113,8 @@ export function BriefForm() {
                   className={cn(
                     "flex-1 rounded-xl border px-4 py-3 text-sm font-semibold transition",
                     watch("preferredContact") === v
-                      ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-200"
-                      : "border-white/10 text-slate-400 hover:border-white/20"
+                      ? "border-cyan-400/40 bg-cyan-400/10 text-blue-700"
+                      : "border-slate-200 text-slate-400 hover:border-slate-200"
                   )}
                 >
                   {v === "whatsapp" ? "WhatsApp" : v === "email" ? "Email" : "Call"}
@@ -126,7 +126,7 @@ export function BriefForm() {
       </fieldset>
 
       <fieldset className="space-y-5">
-        <legend className="font-heading text-lg font-bold text-white">Bisnis</legend>
+        <legend className="font-heading text-lg font-bold text-slate-900">Bisnis</legend>
         <div className="grid gap-5 md:grid-cols-2">
           <div>
             <label className={labelClass}>Nama Bisnis *</label>
@@ -154,7 +154,7 @@ export function BriefForm() {
       </fieldset>
 
       <fieldset className="space-y-5">
-        <legend className="font-heading text-lg font-bold text-white">Layanan Dibutuhkan *</legend>
+        <legend className="font-heading text-lg font-bold text-slate-900">Layanan Dibutuhkan *</legend>
         <div className="grid gap-3 md:grid-cols-2">
           {[
             ["website_development", "Website Development"],
@@ -173,8 +173,8 @@ export function BriefForm() {
               className={cn(
                 "rounded-xl border px-4 py-3 text-left text-sm font-semibold transition",
                 servicesNeeded.includes(value)
-                  ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-200"
-                  : "border-white/10 text-slate-400 hover:border-white/20"
+                  ? "border-cyan-400/40 bg-cyan-400/10 text-blue-700"
+                  : "border-slate-200 text-slate-400 hover:border-slate-200"
               )}
             >
               {label}
@@ -185,7 +185,7 @@ export function BriefForm() {
       </fieldset>
 
       <fieldset className="space-y-5">
-        <legend className="font-heading text-lg font-bold text-white">Detail Project</legend>
+        <legend className="font-heading text-lg font-bold text-slate-900">Detail Project</legend>
         <div>
           <label className={labelClass}>Goal Project *</label>
           <textarea className={cn(inputClass, "min-h-[100px] resize-y")} placeholder="Jelaskan goal utama project kamu..." {...register("projectGoal")} />
@@ -229,7 +229,7 @@ export function BriefForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-sm font-bold text-white shadow-[0_16px_44px_rgba(37,99,235,0.34)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)] disabled:opacity-50"
+        className="w-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-sm font-bold text-slate-900 shadow-[0_16px_44px_rgba(37,99,235,0.34)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)] disabled:opacity-50"
       >
         {isSubmitting ? "Mengirim..." : "Kirim Brief Project"}
       </button>

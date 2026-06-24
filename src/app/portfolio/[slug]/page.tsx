@@ -45,7 +45,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
       <SiteHeader />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-6">
               <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Portfolio", href: "/portfolio" }, { label: item.name }]} />
@@ -54,10 +54,10 @@ export default async function PortfolioDetailPage({ params }: Props) {
                 <Badge className="border-purple-400/20 bg-purple-400/10 text-purple-100">{item.industry}</Badge>
                 <Badge className="border-emerald-400/20 bg-emerald-400/10 text-emerald-100">{item.year}</Badge>
               </div>
-              <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-6xl">
+              <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
                 {item.name}
               </h1>
-              <p className="max-w-xl text-lg leading-8 text-slate-300">{item.summary}</p>
+              <p className="max-w-xl text-lg leading-8 text-slate-600">{item.summary}</p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 {item.liveUrl && (
                   <LinkButton href={item.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -69,8 +69,8 @@ export default async function PortfolioDetailPage({ params }: Props) {
                 </LinkButton>
               </div>
             </div>
-            <div className="rounded-[2rem] border border-white/15 bg-slate-900/80 p-6 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
-              <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-slate-950">
+            <div className="rounded-[2rem] border border-white/15 bg-white/80 p-6 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
+              <div className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white">
                 <Image src={item.screenshot} alt={`${item.name} screenshot`} width={800} height={450} className="w-full object-cover" />
               </div>
             </div>
@@ -82,20 +82,20 @@ export default async function PortfolioDetailPage({ params }: Props) {
           <div className="container-shell grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-8">
               <div>
-                <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-white">Problem</h2>
-                <p className="mt-4 text-base leading-7 text-slate-300">{item.problem}</p>
+                <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-slate-900">Problem</h2>
+                <p className="mt-4 text-base leading-7 text-slate-600">{item.problem}</p>
               </div>
               <div>
-                <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-white">Solution</h2>
-                <p className="mt-4 text-base leading-7 text-slate-300">{item.solution}</p>
+                <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-slate-900">Solution</h2>
+                <p className="mt-4 text-base leading-7 text-slate-600">{item.solution}</p>
               </div>
             </div>
             <Card>
               <h3 className="mb-6 font-heading text-xl font-bold">Key Features</h3>
               <ul className="space-y-4">
                 {item.features.map((f) => (
-                  <li className="flex gap-3 text-slate-300" key={f}>
-                    <CheckCircle2 className="mt-0.5 shrink-0 text-cyan-300" size={18} />
+                  <li className="flex gap-3 text-slate-600" key={f}>
+                    <CheckCircle2 className="mt-0.5 shrink-0 text-blue-600" size={18} />
                     <span>{f}</span>
                   </li>
                 ))}
@@ -105,23 +105,23 @@ export default async function PortfolioDetailPage({ params }: Props) {
         </section>
 
         {/* Tech Stack & Services */}
-        <section className="bg-slate-900/40 py-20 md:py-28">
+        <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell grid gap-12 lg:grid-cols-2">
             <div className="space-y-6">
-              <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-white">Tech Stack</h2>
+              <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-slate-900">Tech Stack</h2>
               <div className="flex flex-wrap gap-3">
                 {item.techStack.map((t) => (
-                  <span className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-slate-300" key={t}>
+                  <span className="rounded-full border border-slate-200 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-slate-600" key={t}>
                     {t}
                   </span>
                 ))}
               </div>
             </div>
             <div className="space-y-6">
-              <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-white">Services</h2>
+              <h2 className="font-heading text-2xl font-bold tracking-[-0.04em] text-slate-900">Services</h2>
               <div className="flex flex-wrap gap-3">
                 {item.services.map((s) => (
-                  <span className="rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-sm font-semibold text-cyan-200" key={s}>
+                  <span className="rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-700" key={s}>
                     {s}
                   </span>
                 ))}
@@ -133,15 +133,15 @@ export default async function PortfolioDetailPage({ params }: Props) {
         {/* Related Projects */}
         <section className="py-20 md:py-28">
           <div className="container-shell space-y-12">
-            <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white">Project lainnya</h2>
+            <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900">Project lainnya</h2>
             <div className="grid gap-5 md:grid-cols-3">
               {related.map((r) => (
                 <Link href={`/portfolio/${r.slug}`} key={r.slug}>
                   <Card className="group">
                     <div className="mb-4 h-32 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
-                    <h3 className="font-bold group-hover:text-cyan-200 transition">{r.name}</h3>
+                    <h3 className="font-bold group-hover:text-blue-600 transition">{r.name}</h3>
                     <p className="mt-2 text-sm text-slate-400">{r.summary}</p>
-                    <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-cyan-300">
+                    <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-blue-600">
                       Lihat detail <ArrowRight size={14} />
                     </div>
                   </Card>
@@ -153,7 +153,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
 
         {/* CTA */}
         <section className="pb-20 md:pb-28">
-          <div className="container-shell rounded-[2rem] border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8 md:p-14">
+          <div className="container-shell rounded-[2rem] border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">
                 Mau buat project seperti {item.name}?

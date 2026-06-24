@@ -31,22 +31,22 @@ export default async function PreviewPage({
           </p>
         </div>
 
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell max-w-3xl space-y-6">
             <div className="flex items-center gap-3">
               <Badge>{post.category}</Badge>
               <span className="flex items-center gap-1 text-sm text-slate-400">
                 <Clock size={14} /> {post.readTime}
               </span>
-              <span className="text-sm text-slate-500">{post.publishedAt}</span>
+              <span className="text-sm text-slate-400">{post.publishedAt}</span>
               {post.author && (
-                <span className="text-sm text-slate-500">· {post.author}</span>
+                <span className="text-sm text-slate-400">· {post.author}</span>
               )}
             </div>
-            <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-white md:text-5xl">
+            <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-slate-900 md:text-5xl">
               {post.title}
             </h1>
-            <p className="text-lg leading-8 text-slate-300">{post.excerpt}</p>
+            <p className="text-lg leading-8 text-slate-600">{post.excerpt}</p>
             {post.focusKeyword && (
               <p className="text-xs text-slate-600">Focus keyword: {post.focusKeyword}</p>
             )}
@@ -56,7 +56,7 @@ export default async function PreviewPage({
         <section className="py-20 md:py-28">
           <div className="container-shell max-w-3xl">
             <article
-              className="prose prose-invert prose-slate max-w-none"
+              className="prose prose-slate prose-slate max-w-none"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </div>

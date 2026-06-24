@@ -60,23 +60,23 @@ export function ServicePage({ data }: { data: ServicePageData }) {
       <SiteHeader />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell grid items-center gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-8">
               <Badge>{data.eyebrow}</Badge>
               <div className="space-y-6">
-                <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-6xl">
+                <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
                   {data.h1}
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-slate-300">{data.subheadline}</p>
+                <p className="max-w-2xl text-lg leading-8 text-slate-600">{data.subheadline}</p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <LinkButton href={data.primaryCta.href}>{data.primaryCta.label} <ArrowRight size={18} /></LinkButton>
                 <LinkButton href={data.secondaryCta.href} variant="secondary">{data.secondaryCta.label}</LinkButton>
               </div>
             </div>
-            <div className="rounded-[2rem] border border-white/15 bg-slate-900/80 p-6 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
-              <div className="rounded-[1.5rem] border border-white/10 bg-slate-950 p-5">
+            <div className="rounded-[2rem] border border-white/15 bg-white/80 p-6 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
+              <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5">
                 <div className="mb-5 flex gap-2">
                   <span className="h-3 w-3 rounded-full bg-red-400" />
                   <span className="h-3 w-3 rounded-full bg-amber-400" />
@@ -87,7 +87,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                   <div className="h-4 w-full rounded-full bg-white/8" />
                   <div className="h-4 w-2/3 rounded-full bg-white/8" />
                   <div className="grid grid-cols-2 gap-3 pt-4">
-                    <div className="h-28 rounded-2xl bg-blue-500/20" />
+                    <div className="h-28 rounded-2xl bg-blue-50" />
                     <div className="h-28 rounded-2xl bg-cyan-500/20" />
                   </div>
                 </div>
@@ -113,21 +113,21 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </section>
 
         {/* Value Prop + Deliverables */}
-        <section className="bg-slate-900/40 py-20 md:py-28">
+        <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-6">
               <Badge>Solusi</Badge>
-              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white md:text-5xl">
+              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-5xl">
                 {data.valueProp.heading}
               </h2>
-              <p className="text-lg leading-8 text-slate-300">{data.valueProp.body}</p>
+              <p className="text-lg leading-8 text-slate-600">{data.valueProp.body}</p>
             </div>
             <Card>
               <h3 className="mb-6 font-heading text-xl font-bold">Yang kamu dapat</h3>
               <ul className="space-y-4">
                 {data.deliverables.map((d) => (
-                  <li className="flex gap-3 text-slate-300" key={d}>
-                    <CheckCircle2 className="mt-0.5 shrink-0 text-cyan-300" size={18} />
+                  <li className="flex gap-3 text-slate-600" key={d}>
+                    <CheckCircle2 className="mt-0.5 shrink-0 text-blue-600" size={18} />
                     <span>{d}</span>
                   </li>
                 ))}
@@ -143,7 +143,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
               {data.processSteps.map((step, i) => (
                 <Card key={step.title}>
-                  <p className="font-mono text-sm text-cyan-300">0{i + 1}</p>
+                  <p className="font-mono text-sm text-blue-600">0{i + 1}</p>
                   <h3 className="mt-3 font-heading text-xl font-bold">{step.title}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">{step.body}</p>
                 </Card>
@@ -153,7 +153,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         </section>
 
         {/* Portfolio */}
-        <section className="bg-slate-900/40 py-20 md:py-28">
+        <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Portfolio" title="Project terkait" />
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
@@ -161,7 +161,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 <a key={item.name} href={`/portfolio/${toSlug(item.name)}`} className="group block">
                   <Card className="transition group-hover:border-cyan-400/40">
                     <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
-                    <h3 className="font-bold group-hover:text-cyan-300 transition">{item.name}</h3>
+                    <h3 className="font-bold group-hover:text-blue-600 transition">{item.name}</h3>
                     <p className="mt-2 text-sm text-slate-400">{item.description}</p>
                   </Card>
                 </a>
@@ -174,13 +174,13 @@ export function ServicePage({ data }: { data: ServicePageData }) {
 
         {/* Fit For */}
         {data.fitFor && data.fitFor.length > 0 && (
-          <section className="bg-slate-900/40 py-20 md:py-28">
+          <section className="bg-white/40 py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Cocok untuk siapa" title={`${data.eyebrow} cocok untuk bisnis seperti apa?`} />
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
                 {data.fitFor.map((item) => (
                   <Card key={item.title} className="p-6">
-                    <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
+                    <h3 className="font-heading text-lg font-bold text-slate-900">{item.title}</h3>
                     <p className="mt-3 text-sm leading-7 text-slate-400">{item.body}</p>
                   </Card>
                 ))}
@@ -194,9 +194,9 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           <section className="py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Perbandingan" title="Pilih opsi yang paling sesuai dengan kebutuhan" />
-              <div className="overflow-x-auto rounded-3xl border border-white/10 bg-slate-950/70">
+              <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white/70">
                 <table className="w-full min-w-[760px] text-left text-sm">
-                  <thead className="bg-white/5 text-slate-200">
+                  <thead className="bg-white/5 text-slate-700">
                     <tr>
                       {data.comparison.columns.map((column) => (
                         <th className="px-5 py-4 font-semibold" key={column}>{column}</th>
@@ -207,7 +207,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                     {data.comparison.rows.map((row) => (
                       <tr key={row.join('-')}>
                         {row.map((cell, index) => (
-                          <td className={`px-5 py-4 leading-7 ${index === 0 ? 'font-semibold text-white' : 'text-slate-300'}`} key={`${row[0]}-${index}`}>{cell}</td>
+                          <td className={`px-5 py-4 leading-7 ${index === 0 ? 'font-semibold text-slate-900' : 'text-slate-600'}`} key={`${row[0]}-${index}`}>{cell}</td>
                         ))}
                       </tr>
                     ))}
@@ -220,16 +220,16 @@ export function ServicePage({ data }: { data: ServicePageData }) {
 
         {/* Proof Blocks */}
         {data.proofBlocks && data.proofBlocks.length > 0 && (
-          <section className="bg-slate-900/40 py-20 md:py-28">
+          <section className="bg-white/40 py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Proof" title="Bukti kerja: challenge → solution → result" />
               <div className="grid gap-5 lg:grid-cols-3">
                 {data.proofBlocks.map((item) => (
                   <Card key={item.project} className="p-7">
-                    <h3 className="font-heading text-xl font-bold text-white">{item.project}</h3>
-                    <div className="mt-5 space-y-4 text-sm leading-7 text-slate-300">
+                    <h3 className="font-heading text-xl font-bold text-slate-900">{item.project}</h3>
+                    <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600">
                       <p><strong className="text-red-300">Challenge:</strong> {item.challenge}</p>
-                      <p><strong className="text-cyan-300">Solution:</strong> {item.solution}</p>
+                      <p><strong className="text-blue-600">Solution:</strong> {item.solution}</p>
                       <p><strong className="text-emerald-300">Result:</strong> {item.result}</p>
                     </div>
                   </Card>
@@ -247,13 +247,13 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               <div className="mx-auto max-w-4xl space-y-10">
                 {data.pillarSections.map((section) => (
                   <Card key={section.title} className="p-7 md:p-9">
-                    <h2 className="font-heading text-2xl font-black tracking-[-0.04em] text-white md:text-3xl">{section.title}</h2>
-                    <p className="mt-4 text-base leading-8 text-slate-300">{section.body}</p>
+                    <h2 className="font-heading text-2xl font-black tracking-[-0.04em] text-slate-900 md:text-3xl">{section.title}</h2>
+                    <p className="mt-4 text-base leading-8 text-slate-600">{section.body}</p>
                     {section.points && section.points.length > 0 && (
                       <ul className="mt-6 space-y-3">
                         {section.points.map((point) => (
-                          <li className="flex gap-3 text-slate-300" key={point}>
-                            <CheckCircle2 className="mt-0.5 shrink-0 text-cyan-300" size={18} />
+                          <li className="flex gap-3 text-slate-600" key={point}>
+                            <CheckCircle2 className="mt-0.5 shrink-0 text-blue-600" size={18} />
                             <span>{point}</span>
                           </li>
                         ))}
@@ -268,13 +268,13 @@ export function ServicePage({ data }: { data: ServicePageData }) {
 
         {/* Cluster Links */}
         {data.clusterLinks && data.clusterLinks.length > 0 && (
-          <section className="bg-slate-900/40 py-20 md:py-28">
+          <section className="bg-white/40 py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Topic Cluster" title="Artikel pendukung untuk mendalami topik ini" />
               <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
                 {data.clusterLinks.map((link) => (
-                  <a key={link.href} href={link.href} className="group block rounded-2xl border border-white/10 bg-white/[0.03] p-5 transition hover:border-cyan-400/40">
-                    <span className="text-sm font-semibold text-slate-300 group-hover:text-cyan-300">{link.label}</span>
+                  <a key={link.href} href={link.href} className="group block rounded-2xl border border-slate-200 bg-white/[0.03] p-5 transition hover:border-cyan-400/40">
+                    <span className="text-sm font-semibold text-slate-600 group-hover:text-blue-600">{link.label}</span>
                   </a>
                 ))}
               </div>
@@ -300,14 +300,14 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         {/* Final CTA */}
         {/* Related Services */}
         {data.relatedServices && data.relatedServices.length > 0 && (
-          <section className="bg-slate-900/40 py-20 md:py-28">
+          <section className="bg-white/40 py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Lainnya" title="Layanan terkait" />
               <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {data.relatedServices.map((svc) => (
                   <a key={svc.href} href={svc.href} className="group block">
                     <Card className="transition group-hover:border-cyan-400/40">
-                      <h3 className="font-bold group-hover:text-cyan-300 transition">{svc.label}</h3>
+                      <h3 className="font-bold group-hover:text-blue-600 transition">{svc.label}</h3>
                       <p className="mt-2 text-sm text-slate-400">{svc.description}</p>
                     </Card>
                   </a>
@@ -318,7 +318,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         )}
 
         <section className="pb-20 md:pb-28">
-          <div className="container-shell rounded-[2rem] border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8 md:p-14">
+          <div className="container-shell rounded-[2rem] border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">{data.finalCta.heading}</h2>
               <p className="text-lg leading-8 text-blue-50">{data.finalCta.body}</p>

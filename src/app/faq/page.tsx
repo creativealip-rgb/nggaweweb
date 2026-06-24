@@ -67,10 +67,10 @@ export default function FaqPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <SiteHeader />
       <main>
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Badge>FAQ</Badge>
-            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-6xl">
+            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
               Pertanyaan umum tentang website, SEO, dan automation.
             </h1>
           </div>
@@ -91,7 +91,7 @@ export default function FaqPage() {
 
         <section className="pb-20 md:pb-28">
           <div className="container-shell text-center">
-            <h2 className="font-heading text-2xl font-bold text-white">Masih ada pertanyaan?</h2>
+            <h2 className="font-heading text-2xl font-bold text-slate-900">Masih ada pertanyaan?</h2>
             <p className="mt-3 text-slate-400">Chat langsung dan tanya apa saja.</p>
             <LinkButton className="mt-6" href={whatsappHref}>Chat WhatsApp</LinkButton>
           </div>

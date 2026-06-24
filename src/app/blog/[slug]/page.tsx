@@ -82,11 +82,11 @@ export default async function BlogDetailPage({ params }: Props) {
       <SiteHeader />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-16 md:py-20">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-16 md:py-20">
           <div className="container-shell max-w-5xl space-y-6">
             <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} />
             {post.image && (
-              <div className="overflow-hidden rounded-2xl border border-white/10">
+              <div className="overflow-hidden rounded-2xl border border-slate-200">
                 <img src={post.image} alt={post.title} className="w-full object-cover max-h-[400px]" />
               </div>
             )}
@@ -95,14 +95,14 @@ export default async function BlogDetailPage({ params }: Props) {
               <span className="flex items-center gap-1 text-sm text-slate-400">
                 <Clock size={14} /> {post.readTime}
               </span>
-              <span className="text-sm text-slate-500">{post.publishedAt}</span>
-              {post.author && <span className="text-sm text-slate-500">· {post.author}</span>}
-              <span className="text-sm text-slate-500">· 👁️ {post.views || 0}</span>
+              <span className="text-sm text-slate-400">{post.publishedAt}</span>
+              {post.author && <span className="text-sm text-slate-400">· {post.author}</span>}
+              <span className="text-sm text-slate-400">· 👁️ {post.views || 0}</span>
             </div>
-            <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-white md:text-4xl">
+            <h1 className="font-heading text-3xl font-black leading-tight tracking-[-0.04em] text-slate-900 md:text-4xl">
               {post.title}
             </h1>
-            <p className="text-lg leading-8 text-slate-300">{post.excerpt}</p>
+            <p className="text-lg leading-8 text-slate-600">{post.excerpt}</p>
           </div>
         </section>
 
@@ -112,10 +112,10 @@ export default async function BlogDetailPage({ params }: Props) {
             <div className="flex flex-col gap-10 lg:flex-row">
               {/* Main Article */}
               <article className="min-w-0 flex-1">
-                <div className="prose prose-invert prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
+                <div className="prose prose-slate prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
 
                 {/* Bottom CTA */}
-                <div className="mt-12 rounded-2xl border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8">
+                <div className="mt-12 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8">
                   <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
                   <p className="mt-3 text-blue-100">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
                   <div className="mt-6 flex gap-3">
@@ -131,18 +131,18 @@ export default async function BlogDetailPage({ params }: Props) {
                 {/* Related at bottom (mobile visible, desktop hidden) */}
                 {related.length > 0 && (
                   <div className="mt-16 space-y-8 lg:hidden">
-                    <h2 className="font-heading text-2xl font-bold text-white">Artikel lainnya</h2>
+                    <h2 className="font-heading text-2xl font-bold text-slate-900">Artikel lainnya</h2>
                     <div className="grid gap-5 md:grid-cols-2">
                       {related.slice(0, 2).map((r) => (
                         <Link href={`/blog/${r.slug}`} key={r.slug} className="group">
-                          <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5 transition hover:border-cyan-300/30">
+                          <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 transition hover:border-blue-300">
                             {r.image && (
                               <div className="mb-3 overflow-hidden rounded-xl">
                                 <img src={r.image} alt={r.title} className="h-28 w-full object-cover" />
                               </div>
                             )}
                             <Badge>{r.category}</Badge>
-                            <h3 className="mt-3 text-sm font-bold group-hover:text-cyan-200 transition">{r.title}</h3>
+                            <h3 className="mt-3 text-sm font-bold group-hover:text-blue-600 transition">{r.title}</h3>
                           </div>
                         </Link>
                       ))}
@@ -155,17 +155,17 @@ export default async function BlogDetailPage({ params }: Props) {
               <aside className="hidden lg:block lg:w-[300px] shrink-0">
                 <div className="sticky top-24 space-y-6">
                   {/* CTA Card */}
-                  <Card className="space-y-4 border-cyan-400/20 bg-gradient-to-b from-slate-900 to-slate-950 p-6">
+                  <Card className="space-y-4 border-blue-200 bg-gradient-to-b from-white to-slate-50 p-6">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/20">
-                        <MessageCircle size={20} className="text-emerald-400" />
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-50">
+                        <MessageCircle size={20} className="text-emerald-600" />
                       </div>
                       <div>
-                        <p className="font-heading text-sm font-bold text-white">Butuh bantuan?</p>
+                        <p className="font-heading text-sm font-bold text-slate-900">Butuh bantuan?</p>
                         <p className="text-xs text-slate-400">Chat langsung via WhatsApp</p>
                       </div>
                     </div>
-                    <LinkButton href={whatsappHref} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white shadow-none">
+                    <LinkButton href={whatsappHref} className="w-full bg-emerald-500 hover:bg-emerald-500 text-slate-900 shadow-none">
                       💬 Konsultasi Gratis
                     </LinkButton>
                     <LinkButton href="/brief-project" variant="secondary" className="w-full">
@@ -175,11 +175,11 @@ export default async function BlogDetailPage({ params }: Props) {
 
                   {/* About Card */}
                   <Card className="space-y-3 p-5">
-                    <p className="font-heading text-sm font-bold text-white">Tentang Nggawe Web</p>
+                    <p className="font-heading text-sm font-bold text-slate-900">Tentang Nggawe Web</p>
                     <p className="text-xs leading-6 text-slate-400">
                       Kami bantu bisnis punya website profesional, ditemukan di Google, dan lebih efisien dengan automation.
                     </p>
-                    <div className="flex gap-4 text-xs text-slate-500">
+                    <div className="flex gap-4 text-xs text-slate-400">
                       <span>🌐 Website</span>
                       <span>📈 SEO</span>
                       <span>⚡ Automation</span>
@@ -189,22 +189,22 @@ export default async function BlogDetailPage({ params }: Props) {
                   {/* Related Articles */}
                   {related.length > 0 && (
                     <Card className="space-y-4 p-5">
-                      <p className="font-heading text-sm font-bold text-white">Artikel Terkait</p>
+                      <p className="font-heading text-sm font-bold text-slate-900">Artikel Terkait</p>
                       <div className="space-y-3">
                         {related.map((r) => (
                           <Link href={`/blog/${r.slug}`} key={r.slug} className="group flex gap-3">
                             {r.image ? (
-                              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-800">
+                              <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-100">
                                 <img src={r.image} alt={r.title} className="h-full w-full object-cover" />
                               </div>
                             ) : (
                               <div className="h-14 w-14 shrink-0 rounded-lg bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
                             )}
                             <div className="min-w-0">
-                              <p className="text-xs font-semibold text-slate-300 line-clamp-2 group-hover:text-cyan-200 transition">
+                              <p className="text-xs font-semibold text-slate-600 line-clamp-2 group-hover:text-blue-600 transition">
                                 {r.title}
                               </p>
-                              <span className="text-[10px] text-slate-500">{r.category}</span>
+                              <span className="text-[10px] text-slate-400">{r.category}</span>
                             </div>
                           </Link>
                         ))}

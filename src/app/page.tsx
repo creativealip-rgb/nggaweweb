@@ -31,15 +31,15 @@ export default function Home() {
     <>
       <SiteHeader />
       <main>
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell grid items-center gap-12 lg:grid-cols-[1.02fr_0.98fr]">
             <div className="space-y-8">
               <Badge>Jasa Website, SEO, dan Automation</Badge>
               <div className="space-y-6">
-                <h1 className="font-heading text-5xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-7xl">
+                <h1 className="font-heading text-5xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-7xl">
                   Website premium, <span className="text-gradient">SEO-ready</span>, dan automation buat bisnis yang mau tumbuh lebih rapi.
                 </h1>
-                <p className="max-w-2xl text-lg leading-8 text-slate-300 md:text-xl">
+                <p className="max-w-2xl text-lg leading-8 text-slate-600 md:text-xl">
                   Nggawe Web bantu service business, startup, UMKM, dan agency punya website yang profesional, mudah ditemukan Google, dan siap menangkap lead otomatis.
                 </p>
               </div>
@@ -47,16 +47,16 @@ export default function Home() {
                 <LinkButton href={whatsappHref}>Konsultasi Gratis <ArrowRight size={18} /></LinkButton>
                 <LinkButton href="/portfolio" variant="secondary">Lihat Portfolio</LinkButton>
               </div>
-              <div className="flex flex-wrap gap-3 text-sm text-slate-300">
+              <div className="flex flex-wrap gap-3 text-sm text-slate-600">
                 {['Website', 'SEO', 'Automation', 'Portfolio real'].map((item) => (
-                  <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1" key={item}>{item}</span>
+                  <span className="rounded-full border border-slate-200 bg-white/[0.04] px-3 py-1" key={item}>{item}</span>
                 ))}
               </div>
             </div>
 
             <div className="relative">
-              <div className="rounded-[2rem] border border-white/15 bg-slate-900/80 p-4 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
-                <div className="rounded-[1.5rem] border border-white/10 bg-slate-950 p-5">
+              <div className="rounded-[2rem] border border-white/15 bg-white/80 p-4 shadow-[0_0_80px_rgba(59,130,246,0.22)] backdrop-blur">
+                <div className="rounded-[1.5rem] border border-slate-200 bg-white p-5">
                   <div className="mb-5 flex gap-2">
                     <span className="h-3 w-3 rounded-full bg-red-400" />
                     <span className="h-3 w-3 rounded-full bg-amber-400" />
@@ -67,15 +67,15 @@ export default function Home() {
                     <div className="h-4 w-full rounded-full bg-white/8" />
                     <div className="h-4 w-2/3 rounded-full bg-white/8" />
                     <div className="grid grid-cols-3 gap-3 pt-4">
-                      <div className="h-24 rounded-2xl bg-blue-500/20" />
+                      <div className="h-24 rounded-2xl bg-blue-50" />
                       <div className="h-24 rounded-2xl bg-cyan-500/20" />
-                      <div className="h-24 rounded-2xl bg-purple-500/20" />
+                      <div className="h-24 rounded-2xl bg-purple-50" />
                     </div>
                   </div>
                 </div>
               </div>
               <Card className="absolute -bottom-6 left-4 flex items-center gap-3 p-4">
-                <Send className="text-cyan-300" size={22} />
+                <Send className="text-blue-600" size={22} />
                 <div><p className="text-sm font-bold">Lead captured</p><p className="text-xs text-slate-400">Form → CRM → notif</p></div>
               </Card>
               <Card className="absolute -right-3 top-8 hidden items-center gap-3 p-4 md:flex">
@@ -101,7 +101,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-slate-900/40 py-20 md:py-28">
+        <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader eyebrow="Services" title="Satu partner untuk website, SEO, dan automation." description="Pilih layanan sesuai kebutuhan sekarang, atau bangun sistem lengkap dari awal." />
             <div className="grid gap-6 lg:grid-cols-3">
@@ -109,11 +109,11 @@ export default function Home() {
                 const Icon = service.icon;
                 return (
                   <Card key={service.title} className="flex flex-col">
-                    <Icon className="mb-6 text-cyan-300" size={32} />
+                    <Icon className="mb-6 text-blue-600" size={32} />
                     <h3 className="font-heading text-2xl font-bold tracking-[-0.04em]">{service.title}</h3>
                     <p className="mt-4 leading-7 text-slate-400">{service.description}</p>
-                    <ul className="mt-6 space-y-3 text-sm text-slate-300">
-                      {service.bullets.map((bullet) => <li className="flex gap-2" key={bullet}><CheckCircle2 className="mt-0.5 text-cyan-300" size={16} />{bullet}</li>)}
+                    <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                      {service.bullets.map((bullet) => <li className="flex gap-2" key={bullet}><CheckCircle2 className="mt-0.5 text-blue-600" size={16} />{bullet}</li>)}
                     </ul>
                     <LinkButton className="mt-8 w-fit" href={service.href} variant="ghost">Lihat layanan <ArrowRight size={16} /></LinkButton>
                   </Card>
@@ -138,15 +138,15 @@ export default function Home() {
                 return (
                   <div key={label as string}>
                     <div className="flex items-center gap-4 rounded-2xl border border-cyan-300/15 bg-cyan-300/5 p-4">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-300/10">
-                        <NodeIcon className="text-cyan-300" size={20} />
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50">
+                        <NodeIcon className="text-blue-600" size={20} />
                       </div>
                       <div>
                         <p className="font-semibold">{label as string}</p>
                         <p className="text-sm text-slate-400">{desc as string}</p>
                       </div>
                     </div>
-                    {i < arr.length - 1 && <div className="flex justify-center py-1"><ChevronRight className="rotate-90 text-cyan-300/40" size={20} /></div>}
+                    {i < arr.length - 1 && <div className="flex justify-center py-1"><ChevronRight className="rotate-90 text-blue-600/40" size={20} /></div>}
                   </div>
                 );
               })}
@@ -154,7 +154,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-slate-900/40 py-20 md:py-28">
+        <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Portfolio" title="Beberapa project yang sudah dibangun." description="Dari website bisnis service sampai platform aplikasi, setiap project dibuat dengan fokus pada tampilan, performa, struktur, dan kebutuhan bisnis." />
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
@@ -162,9 +162,9 @@ export default function Home() {
                 const slug = item.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                 return (
                   <Link href={`/portfolio/${slug}`} key={item}>
-                    <Card className="min-h-40 group cursor-pointer hover:border-cyan-300/30 transition">
+                    <Card className="min-h-40 group cursor-pointer hover:border-blue-300 transition">
                       <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
-                      <h3 className="font-bold group-hover:text-cyan-200 transition">{item}</h3>
+                      <h3 className="font-bold group-hover:text-blue-600 transition">{item}</h3>
                       <p className="mt-2 text-sm text-slate-400">Project showcase</p>
                     </Card>
                   </Link>
@@ -178,12 +178,12 @@ export default function Home() {
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Process" title="Proses kerja jelas dari strategi sampai launch." />
             <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
-              {process.map(([step, desc], index) => <Card className="p-5" key={step}><p className="text-sm font-mono text-cyan-300">0{index + 1}</p><h3 className="mt-3 font-bold">{step}</h3><p className="mt-2 text-sm text-slate-400">{desc}</p></Card>)}
+              {process.map(([step, desc], index) => <Card className="p-5" key={step}><p className="text-sm font-mono text-blue-600">0{index + 1}</p><h3 className="mt-3 font-bold">{step}</h3><p className="mt-2 text-sm text-slate-400">{desc}</p></Card>)}
             </div>
           </div>
         </section>
 
-        <section className="bg-slate-900/40 py-20 md:py-28">
+        <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Testimonial" title="Klien bilang apa tentang hasil kerja kami." description="Feedback real dari bisnis yang sudah merasakan dampak website yang dikerjakan dengan serius." />
             <div className="grid gap-6 md:grid-cols-3">
@@ -200,14 +200,14 @@ export default function Home() {
                       <span key={i} className="text-yellow-400">★</span>
                     ))}
                   </div>
-                  <p className="text-sm leading-7 text-slate-300 italic">"{t.quote}"</p>
+                  <p className="text-sm leading-7 text-slate-600 italic">"{t.quote}"</p>
                   <div className="mt-6 flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-white font-bold text-sm">
+                    <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-slate-900 font-bold text-sm">
                       {t.name.split(" ").map((n) => n[0]).join("")}
                     </div>
                     <div>
-                      <p className="text-sm font-bold text-white">{t.name}</p>
-                      <p className="text-xs text-slate-500">{t.role}</p>
+                      <p className="text-sm font-bold text-slate-900">{t.name}</p>
+                      <p className="text-xs text-slate-400">{t.role}</p>
                     </div>
                   </div>
                 </Card>
@@ -217,7 +217,7 @@ export default function Home() {
         </section>
 
         <section className="pb-20 md:pb-28">
-          <div className="container-shell rounded-[2rem] border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8 md:p-14">
+          <div className="container-shell rounded-[2rem] border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">Mau website yang bukan cuma bagus, tapi juga bekerja untuk bisnis kamu?</h2>
               <p className="text-lg leading-8 text-blue-50">Ceritakan kebutuhan kamu. Kami bantu mapping solusi paling masuk akal: mulai dari website, SEO, sampai automation.</p>

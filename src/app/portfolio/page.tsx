@@ -31,14 +31,14 @@ export default function PortfolioPage() {
     <>
       <SiteHeader />
       <main>
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Portfolio" }]} />
             <Badge>Portfolio</Badge>
-            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-6xl">
+            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
               Project yang menunjukkan design, sistem, dan problem solving.
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
+            <p className="max-w-2xl text-lg leading-8 text-slate-600">
               Dari website bisnis service sampai platform aplikasi, setiap project dibuat dengan fokus pada tampilan, performa, struktur, dan kebutuhan bisnis.
             </p>
           </div>
@@ -52,8 +52,8 @@ export default function PortfolioPage() {
                   key={cat}
                   className={`cursor-pointer rounded-full border px-4 py-2 text-sm font-semibold transition ${
                     i === 0
-                      ? "border-cyan-300/40 bg-cyan-300/10 text-cyan-200"
-                      : "border-white/10 text-slate-400 hover:border-white/20 hover:text-white"
+                      ? "border-blue-300 bg-blue-50 text-blue-700"
+                      : "border-slate-200 text-slate-400 hover:border-slate-200 hover:text-slate-900"
                   }`}
                 >
                   {cat}
@@ -72,11 +72,11 @@ export default function PortfolioPage() {
                       <Badge>{item.projectType}</Badge>
                       <Badge className="border-purple-400/20 bg-purple-400/10 text-purple-100">{item.industry}</Badge>
                     </div>
-                    <h3 className="mt-4 font-heading text-xl font-bold tracking-[-0.03em] group-hover:text-cyan-200 transition">
+                    <h3 className="mt-4 font-heading text-xl font-bold tracking-[-0.03em] group-hover:text-blue-600 transition">
                       {item.name}
                     </h3>
                     <p className="mt-3 flex-1 text-sm leading-7 text-slate-400">{item.summary}</p>
-                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-cyan-300">
+                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-blue-600">
                       Lihat detail <ArrowRight size={14} />
                     </div>
                   </Card>
@@ -87,7 +87,7 @@ export default function PortfolioPage() {
         </section>
 
         <section className="pb-20 md:pb-28">
-          <div className="container-shell rounded-[2rem] border border-cyan-300/20 bg-gradient-to-r from-blue-700 to-cyan-600 p-8 md:p-14">
+          <div className="container-shell rounded-[2rem] border border-blue-200 bg-gradient-to-r from-blue-600 to-cyan-500 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">
                 Mau buat project serupa?

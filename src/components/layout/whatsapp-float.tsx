@@ -22,7 +22,7 @@ export function WhatsAppFloat() {
       className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 shadow-[0_4px_24px_rgba(34,197,94,0.4)] transition hover:scale-110 hover:bg-green-400"
       aria-label="Chat WhatsApp"
     >
-      <MessageCircle className="text-white" size={28} />
+      <MessageCircle className="text-slate-900" size={28} />
     </a>
   );
 }

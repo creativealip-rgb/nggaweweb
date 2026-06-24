@@ -65,7 +65,7 @@ export function WebsiteCostCalculator() {
       <div className="space-y-8">
         {/* Step 1 */}
         <div className="space-y-4">
-          <h3 className="font-heading text-lg font-bold text-white">1. Tipe Website</h3>
+          <h3 className="font-heading text-lg font-bold text-slate-900">1. Tipe Website</h3>
           <div className="grid gap-3 sm:grid-cols-2">
             {websiteTypes.map((t) => (
               <button
@@ -74,12 +74,12 @@ export function WebsiteCostCalculator() {
                 className={cn(
                   "rounded-xl border px-4 py-3 text-left text-sm font-semibold transition",
                   websiteType === t.value
-                    ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-200"
-                    : "border-white/10 text-slate-400 hover:border-white/20"
+                    ? "border-cyan-400/40 bg-cyan-400/10 text-blue-700"
+                    : "border-slate-200 text-slate-400 hover:border-slate-200"
                 )}
               >
                 {t.label}
-                <span className="mt-1 block text-xs text-slate-500">Mulai {formatRp(t.price)}</span>
+                <span className="mt-1 block text-xs text-slate-400">Mulai {formatRp(t.price)}</span>
               </button>
             ))}
           </div>
@@ -88,7 +88,7 @@ export function WebsiteCostCalculator() {
         {/* Step 2 */}
         {websiteType && (
           <div className="space-y-4">
-            <h3 className="font-heading text-lg font-bold text-white">2. Jumlah Halaman</h3>
+            <h3 className="font-heading text-lg font-bold text-slate-900">2. Jumlah Halaman</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               {pageCounts.map((p) => (
                 <button
@@ -97,12 +97,12 @@ export function WebsiteCostCalculator() {
                   className={cn(
                     "rounded-xl border px-4 py-3 text-left text-sm font-semibold transition",
                     pageCount === p.value
-                      ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-200"
-                      : "border-white/10 text-slate-400 hover:border-white/20"
+                      ? "border-cyan-400/40 bg-cyan-400/10 text-blue-700"
+                      : "border-slate-200 text-slate-400 hover:border-slate-200"
                   )}
                 >
                   {p.label}
-                  {p.price > 0 && <span className="mt-1 block text-xs text-slate-500">+{formatRp(p.price)}</span>}
+                  {p.price > 0 && <span className="mt-1 block text-xs text-slate-400">+{formatRp(p.price)}</span>}
                 </button>
               ))}
             </div>
@@ -112,7 +112,7 @@ export function WebsiteCostCalculator() {
         {/* Step 3 */}
         {pageCount && (
           <div className="space-y-4">
-            <h3 className="font-heading text-lg font-bold text-white">3. Fitur Tambahan</h3>
+            <h3 className="font-heading text-lg font-bold text-slate-900">3. Fitur Tambahan</h3>
             <div className="grid gap-3 sm:grid-cols-2">
               {features.map((f) => (
                 <button
@@ -121,12 +121,12 @@ export function WebsiteCostCalculator() {
                   className={cn(
                     "rounded-xl border px-4 py-3 text-left text-sm font-semibold transition",
                     selectedFeatures.includes(f.value)
-                      ? "border-cyan-400/40 bg-cyan-400/10 text-cyan-200"
-                      : "border-white/10 text-slate-400 hover:border-white/20"
+                      ? "border-cyan-400/40 bg-cyan-400/10 text-blue-700"
+                      : "border-slate-200 text-slate-400 hover:border-slate-200"
                   )}
                 >
                   {f.label}
-                  <span className="mt-1 block text-xs text-slate-500">+{formatRp(f.price)}</span>
+                  <span className="mt-1 block text-xs text-slate-400">+{formatRp(f.price)}</span>
                 </button>
               ))}
             </div>
@@ -135,10 +135,10 @@ export function WebsiteCostCalculator() {
       </div>
 
       {/* Estimate Card */}
-      <div className="sticky top-28 self-start rounded-2xl border border-white/10 bg-slate-900/80 p-6 backdrop-blur">
+      <div className="sticky top-28 self-start rounded-2xl border border-slate-200 bg-white/80 p-6 backdrop-blur">
         <div className="flex items-center gap-3 mb-6">
-          <Calculator className="text-cyan-300" size={24} />
-          <h3 className="font-heading text-lg font-bold text-white">Estimasi Biaya</h3>
+          <Calculator className="text-blue-600" size={24} />
+          <h3 className="font-heading text-lg font-bold text-slate-900">Estimasi Biaya</h3>
         </div>
 
         {total > 0 ? (
@@ -147,13 +147,13 @@ export function WebsiteCostCalculator() {
               {websiteType && (
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-400">{websiteTypes.find((t) => t.value === websiteType)?.label}</span>
-                  <span className="text-white">{formatRp(basePrice)}</span>
+                  <span className="text-slate-900">{formatRp(basePrice)}</span>
                 </div>
               )}
               {pageCount && pagePrice > 0 && (
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-400">{pageCounts.find((p) => p.value === pageCount)?.label}</span>
-                  <span className="text-white">+{formatRp(pagePrice)}</span>
+                  <span className="text-slate-900">+{formatRp(pagePrice)}</span>
                 </div>
               )}
               {selectedFeatures.map((fv) => {
@@ -161,13 +161,13 @@ export function WebsiteCostCalculator() {
                 return feat ? (
                   <div className="flex justify-between text-sm" key={fv}>
                     <span className="text-slate-400">{feat.label}</span>
-                    <span className="text-white">+{formatRp(feat.price)}</span>
+                    <span className="text-slate-900">+{formatRp(feat.price)}</span>
                   </div>
                 ) : null;
               })}
             </div>
 
-            <div className="border-t border-white/10 pt-4">
+            <div className="border-t border-slate-200 pt-4">
               <p className="text-sm text-slate-400">Estimasi range:</p>
               <p className="mt-1 font-heading text-2xl font-black text-gradient">
                 {formatRp(totalMin)} – {formatRp(totalMax)}

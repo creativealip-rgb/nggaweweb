@@ -24,12 +24,12 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-500">
+      <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-sm text-slate-400">
         {items.map((item, i) => (
           <span key={i} className="flex items-center gap-2">
             {i > 0 && <ChevronRight size={14} className="text-slate-700" />}
             {item.href ? (
-              <Link href={item.href} className="hover:text-cyan-400 transition">
+              <Link href={item.href} className="hover:text-blue-600 transition">
                 {item.label}
               </Link>
             ) : (

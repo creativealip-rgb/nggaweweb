@@ -33,11 +33,11 @@ const socialLinks = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-slate-950">
+    <footer className="border-t border-slate-200 bg-white">
       <div className="container-shell grid gap-8 py-12 md:grid-cols-[1.5fr_1fr_1fr_1fr]">
         <div>
           <Link className="font-heading text-2xl font-black tracking-[-0.04em]" href="/">
-            Nggawe<span className="text-cyan-300">Web</span>
+            Nggawe<span className="text-blue-600">Web</span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-7 text-slate-400">
             Website premium, SEO-ready, dan automation buat bisnis yang mau tumbuh lebih rapi.
@@ -50,7 +50,7 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-slate-400 transition hover:border-cyan-300/40 hover:text-cyan-300"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 text-slate-400 transition hover:border-blue-300 hover:text-blue-600"
               >
                 <Icon size={16} />
               </a>
@@ -58,7 +58,7 @@ export function SiteFooter() {
           </div>
         </div>
         <div>
-          <h3 className="font-bold text-white">Services</h3>
+          <h3 className="font-bold text-slate-900">Services</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li><Link href="/jasa-pembuatan-website">Website Development</Link></li>
             <li><Link href="/jasa-seo">SEO Optimization</Link></li>
@@ -66,7 +66,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h3 className="font-bold text-white">Resources</h3>
+          <h3 className="font-bold text-slate-900">Resources</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li><Link href="/portfolio">Portfolio</Link></li>
             <li><Link href="/blog">Blog</Link></li>
@@ -74,7 +74,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h3 className="font-bold text-white">Contact</h3>
+          <h3 className="font-bold text-slate-900">Contact</h3>
           <ul className="mt-4 space-y-3 text-sm text-slate-400">
             <li><Link href="/brief-project">Brief Project</Link></li>
             <li><Link href="/audit-gratis">Audit Gratis</Link></li>
@@ -82,12 +82,12 @@ export function SiteFooter() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-white/10">
-        <div className="container-shell flex flex-col items-center justify-between gap-4 py-6 text-sm text-slate-500 md:flex-row">
+      <div className="border-t border-slate-200">
+        <div className="container-shell flex flex-col items-center justify-between gap-4 py-6 text-sm text-slate-400 md:flex-row">
           <p>&copy; 2026 NggaweWeb. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="hover:text-slate-300">Privacy Policy</Link>
-            <Link href="/tentang" className="hover:text-slate-300">Tentang Kami</Link>
+            <Link href="/privacy-policy" className="hover:text-slate-600">Privacy Policy</Link>
+            <Link href="/tentang" className="hover:text-slate-600">Tentang Kami</Link>
           </div>
         </div>
       </div>

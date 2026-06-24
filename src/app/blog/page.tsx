@@ -20,14 +20,14 @@ export default function BlogPage() {
     <>
       <SiteHeader />
       <main>
-        <section className="relative overflow-hidden border-b border-white/10 bg-grid py-20 md:py-28">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Blog" }]} />
             <Badge>Blog</Badge>
-            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-white md:text-6xl">
+            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
               Insight tentang website, SEO, dan automation.
             </h1>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
+            <p className="max-w-2xl text-lg leading-8 text-slate-600">
               Artikel praktis untuk bantu bisnis kamu punya website lebih baik, lebih ditemukan di Google, dan lebih efisien.
             </p>
           </div>
@@ -40,7 +40,7 @@ export default function BlogPage() {
                 <Link href={`/blog/${post.slug}`} key={post.slug}>
                   <Card className="group flex h-full flex-col">
                     {post.image ? (
-                      <div className="mb-4 h-40 overflow-hidden rounded-2xl bg-slate-800">
+                      <div className="mb-4 h-40 overflow-hidden rounded-2xl bg-slate-100">
                         <img src={post.image} alt={post.title} className="h-full w-full object-cover" />
                       </div>
                     ) : (
@@ -48,15 +48,15 @@ export default function BlogPage() {
                     )}
                     <div className="flex items-center gap-3">
                       <Badge>{post.category}</Badge>
-                      <span className="flex items-center gap-1 text-xs text-slate-500">
+                      <span className="flex items-center gap-1 text-xs text-slate-400">
                         <Clock size={12} /> {post.readTime}
                       </span>
                     </div>
-                    <h3 className="mt-4 flex-1 font-heading text-xl font-bold tracking-[-0.03em] group-hover:text-cyan-200 transition">
+                    <h3 className="mt-4 flex-1 font-heading text-xl font-bold tracking-[-0.03em] group-hover:text-blue-600 transition">
                       {post.title}
                     </h3>
                     <p className="mt-3 text-sm leading-7 text-slate-400">{post.excerpt}</p>
-                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-cyan-300">
+                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-blue-600">
                       Baca artikel <ArrowRight size={14} />
                     </div>
                   </Card>
