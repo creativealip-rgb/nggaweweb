@@ -194,11 +194,11 @@ export default function AdminBlogList() {
                   <td className="px-5 py-3">
                     <div className="flex items-center justify-end gap-2">
                       <Link href={`/admin/blog/${post.id}/edit`} className="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition font-medium">Edit</Link>
-                      {post.status === "published" && (
+                      {publishLabel === "published" && (
                         <Link href={`/blog/${post.slug}`} target="_blank" className="px-3 py-1.5 text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition font-medium">View</Link>
                       )}
-                      {post.status === "draft" && (
-                        <Link href={`/preview/${post.id}`} target="_blank" className="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition font-medium">Preview</Link>
+                      {publishLabel !== "published" && (
+                        <Link href={`/preview/${post.id}`} target="_blank" className="px-3 py-1.5 text-xs bg-sky-50 hover:bg-sky-100 text-sky-700 rounded-lg transition font-medium">Preview</Link>
                       )}
                     </div>
                   </td>

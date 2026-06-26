@@ -1,5 +1,7 @@
-import { notFound } from "next/navigation";
-import { getPostById } from "@/lib/blog-store";
+import type { Metadata } from "next";
+import { notFound, redirect } from "next/navigation";
+import { isAuthenticated } from "@/lib/admin-auth";
+import { getPostById, isPostScheduled } from "@/lib/blog-store";
 import { Badge } from "@/components/ui/badge";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -7,14 +9,32 @@ import { Clock } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+export const metadata: Metadata = {
+  title: "Preview Artikel — Nggawe Web Admin",
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
+};
+
 export default async function PreviewPage({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  if (!(await isAuthenticated())) redirect("/admin/login");
+
   const { id } = await params;
   const post = getPostById(id);
   if (!post) notFound();
+
+  const previewLabel = isPostScheduled(post) ? "Scheduled" : post.status === "draft" ? "Draft" : "Published";
+  const scheduleDate = post.scheduledAt || post.publishedAt;
 
   return (
     <>
@@ -23,10 +43,10 @@ export default async function PreviewPage({
         {/* Draft banner */}
         <div className="bg-yellow-900/50 border-b border-yellow-700/50 px-6 py-3 text-center">
           <p className="text-yellow-200 text-sm font-medium">
-            🔒 Preview Draft — Hanya terlihat di admin. Status:{" "}
-            <span className="font-bold uppercase">{post.status}</span>
-            {post.scheduledAt && (
-              <span className="ml-2">· Terjadwal: {post.scheduledAt.split("T")[0]}</span>
+            🔒 Preview {previewLabel} — hanya admin login yang bisa melihat. Status:{" "}
+            <span className="font-bold uppercase">{previewLabel}</span>
+            {previewLabel === "Scheduled" && scheduleDate && (
+              <span className="ml-2">· Terjadwal: {scheduleDate.split("T")[0]}</span>
             )}
           </p>
         </div>

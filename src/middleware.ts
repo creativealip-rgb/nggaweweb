@@ -29,6 +29,10 @@ export function middleware(req: NextRequest) {
   res.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
   res.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
 
+  if (req.nextUrl.pathname.startsWith("/preview/")) {
+    res.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive, nosnippet");
+  }
+
   // Rate limit API routes
   if (req.nextUrl.pathname.startsWith("/api/")) {
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
