@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { AuditForm } from "@/components/forms/audit-form";
-import { CheckCircle2, Gauge, Layout, Search, Smartphone, Zap } from "lucide-react";
+import { CheckCircle2, FileText, Gauge, Layout, MessageCircle, Search, Smartphone, Zap } from "lucide-react";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
@@ -12,6 +12,21 @@ export const metadata: Metadata = {
   description:
     "Minta audit singkat untuk cek tampilan, speed, SEO basic, CTA, dan peluang improvement website kamu dari Nggawe Web.",
 };
+
+
+const auditOutput = [
+  "3–5 poin masalah paling penting di website / online presence",
+  "Cek cepat SEO basic: title, heading, sitemap, indexability, dan struktur halaman",
+  "Cek trust & CTA: apakah visitor cukup yakin untuk chat atau isi form",
+  "Peluang automation: form, WhatsApp, CRM/sheet, notifikasi, dan follow-up",
+  "Rekomendasi paket: Starter, Growth System, atau Automation System",
+];
+
+const nextSteps = [
+  [FileText, "Isi form audit", "Kirim URL website dan kendala utama yang paling terasa."],
+  [Search, "Kami cek cepat", "Kami review tampilan, SEO basic, CTA, speed, dan lead flow."],
+  [MessageCircle, "Follow-up rekomendasi", "Kamu dapat ringkasan awal dan opsi solusi paling masuk akal."],
+] as const;
 
 const checks = [
   { icon: Layout, title: "Tampilan & Trust", body: "Apakah website terlihat profesional dan meyakinkan?" },
@@ -33,12 +48,47 @@ export default function AuditGratisPage() {
         <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Badge>Audit Gratis</Badge>
-            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
+            <h1 className="max-w-4xl font-heading text-4xl font-black leading-[1.05] tracking-[-0.06em] text-slate-900 md:text-6xl">
               Dapatkan audit singkat untuk website kamu.
             </h1>
             <p className="max-w-2xl text-lg leading-8 text-slate-700">
               Kami akan cek tampilan, speed, SEO basic, struktur CTA, dan peluang improvement awal untuk website kamu.
             </p>
+          </div>
+        </section>
+
+        <section className="py-20 md:py-28">
+          <div className="container-shell space-y-12">
+            <div className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+              <Card className="p-7">
+                <Badge>Output Audit</Badge>
+                <h2 className="mt-5 font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-4xl">
+                  Bukan audit teoritis — kamu dapat rekomendasi langkah berikutnya.
+                </h2>
+                <ul className="mt-6 space-y-4">
+                  {auditOutput.map((item) => (
+                    <li className="flex gap-3 text-sm leading-7 text-slate-600" key={item}>
+                      <CheckCircle2 className="mt-0.5 shrink-0 text-blue-600" size={18} />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+              <div className="space-y-4">
+                {nextSteps.map(([Icon, title, body], index) => (
+                  <Card className="flex items-start gap-4 p-5" key={title}>
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                      <Icon size={21} />
+                    </div>
+                    <div>
+                      <p className="font-mono text-xs font-bold text-blue-600">0{index + 1}</p>
+                      <h3 className="mt-1 font-heading text-xl font-bold text-slate-900">{title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-slate-600">{body}</p>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 

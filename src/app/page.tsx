@@ -17,6 +17,29 @@ const painPoints = [
   ["Tidak ada sistem growth", "Website tidak terhubung dengan analytics, automation, dan proses bisnis yang jelas."],
 ];
 
+
+const offerPackages = [
+  {
+    name: "Website Starter",
+    price: "Rp3,5–7 juta",
+    description: "Website rapi untuk mulai terlihat profesional dan siap menerima inquiry.",
+    items: ["1–5 halaman", "Responsive", "WhatsApp CTA", "SEO basic"],
+  },
+  {
+    name: "Website Growth System",
+    price: "Rp8–20 juta",
+    description: "Paket utama: website + SEO foundation + lead automation supaya channel lead lebih rapi.",
+    items: ["5–10 halaman", "Service page SEO", "Brief form", "Analytics", "Telegram/email notification"],
+    featured: true,
+  },
+  {
+    name: "Automation System",
+    price: "Rp20–50 juta+",
+    description: "Sistem custom untuk CRM sederhana, follow-up, booking/order flow, dan integrasi API.",
+    items: ["Custom workflow", "CRM/sheet sync", "Autoresponder", "Follow-up reminder"],
+  },
+];
+
 const process: [string, string][] = [
   ["Discovery", "Pahami bisnis, target, dan kebutuhan."],
   ["Strategy", "Rancang struktur, konten, dan SEO plan."],
@@ -130,6 +153,37 @@ export default function Home() {
                   </Card>
                 );
               })}
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 md:py-28">
+          <div className="container-shell space-y-12">
+            <SectionHeader
+              align="center"
+              eyebrow="Website Growth System"
+              title="Offer utama: website + SEO + automation dalam satu paket."
+              description="Ini yang akan kita dorong selama 30 hari: bukan sekadar website, tapi sistem sederhana untuk trust, traffic, dan follow-up lead."
+            />
+            <div className="grid gap-5 lg:grid-cols-3">
+              {offerPackages.map((pkg) => (
+                <Card key={pkg.name} className={`p-7 ${pkg.featured ? "border-blue-400 bg-blue-50/70 shadow-xl shadow-blue-500/10" : ""}`}>
+                  <h3 className="font-heading text-2xl font-black tracking-[-0.04em] text-slate-900">{pkg.name}</h3>
+                  <p className="mt-2 text-3xl font-black text-blue-600">{pkg.price}</p>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{pkg.description}</p>
+                  <ul className="mt-6 space-y-3 text-sm text-slate-600">
+                    {pkg.items.map((item) => (
+                      <li className="flex gap-2" key={item}>
+                        <CheckCircle2 className="mt-0.5 text-blue-600" size={16} />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <LinkButton className="mt-7 w-full" href={pkg.featured ? "/brief-project" : "/audit-gratis"} variant={pkg.featured ? "primary" : "secondaryOnLight"}>
+                    {pkg.featured ? "Isi Brief Project" : "Minta Audit Gratis"}
+                  </LinkButton>
+                </Card>
+              ))}
             </div>
           </div>
         </section>

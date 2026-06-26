@@ -5,7 +5,38 @@ import { SectionHeader } from "@/components/ui/section-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { whatsappHref } from "@/content/site";
-import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageCircle, Send, Workflow, XCircle } from "lucide-react";
+
+const growthPackages = [
+  {
+    name: "Website Starter",
+    price: "Rp3,5–7 juta",
+    label: "Mulai profesional",
+    description: "Untuk UMKM atau bisnis jasa yang butuh website rapi, cepat live, dan siap dipakai jualan.",
+    items: ["1–5 halaman", "Responsive", "WhatsApp CTA", "SEO basic", "Deploy live"],
+  },
+  {
+    name: "Website Growth System",
+    price: "Rp8–20 juta",
+    label: "Paling direkomendasikan",
+    description: "Website + SEO foundation + lead automation untuk bisnis yang ingin channel lead lebih rapi.",
+    items: ["5–10 halaman", "Service page SEO", "Brief/contact form", "Analytics", "Lead notif Telegram/email"],
+    featured: true,
+  },
+  {
+    name: "Automation System",
+    price: "Rp20–50 juta+",
+    label: "Custom workflow",
+    description: "Untuk bisnis yang butuh CRM sederhana, follow-up pipeline, booking/order flow, atau integrasi API.",
+    items: ["Custom workflow", "CRM/spreadsheet sync", "Autoresponder", "Follow-up reminder", "Documentation"],
+  },
+];
+
+const automationFlow = [
+  [MessageCircle, "Visitor isi form", "Lead masuk dari website, audit gratis, atau brief project."],
+  [Send, "Tim langsung dapat notif", "Data terkirim ke Telegram/email supaya follow-up tidak telat."],
+  [Workflow, "Data masuk sistem", "Lead tersimpan di sheet/CRM dan siap diberi status follow-up."],
+] as const;
 
 export type ServicePageData = {
   relatedServices?: { label: string; href: string; description: string }[];
@@ -64,7 +95,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <div className="space-y-8">
               <Badge>{data.eyebrow}</Badge>
               <div className="space-y-6">
-                <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
+                <h1 className="font-heading text-4xl font-black leading-[1.05] tracking-[-0.06em] text-slate-900 md:text-6xl">
                   {data.h1}
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-700">{data.subheadline}</p>
@@ -132,6 +163,69 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 ))}
               </ul>
             </Card>
+          </div>
+        </section>
+
+        {/* Packages */}
+        <section className="py-20 md:py-28">
+          <div className="container-shell space-y-12">
+            <SectionHeader
+              align="center"
+              eyebrow="Paket"
+              title="Mulai dari website rapi sampai sistem lead yang otomatis."
+              description="Pilih paket sesuai tahap bisnis. Kalau belum yakin, mulai dari audit gratis — nanti kami rekomendasikan scope paling masuk akal."
+            />
+            <div className="grid gap-5 lg:grid-cols-3">
+              {growthPackages.map((pkg) => (
+                <Card
+                  key={pkg.name}
+                  className={`relative p-7 ${pkg.featured ? "border-blue-400 bg-blue-50/70 shadow-xl shadow-blue-500/10" : ""}`}
+                >
+                  <span className={`inline-flex rounded-full px-3 py-1 text-xs font-bold ${pkg.featured ? "bg-blue-600 text-white" : "bg-slate-100 text-slate-600"}`}>
+                    {pkg.label}
+                  </span>
+                  <h3 className="mt-5 font-heading text-2xl font-black tracking-[-0.04em] text-slate-900">{pkg.name}</h3>
+                  <p className="mt-2 text-3xl font-black text-blue-600">{pkg.price}</p>
+                  <p className="mt-4 text-sm leading-7 text-slate-600">{pkg.description}</p>
+                  <ul className="mt-6 space-y-3">
+                    {pkg.items.map((item) => (
+                      <li className="flex gap-3 text-sm text-slate-600" key={item}>
+                        <CheckCircle2 className="mt-0.5 shrink-0 text-blue-600" size={16} />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <LinkButton className="mt-7 w-full" href={pkg.featured ? "/brief-project" : "/audit-gratis"} variant={pkg.featured ? "primary" : "secondaryOnLight"}>
+                    {pkg.featured ? "Isi Brief Project" : "Minta Audit Gratis"}
+                  </LinkButton>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Automation Demo */}
+        <section className="bg-white/40 py-20 md:py-28">
+          <div className="container-shell grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+            <SectionHeader
+              eyebrow="Lead Automation"
+              title="Bukan cuma website. Lead harus langsung masuk ke sistem."
+              description="Flow sederhana ini yang kami dorong untuk paket Growth: visitor isi form, tim dapat notifikasi, data tersimpan, lalu follow-up bisa dilacak."
+            />
+            <div className="space-y-4">
+              {automationFlow.map(([Icon, title, body], index) => (
+                <Card key={title} className="flex items-start gap-4 p-5">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-blue-50 text-blue-600">
+                    <Icon size={21} />
+                  </div>
+                  <div>
+                    <p className="font-mono text-xs font-bold text-blue-600">0{index + 1}</p>
+                    <h3 className="mt-1 font-heading text-xl font-bold text-slate-900">{title}</h3>
+                    <p className="mt-2 text-sm leading-7 text-slate-600">{body}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
           </div>
         </section>
 
@@ -320,8 +414,8 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         <section className="pb-20 md:pb-28">
           <div className="container-shell rounded-[2rem] border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
-              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">Mau website yang bukan cuma bagus, tapi juga bekerja untuk bisnis kamu?</h2>
-              <p className="text-lg leading-8 text-white">Ceritakan kebutuhan kamu. Kami bantu mapping solusi paling masuk akal: mulai dari website, SEO, sampai automation.</p>
+              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">{data.finalCta.heading}</h2>
+              <p className="text-lg leading-8 text-white">{data.finalCta.body}</p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <LinkButton href={whatsappHref}>Konsultasi Gratis</LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">Isi Brief Project</LinkButton>
