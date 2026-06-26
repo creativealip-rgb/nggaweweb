@@ -17,11 +17,34 @@ type Post = {
   scheduledAt?: string;
 };
 
+type PublishFilter = "all" | "published" | "scheduled" | "draft";
+
+function isScheduled(post: Post, now = new Date()) {
+  if (post.status !== "published") return false;
+  if (post.scheduledAt && post.scheduledAt > now.toISOString()) return true;
+  return Boolean(post.publishedAt && new Date(post.publishedAt) > now);
+}
+
+function getPublishLabel(post: Post): "published" | "scheduled" | "draft" {
+  if (post.status === "draft") return "draft";
+  return isScheduled(post) ? "scheduled" : "published";
+}
+
+const statusStyle = {
+  published: "bg-emerald-100 text-emerald-700",
+  scheduled: "bg-sky-100 text-sky-700",
+  draft: "bg-amber-100 text-amber-700",
+};
+
+function getScheduleDate(post: Post) {
+  return (post.scheduledAt || post.publishedAt || "").split("T")[0];
+}
+
 export default function AdminBlogList() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [search, setSearch] = useState("");
   const [filterCat, setFilterCat] = useState("all");
-  const [filterStatus, setFilterStatus] = useState("all");
+  const [filterStatus, setFilterStatus] = useState<PublishFilter>("all");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,13 +61,14 @@ export default function AdminBlogList() {
   const filtered = posts.filter((p) => {
     if (search && !p.title.toLowerCase().includes(search.toLowerCase())) return false;
     if (filterCat !== "all" && p.category !== filterCat) return false;
-    if (filterStatus !== "all" && p.status !== filterStatus) return false;
+    if (filterStatus !== "all" && getPublishLabel(p) !== filterStatus) return false;
     return true;
   });
 
   const totalViews = posts.reduce((sum, p) => sum + (p.views || 0), 0);
-  const published = posts.filter((p) => p.status === "published").length;
-  const drafts = posts.filter((p) => p.status === "draft").length;
+  const published = posts.filter((p) => getPublishLabel(p) === "published").length;
+  const scheduled = posts.filter((p) => getPublishLabel(p) === "scheduled").length;
+  const drafts = posts.filter((p) => getPublishLabel(p) === "draft").length;
 
   if (loading) {
     return (
@@ -74,10 +98,11 @@ export default function AdminBlogList() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
           {[
             { label: "Total", value: posts.length, icon: "📝", bg: "bg-blue-50", text: "text-blue-700" },
             { label: "Published", value: published, icon: "✅", bg: "bg-emerald-50", text: "text-emerald-700" },
+            { label: "Scheduled", value: scheduled, icon: "⏰", bg: "bg-sky-50", text: "text-sky-700" },
             { label: "Draft", value: drafts, icon: "📄", bg: "bg-amber-50", text: "text-amber-700" },
             { label: "Views", value: totalViews, icon: "👁️", bg: "bg-purple-50", text: "text-purple-700" },
           ].map((stat) => (
@@ -116,11 +141,12 @@ export default function AdminBlogList() {
           </select>
           <select
             value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
+            onChange={(e) => setFilterStatus(e.target.value as PublishFilter)}
             className="px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500"
           >
             <option value="all">Semua Status</option>
             <option value="published">Published</option>
+            <option value="scheduled">Scheduled</option>
             <option value="draft">Draft</option>
           </select>
         </div>
@@ -138,7 +164,10 @@ export default function AdminBlogList() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((post) => (
+              {filtered.map((post) => {
+                const publishLabel = getPublishLabel(post);
+                const scheduleDate = getScheduleDate(post);
+                return (
                 <tr key={post.id} className="border-b border-slate-50 hover:bg-slate-50 transition">
                   <td className="px-5 py-3">
                     <p className="text-sm font-medium text-slate-900 truncate max-w-md">{post.title}</p>
@@ -151,11 +180,11 @@ export default function AdminBlogList() {
                   </td>
                   <td className="px-5 py-3 hidden md:table-cell">
                     <div className="flex items-center gap-2">
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${post.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
-                        {post.status}
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${statusStyle[publishLabel]}`}>
+                        {publishLabel}
                       </span>
-                      {post.scheduledAt && post.scheduledAt > new Date().toISOString() && (
-                        <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">⏰ {post.scheduledAt.split("T")[0]}</span>
+                      {publishLabel === "scheduled" && scheduleDate && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-sky-50 text-sky-700 font-medium">⏰ {scheduleDate}</span>
                       )}
                     </div>
                   </td>
@@ -174,7 +203,8 @@ export default function AdminBlogList() {
                     </div>
                   </td>
                 </tr>
-              ))}
+                );
+              })}
               {filtered.length === 0 && (
                 <tr>
                   <td colSpan={5} className="px-5 py-12 text-center">

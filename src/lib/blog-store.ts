@@ -41,12 +41,21 @@ export function getWordCount(content: string): number {
   return content.replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
 }
 
-export function isPostLive(post: BlogPost, now = new Date()): boolean {
+export function isPostScheduled(post: BlogPost, now = new Date()): boolean {
   if (post.status !== "published") return false;
   const isoNow = now.toISOString();
-  if (post.scheduledAt && post.scheduledAt > isoNow) return false;
-  if (post.publishedAt && new Date(post.publishedAt) > now) return false;
-  return true;
+  if (post.scheduledAt && post.scheduledAt > isoNow) return true;
+  if (post.publishedAt && new Date(post.publishedAt) > now) return true;
+  return false;
+}
+
+export function isPostLive(post: BlogPost, now = new Date()): boolean {
+  return post.status === "published" && !isPostScheduled(post, now);
+}
+
+export function getPostPublishLabel(post: BlogPost, now = new Date()): "draft" | "scheduled" | "published" {
+  if (post.status === "draft") return "draft";
+  return isPostScheduled(post, now) ? "scheduled" : "published";
 }
 
 export function isPostIndexable(post: BlogPost, now = new Date()): boolean {
