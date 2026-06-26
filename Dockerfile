@@ -29,6 +29,7 @@ ENV NODE_ENV=production
 ENV HOSTNAME="0.0.0.0"
 ENV PORT=3000
 
+RUN apk add --no-cache su-exec
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
@@ -39,8 +40,6 @@ COPY --from=builder --chown=nextjs:nodejs /app/data ./data
 RUN mkdir -p /app/data /app/public/uploads/blog && chown -R nextjs:nodejs /app/data /app/public
 COPY --from=builder --chown=nextjs:nodejs /app/public/manifest.json ./public/manifest.json
 
-USER nextjs
-
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "chown -R nextjs:nodejs /app/data /app/public/uploads && exec su-exec nextjs:nodejs node server.js"]

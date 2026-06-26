@@ -1,7 +1,9 @@
 import type { MetadataRoute } from "next";
-import { getPublishedPosts } from "@/lib/blog-store";
+import { getIndexablePosts } from "@/lib/blog-store";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://nggawe.web.id";
+
+export const dynamic = "force-dynamic";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages = [
@@ -26,9 +28,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${siteUrl}/privacy-policy`, lastModified: new Date(), changeFrequency: "yearly" as const, priority: 0.3 },
   ];
 
-  const blogPages = getPublishedPosts().map((post) => ({
+  const blogPages = getIndexablePosts().map((post) => ({
     url: `${siteUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.publishedAt),
+    lastModified: new Date(post.updatedAt || post.publishedAt),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));

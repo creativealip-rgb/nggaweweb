@@ -36,6 +36,28 @@ function ensureDir() {
 
 // ── Posts ──
 
+
+export function getWordCount(content: string): number {
+  return content.replace(/<[^>]+>/g, " ").trim().split(/\s+/).filter(Boolean).length;
+}
+
+export function isPostLive(post: BlogPost, now = new Date()): boolean {
+  if (post.status !== "published") return false;
+  const isoNow = now.toISOString();
+  if (post.scheduledAt && post.scheduledAt > isoNow) return false;
+  if (post.publishedAt && new Date(post.publishedAt) > now) return false;
+  return true;
+}
+
+export function isPostIndexable(post: BlogPost, now = new Date()): boolean {
+  return isPostLive(post, now) && getWordCount(post.content || "") >= 800;
+}
+
+export function getIndexablePosts(): BlogPost[] {
+  const now = new Date();
+  return getAllPosts().filter((post) => isPostIndexable(post, now));
+}
+
 export function getAllPosts(): BlogPost[] {
   ensureDir();
   if (!fs.existsSync(DB_PATH)) return [];
@@ -43,12 +65,8 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPublishedPosts(): BlogPost[] {
-  const now = new Date().toISOString();
-  return getAllPosts().filter(
-    (p) =>
-      p.status === "published" &&
-      (!p.scheduledAt || p.scheduledAt <= now)
-  );
+  const now = new Date();
+  return getAllPosts().filter((post) => isPostLive(post, now));
 }
 
 export function getPostBySlug(slug: string): BlogPost | undefined {

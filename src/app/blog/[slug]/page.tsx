@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
-import { getPublishedPosts, getPostBySlug } from "@/lib/blog-store";
+import { getPublishedPosts, getPostBySlug, getWordCount, isPostIndexable, isPostLive } from "@/lib/blog-store";
 import { whatsappHref, siteConfig } from "@/content/site";
 import { Clock, MessageCircle, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/blog/view-counter";
@@ -26,14 +26,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
   const title = post.metaTitle || `${post.title} — Nggawe Web`;
   const description = post.metaDescription || post.excerpt;
+  const indexable = isPostIndexable(post);
   return {
     title,
     description,
     keywords: post.focusKeyword ? [post.focusKeyword] : post.tags,
     alternates: { canonical: `/blog/${slug}` },
+    robots: indexable
+      ? { index: true, follow: true }
+      : { index: false, follow: true, googleBot: { index: false, follow: true } },
     openGraph: {
       title,
       description,
+      type: "article",
+      publishedTime: post.publishedAt,
+      modifiedTime: post.updatedAt || post.publishedAt,
+      authors: ["Nggawe Web"],
       ...(post.ogImage && { images: [post.ogImage] }),
     },
   };
@@ -42,7 +50,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogDetailPage({ params }: Props) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
-  if (!post) notFound();
+  if (!post || !isPostLive(post)) notFound();
+
+  const wordCount = getWordCount(post.content || "");
+  const isIndexable = isPostIndexable(post);
 
   const related = getPublishedPosts()
     .filter((p) => p.slug !== post.slug)
@@ -68,8 +79,22 @@ export default async function BlogDetailPage({ params }: Props) {
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
     keywords: post.tags,
-    author: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
-    publisher: { "@type": "Organization", name: "Nggawe Web", url: siteConfig.url },
+    wordCount,
+    inLanguage: "id-ID",
+    isAccessibleForFree: true,
+    author: {
+      "@type": "Organization",
+      name: "Nggawe Web",
+      url: `${siteConfig.url}/tentang`,
+      sameAs: [siteConfig.url, `${siteConfig.url}/portfolio`],
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Nggawe Web",
+      url: siteConfig.url,
+      logo: { "@type": "ImageObject", url: `${siteConfig.url}/icon.svg` },
+    },
+    about: post.focusKeyword || post.category,
     mainEntityOfPage: { "@type": "WebPage", "@id": `${siteConfig.url}/blog/${post.slug}` },
     ...(post.image && { image: `${siteConfig.url}${post.image}` }),
   };
@@ -111,6 +136,11 @@ export default async function BlogDetailPage({ params }: Props) {
               {post.title}
             </h1>
             <p className="text-lg leading-8 text-slate-700">{post.excerpt}</p>
+            {!isIndexable && (
+              <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm leading-6 text-amber-900">
+                Artikel ini masih dalam tahap pengayaan konten. Kami tetap menyediakan ringkasan awal, tapi halaman ini belum diprioritaskan untuk index Google sampai kontennya lebih lengkap.
+              </div>
+            )}
           </div>
         </section>
 
@@ -120,6 +150,27 @@ export default async function BlogDetailPage({ params }: Props) {
             <div className="flex flex-col gap-10 lg:flex-row">
               {/* Main Article */}
               <article className="min-w-0 flex-1">
+                <Card className="mb-8 border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50 p-6">
+                  <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                    <div>
+                      <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600">E-E-A-T Note</p>
+                      <h2 className="mt-2 font-heading text-2xl font-black tracking-[-0.04em] text-slate-900">Ditulis oleh Nggawe Web</h2>
+                      <p className="mt-3 text-sm leading-7 text-slate-700">
+                        Artikel ini disusun dari pengalaman membangun website, SEO structure, dan automation flow untuk project seperti Cubiqlo, Monev, Contenly, Ganesha Travel, dan Whale Dive Centre.
+                      </p>
+                    </div>
+                    <div className="shrink-0 rounded-2xl bg-white/80 p-4 text-sm text-slate-600">
+                      <p><strong className="text-slate-900">Kategori:</strong> {post.category}</p>
+                      <p><strong className="text-slate-900">Update:</strong> {post.updatedAt || post.publishedAt}</p>
+                      <p><strong className="text-slate-900">Kata:</strong> {wordCount}</p>
+                    </div>
+                  </div>
+                  <div className="mt-5 flex flex-wrap gap-3 text-sm font-semibold">
+                    <Link href="/tentang" className="text-blue-700 hover:text-slate-900">Tentang Nggawe Web →</Link>
+                    <Link href="/portfolio" className="text-blue-700 hover:text-slate-900">Lihat portfolio →</Link>
+                  </div>
+                </Card>
+
                 <div className="prose prose-slate prose-slate max-w-none" dangerouslySetInnerHTML={{ __html: post.content }} />
 
                 {/* Bottom CTA */}
@@ -185,7 +236,7 @@ export default async function BlogDetailPage({ params }: Props) {
                   <Card className="space-y-3 p-5">
                     <p className="font-heading text-sm font-bold text-slate-900">Tentang Nggawe Web</p>
                     <p className="text-xs leading-6 text-slate-600">
-                      Kami bantu bisnis punya website profesional, ditemukan di Google, dan lebih efisien dengan automation.
+                      Kami bantu bisnis punya website profesional, ditemukan di Google, dan lebih efisien dengan automation. Artikel ditulis berdasarkan pengalaman project nyata dan diperbarui saat ada insight baru.
                     </p>
                     <div className="flex gap-4 text-xs text-slate-600">
                       <span>🌐 Website</span>
