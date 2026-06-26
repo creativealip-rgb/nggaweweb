@@ -16,6 +16,7 @@ const briefSchema = z.object({
   businessType: z.string().min(1, "Pilih tipe bisnis"),
   currentWebsite: z.string().optional(),
   servicesNeeded: z.array(z.string()).min(1, "Pilih minimal 1 layanan"),
+  recommendedPackage: z.enum(["starter", "growth", "automation", "not_sure"]),
   projectGoal: z.string().min(10, "Jelaskan goal project minimal 10 karakter"),
   budgetRange: z.string().min(1, "Pilih range budget"),
   timeline: z.string().min(1, "Pilih timeline"),
@@ -29,6 +30,34 @@ const inputClass = "w-full rounded-xl border border-slate-200 bg-white/70 px-4 p
 const labelClass = "mb-2 block text-sm font-semibold text-slate-600";
 const errorClass = "mt-1 text-xs text-red-400";
 
+const packageOptions = [
+  {
+    value: "starter",
+    label: "Website Starter",
+    price: "Rp3,5–7 juta",
+    description: "Untuk website rapi 1–5 halaman, CTA WhatsApp, dan SEO basic.",
+  },
+  {
+    value: "growth",
+    label: "Website Growth System",
+    price: "Rp8–20 juta",
+    description: "Paket utama: website, SEO foundation, analytics, dan lead notification.",
+    recommended: true,
+  },
+  {
+    value: "automation",
+    label: "Automation System",
+    price: "Rp20–50 juta+",
+    description: "Untuk CRM sederhana, follow-up reminder, booking/order flow, atau integrasi API.",
+  },
+  {
+    value: "not_sure",
+    label: "Belum yakin",
+    price: "Butuh rekomendasi",
+    description: "Pilih ini kalau kamu mau kami mapping scope paling masuk akal dari brief.",
+  },
+] as const;
+
 export function BriefForm() {
   const [submitted, setSubmitted] = useState(false);
   const [submitError, setSubmitError] = useState("");
@@ -40,11 +69,12 @@ export function BriefForm() {
     setValue,
   } = useForm<BriefForm>({
     resolver: zodResolver(briefSchema),
-    defaultValues: { preferredContact: "whatsapp", servicesNeeded: [], honeypot: "" },
+    defaultValues: { preferredContact: "whatsapp", recommendedPackage: "growth", servicesNeeded: [], honeypot: "" },
   });
 
   const servicesNeeded = useWatch({ control, name: "servicesNeeded" }) || [];
   const preferredContact = useWatch({ control, name: "preferredContact" });
+  const recommendedPackage = useWatch({ control, name: "recommendedPackage" });
 
   const toggleService = (service: string) => {
     const next = servicesNeeded.includes(service)
@@ -186,6 +216,34 @@ export function BriefForm() {
       </fieldset>
 
       <fieldset className="space-y-5">
+        <legend className="font-heading text-lg font-bold text-slate-900">Paket yang paling mendekati *</legend>
+        <div className="grid gap-3 md:grid-cols-2">
+          {packageOptions.map((pkg) => (
+            <button
+              type="button"
+              key={pkg.value}
+              onClick={() => setValue("recommendedPackage", pkg.value, { shouldValidate: true })}
+              className={cn(
+                "relative rounded-2xl border px-4 py-4 text-left transition",
+                recommendedPackage === pkg.value
+                  ? "border-blue-400 bg-blue-50 text-slate-900 shadow-sm"
+                  : "border-slate-200 bg-white/60 text-slate-600 hover:border-blue-200"
+              )}
+            >
+              {"recommended" in pkg && pkg.recommended && (
+                <span className="mb-2 inline-flex rounded-full bg-blue-600 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-white">
+                  Direkomendasikan
+                </span>
+              )}
+              <span className="block font-heading text-lg font-bold">{pkg.label}</span>
+              <span className="mt-1 block text-sm font-semibold text-blue-600">{pkg.price}</span>
+              <span className="mt-2 block text-xs leading-5 text-slate-500">{pkg.description}</span>
+            </button>
+          ))}
+        </div>
+      </fieldset>
+
+      <fieldset className="space-y-5">
         <legend className="font-heading text-lg font-bold text-slate-900">Detail Project</legend>
         <div>
           <label className={labelClass}>Goal Project *</label>
@@ -197,10 +255,10 @@ export function BriefForm() {
             <label className={labelClass}>Budget Range *</label>
             <select className={inputClass} {...register("budgetRange")}>
               <option value="">Pilih budget</option>
-              <option value="below_3_5m">Di bawah Rp3,5 juta</option>
-              <option value="3_5m_8_5m">Rp3,5 juta – Rp8,5 juta</option>
-              <option value="8_5m_15m">Rp8,5 juta – Rp15 juta</option>
-              <option value="15m_30m">Rp15 juta – Rp30 juta</option>
+              <option value="below_3_5m">Di bawah Rp3,5 juta (belum cocok untuk full project)</option>
+              <option value="3_5m_7m">Rp3,5 juta – Rp7 juta (Starter)</option>
+              <option value="8m_20m">Rp8 juta – Rp20 juta (Growth System)</option>
+              <option value="20m_50m">Rp20 juta – Rp50 juta (Automation/System)</option>
               <option value="30m_plus">Rp30 juta+</option>
               <option value="not_sure">Belum yakin</option>
             </select>
@@ -234,8 +292,8 @@ export function BriefForm() {
       >
         {isSubmitting ? "Mengirim..." : "Kirim Brief Project"}
       </button>
-      <p className="mt-4 text-center text-xs text-slate-400">
-        Data kamu aman. Baca <a href="/privacy-policy" className="underline hover:text-blue-600">Kebijakan Privasi</a> kami.
+      <p className="mt-4 text-center text-xs text-slate-600">
+        Data kamu aman. Baca <a href="/privacy-policy" className="font-semibold underline hover:text-blue-600">Kebijakan Privasi</a> kami.
       </p>
     </form>
   );

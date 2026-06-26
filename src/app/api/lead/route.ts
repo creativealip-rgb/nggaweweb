@@ -34,6 +34,7 @@ export async function POST(request: Request) {
             businessType: body.businessType ?? "",
             currentWebsite: body.currentWebsite ?? "",
             servicesNeeded: body.servicesNeeded ?? [],
+            recommendedPackage: body.recommendedPackage ?? "",
             projectGoal: body.projectGoal ?? "",
             budgetRange: body.budgetRange ?? "",
             timeline: body.timeline ?? "",
