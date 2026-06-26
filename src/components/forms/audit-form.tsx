@@ -19,7 +19,7 @@ const auditSchema = z.object({
 
 type AuditForm = z.infer<typeof auditSchema>;
 
-const inputClass = "w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-sm text-slate-900 placeholder-slate-500 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20";
+const inputClass = "w-full rounded-xl border border-slate-200 bg-white/70 px-4 py-3 text-base text-slate-900 placeholder-slate-500 outline-none transition focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20";
 const labelClass = "mb-2 block text-sm font-semibold text-slate-600";
 const errorClass = "mt-1 text-xs text-red-400";
 
@@ -55,7 +55,7 @@ export function AuditForm() {
   if (submitted) {
     return (
       <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-8 text-center">
-        <h3 className="font-heading text-2xl font-bold text-emerald-300">Request audit berhasil!</h3>
+        <h3 className="font-heading text-2xl font-bold text-emerald-700">Request audit berhasil!</h3>
         <p className="mt-3 text-slate-600">Kami akan cek singkat website kamu dan follow-up hasil awalnya.</p>
       </div>
     );
@@ -110,10 +110,13 @@ export function AuditForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-sm font-bold text-slate-900 shadow-[0_16px_44px_rgba(37,99,235,0.34)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)] disabled:opacity-50"
+        className="w-full rounded-full bg-gradient-to-r from-blue-600 to-cyan-500 px-8 py-4 text-base font-bold text-white shadow-[0_16px_44px_rgba(37,99,235,0.34)] transition hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)] disabled:opacity-50"
       >
         {isSubmitting ? "Mengirim..." : "Minta Audit Gratis"}
       </button>
+      <p className="mt-4 text-center text-xs text-slate-400">
+        Data kamu aman. Baca <a href="/privacy-policy" className="underline hover:text-blue-600">Kebijakan Privasi</a> kami.
+      </p>
     </form>
   );
 }

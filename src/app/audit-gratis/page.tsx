@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { AuditForm } from "@/components/forms/audit-form";
 import { CheckCircle2, Gauge, Layout, Search, Smartphone, Zap } from "lucide-react";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Audit Website dan SEO Gratis — Nggawe Web",
@@ -26,6 +27,9 @@ export default function AuditGratisPage() {
     <>
       <SiteHeader />
       <main>
+        <div className="container-shell py-4">
+          <Breadcrumbs items={[{ label: "Audit Gratis" }]} />
+        </div>
         <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Badge>Audit Gratis</Badge>

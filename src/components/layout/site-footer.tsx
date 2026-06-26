@@ -86,8 +86,8 @@ export function SiteFooter() {
         <div className="container-shell flex flex-col items-center justify-between gap-4 py-6 text-sm text-slate-600 md:flex-row">
           <p>&copy; 2026 NggaweWeb. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="/privacy-policy" className="hover:text-slate-600">Privacy Policy</Link>
-            <Link href="/tentang" className="hover:text-slate-600">Tentang Kami</Link>
+            <Link href="/privacy-policy" className="hover:text-blue-600">Privacy Policy</Link>
+            <Link href="/tentang" className="hover:text-blue-600">Tentang Kami</Link>
           </div>
         </div>
       </div>

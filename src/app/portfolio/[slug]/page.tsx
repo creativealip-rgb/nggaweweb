@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 import { LinkButton } from "@/components/ui/button";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { portfolioItems, type PortfolioItem } from "@/content/portfolio";
+import { portfolioItems } from "@/content/portfolio";
 import { whatsappHref } from "@/content/site";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { ArrowRight, CheckCircle2, ExternalLink } from "lucide-react";
@@ -51,8 +51,8 @@ export default async function PortfolioDetailPage({ params }: Props) {
               <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Portfolio", href: "/portfolio" }, { label: item.name }]} />
               <div className="flex flex-wrap gap-2">
                 <Badge>{item.projectType}</Badge>
-                <Badge className="border-purple-400/20 bg-purple-400/10 text-purple-100">{item.industry}</Badge>
-                <Badge className="border-emerald-400/20 bg-emerald-400/10 text-emerald-100">{item.year}</Badge>
+                <Badge className="border-purple-400/20 bg-purple-50 text-purple-700">{item.industry}</Badge>
+                <Badge className="border-emerald-400/20 bg-emerald-50 text-emerald-700">{item.year}</Badge>
               </div>
               <h1 className="font-heading text-4xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-6xl">
                 {item.name}
@@ -91,7 +91,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
               </div>
             </div>
             <Card>
-              <h3 className="mb-6 font-heading text-xl font-bold">Key Features</h3>
+              <h2 className="mb-6 font-heading text-xl font-bold tracking-[-0.04em] text-slate-900">Key Features</h2>
               <ul className="space-y-4">
                 {item.features.map((f) => (
                   <li className="flex gap-3 text-slate-600" key={f}>
@@ -133,12 +133,14 @@ export default async function PortfolioDetailPage({ params }: Props) {
         {/* Related Projects */}
         <section className="py-20 md:py-28">
           <div className="container-shell space-y-12">
-            <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900">Project lainnya</h2>
+            <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-4xl">Project lainnya</h2>
             <div className="grid gap-5 md:grid-cols-3">
               {related.map((r) => (
                 <Link href={`/portfolio/${r.slug}`} key={r.slug}>
                   <Card className="group">
-                    <div className="mb-4 h-32 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
+                    <div className="mb-4 h-32 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10 flex items-center justify-center">
+                      <span className="text-lg font-bold text-blue-600/60">{r.name}</span>
+                    </div>
                     <h3 className="font-bold group-hover:text-blue-600 transition">{r.name}</h3>
                     <p className="mt-2 text-sm text-slate-400">{r.summary}</p>
                     <div className="mt-4 flex items-center gap-2 text-sm font-semibold text-blue-600">
@@ -162,7 +164,7 @@ export default async function PortfolioDetailPage({ params }: Props) {
                 Ceritakan kebutuhan kamu. Kami bantu rekomendasi solusi dan estimasi yang sesuai.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
+                <LinkButton href={whatsappHref}>
                   Konsultasi Gratis
                 </LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">

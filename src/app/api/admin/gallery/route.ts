@@ -22,3 +22,17 @@ export async function GET() {
 
   return NextResponse.json(files);
 }
+
+export async function DELETE(request: Request) {
+  if (!(await isAuthenticated())) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+  const { searchParams } = new URL(request.url);
+  const name = searchParams.get("name");
+  if (!name) return NextResponse.json({ error: "Name required" }, { status: 400 });
+
+  const filePath = path.join(UPLOAD_DIR, name);
+  if (!fs.existsSync(filePath)) return NextResponse.json({ error: "File not found" }, { status: 404 });
+
+  fs.unlinkSync(filePath);
+  return NextResponse.json({ ok: true });
+}

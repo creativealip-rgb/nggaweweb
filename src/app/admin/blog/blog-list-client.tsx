@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import AdminShell from "@/components/admin/admin-shell";
 
 type Post = {
   id: string;
@@ -42,86 +43,153 @@ export default function AdminBlogList() {
   });
 
   const totalViews = posts.reduce((sum, p) => sum + (p.views || 0), 0);
+  const published = posts.filter((p) => p.status === "published").length;
+  const drafts = posts.filter((p) => p.status === "draft").length;
 
-  if (loading) return <div className="min-h-screen bg-white flex items-center justify-center text-slate-400">Loading...</div>;
+  if (loading) {
+    return (
+      <AdminShell>
+        <div className="flex items-center justify-center py-20">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
+        </div>
+      </AdminShell>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <header className="border-b border-slate-200 px-6 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/admin" className="text-xl font-bold hover:text-blue-600">← Blog Posts</Link>
-          <div className="flex items-center gap-3">
-            <Link href="/admin/gallery" className="px-3 py-2 bg-slate-100 hover:bg-slate-100 text-sm rounded-lg transition">🖼️ Gallery</Link>
-            <Link href="/admin/categories" className="px-3 py-2 bg-slate-100 hover:bg-slate-100 text-sm rounded-lg transition">🏷️ Kategori</Link>
-            <a href="/api/admin/backup" className="px-3 py-2 bg-slate-100 hover:bg-slate-100 text-sm rounded-lg transition">💾 Backup</a>
-            <Link href="/admin/blog/new" className="px-4 py-2 bg-cyan-600 hover:bg-cyan-500 text-sm font-medium rounded-lg transition">+ Tulis Artikel</Link>
+    <AdminShell>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">Blog Posts</h1>
+            <p className="text-sm text-slate-500 mt-1">Kelola semua artikel</p>
           </div>
+          <Link
+            href="/admin/blog/new"
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-sm font-medium rounded-lg shadow-sm transition-all"
+          >
+            <span>+</span> Tulis Artikel
+          </Link>
         </div>
-      </header>
 
-      <main className="max-w-5xl mx-auto px-6 py-8 space-y-6">
         {/* Stats */}
-        <div className="grid grid-cols-4 gap-4">
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-blue-600">{posts.length}</p><p className="text-xs text-slate-400">Total Artikel</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-green-400">{posts.filter((p) => p.status === "published").length}</p><p className="text-xs text-slate-400">Published</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-yellow-400">{posts.filter((p) => p.status === "draft").length}</p><p className="text-xs text-slate-400">Draft</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-purple-600">{totalViews}</p><p className="text-xs text-slate-400">Total Views</p></div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { label: "Total", value: posts.length, icon: "📝", bg: "bg-blue-50", text: "text-blue-700" },
+            { label: "Published", value: published, icon: "✅", bg: "bg-emerald-50", text: "text-emerald-700" },
+            { label: "Draft", value: drafts, icon: "📄", bg: "bg-amber-50", text: "text-amber-700" },
+            { label: "Views", value: totalViews, icon: "👁️", bg: "bg-purple-50", text: "text-purple-700" },
+          ].map((stat) => (
+            <div key={stat.label} className="bg-white rounded-xl border border-slate-200 p-4">
+              <div className="flex items-center gap-3">
+                <span className="text-xl">{stat.icon}</span>
+                <div>
+                  <p className="text-2xl font-bold text-slate-900">{stat.value}</p>
+                  <p className="text-xs text-slate-400">{stat.label}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Search & Filter */}
-        <div className="flex gap-3">
-          <input
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="flex-1 px-4 py-2 bg-white border border-slate-200 rounded-lg text-slate-900 text-sm focus:outline-none focus:border-cyan-500"
-            placeholder="🔍 Cari artikel..."
-          />
-          <select value={filterCat} onChange={(e) => setFilterCat(e.target.value)} className="px-3 py-2 bg-white border border-slate-200 rounded-lg text-slate-900 text-sm focus:outline-none">
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row gap-3">
+          <div className="relative flex-1">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">🔍</span>
+            <input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full pl-9 pr-4 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              placeholder="Cari artikel..."
+            />
+          </div>
+          <select
+            value={filterCat}
+            onChange={(e) => setFilterCat(e.target.value)}
+            className="px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500"
+          >
             <option value="all">Semua Kategori</option>
-            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+            {categories.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
           </select>
-          <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-3 py-2 bg-white border border-slate-200 rounded-lg text-slate-900 text-sm focus:outline-none">
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="px-3 py-2.5 bg-white border border-slate-200 rounded-lg text-sm text-slate-900 focus:outline-none focus:border-blue-500"
+          >
             <option value="all">Semua Status</option>
             <option value="published">Published</option>
             <option value="draft">Draft</option>
           </select>
         </div>
 
-        {/* Posts */}
-        <div className="space-y-3">
-          {filtered.map((post) => (
-            <div key={post.id} className="flex items-center gap-4 p-4 rounded-xl bg-white/70 border border-slate-200 hover:border-slate-200 transition">
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className={`px-2 py-0.5 text-xs rounded-full ${post.status === "published" ? "bg-green-900 text-green-300" : "bg-yellow-900 text-yellow-300"}`}>
-                    {post.status}
-                  </span>
-                  <span className="px-2 py-0.5 text-xs rounded-full bg-slate-100 text-slate-400">{post.category}</span>
-                  {post.scheduledAt && post.scheduledAt > new Date().toISOString() && (
-                    <span className="px-2 py-0.5 text-xs rounded-full bg-blue-900 text-blue-300">⏰ {post.scheduledAt.split("T")[0]}</span>
-                  )}
-                </div>
-                <h3 className="font-medium text-slate-900 truncate">{post.title}</h3>
-                <p className="text-xs text-slate-400 mt-1">
-                  {post.author || "Admin"} · {post.publishedAt} · {post.readTime} · 👁️ {post.views || 0} views
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Link href={`/admin/blog/${post.id}/edit`} className="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-100 rounded-lg transition">Edit</Link>
-                {post.status === "published" && (
-                  <Link href={`/blog/${post.slug}`} target="_blank" className="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-100 rounded-lg transition">View</Link>
-                )}
-                {post.status === "draft" && (
-                  <Link href={`/preview/${post.id}`} target="_blank" className="px-3 py-1.5 text-xs bg-cyan-900 hover:bg-cyan-800 text-blue-600 rounded-lg transition">Preview</Link>
-                )}
-              </div>
-            </div>
-          ))}
-          {filtered.length === 0 && (
-            <p className="text-center text-slate-400 py-8">Tidak ada artikel ditemukan</p>
-          )}
+        {/* Posts Table */}
+        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b border-slate-100">
+                <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3">Artikel</th>
+                <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3 hidden md:table-cell">Kategori</th>
+                <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3 hidden md:table-cell">Status</th>
+                <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3 hidden lg:table-cell">Views</th>
+                <th className="text-right text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3">Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filtered.map((post) => (
+                <tr key={post.id} className="border-b border-slate-50 hover:bg-slate-50 transition">
+                  <td className="px-5 py-3">
+                    <p className="text-sm font-medium text-slate-900 truncate max-w-md">{post.title}</p>
+                    <p className="text-xs text-slate-400 mt-0.5">
+                      {post.author || "Admin"} · {post.publishedAt} · {post.readTime}
+                    </p>
+                  </td>
+                  <td className="px-5 py-3 hidden md:table-cell">
+                    <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">{post.category}</span>
+                  </td>
+                  <td className="px-5 py-3 hidden md:table-cell">
+                    <div className="flex items-center gap-2">
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${post.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                        {post.status}
+                      </span>
+                      {post.scheduledAt && post.scheduledAt > new Date().toISOString() && (
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">⏰ {post.scheduledAt.split("T")[0]}</span>
+                      )}
+                    </div>
+                  </td>
+                  <td className="px-5 py-3 hidden lg:table-cell">
+                    <span className="text-sm text-slate-600">{post.views || 0}</span>
+                  </td>
+                  <td className="px-5 py-3">
+                    <div className="flex items-center justify-end gap-2">
+                      <Link href={`/admin/blog/${post.id}/edit`} className="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition font-medium">Edit</Link>
+                      {post.status === "published" && (
+                        <Link href={`/blog/${post.slug}`} target="_blank" className="px-3 py-1.5 text-xs bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-lg transition font-medium">View</Link>
+                      )}
+                      {post.status === "draft" && (
+                        <Link href={`/preview/${post.id}`} target="_blank" className="px-3 py-1.5 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg transition font-medium">Preview</Link>
+                      )}
+                    </div>
+                  </td>
+                </tr>
+              ))}
+              {filtered.length === 0 && (
+                <tr>
+                  <td colSpan={5} className="px-5 py-12 text-center">
+                    <p className="text-4xl mb-2">📭</p>
+                    <p className="text-slate-400">Tidak ada artikel ditemukan</p>
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      </main>
-    </div>
+
+        {/* Footer info */}
+        <p className="text-xs text-slate-400 text-right">{filtered.length} dari {posts.length} artikel</p>
+      </div>
+    </AdminShell>
   );
 }

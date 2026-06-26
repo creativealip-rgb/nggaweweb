@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { whatsappHref } from "@/content/site";
 import { ArrowRight, CheckCircle2, Code2, Search, Bot } from "lucide-react";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Tentang Nggawe Web — Website, SEO, dan Automation",
@@ -18,6 +19,9 @@ export default function TentangPage() {
     <>
       <SiteHeader />
       <main>
+        <div className="container-shell py-4">
+          <Breadcrumbs items={[{ label: "Tentang Kami" }]} />
+        </div>
         <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Badge>Tentang</Badge>
@@ -33,7 +37,7 @@ export default function TentangPage() {
         <section className="py-20 md:py-28">
           <div className="container-shell grid items-start gap-12 lg:grid-cols-[1fr_1fr]">
             <div className="space-y-6">
-              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-slate-900 md:text-4xl">Kenapa Nggawe Web?</h2>
+              <h2 className="font-heading text-3xl font-black tracking-[-0.03em] text-slate-900 md:text-4xl">Kenapa Nggawe Web?</h2>
               <p className="text-lg leading-8 text-slate-700">
                 Banyak agency bikin website yang bagus tapi tidak menghasilkan. Banyak freelancer bikin website cepat tapi tidak sustainable. Nggawe Web ada di tengah: design premium, technical SEO kuat, dan automation yang bikin bisnis jalan lebih efisien.
               </p>
@@ -72,17 +76,35 @@ export default function TentangPage() {
           </div>
         </section>
 
+        <section className="py-12 md:py-16">
+          <div className="container-shell">
+            <div className="grid grid-cols-2 gap-6 rounded-2xl border border-slate-200 bg-slate-50 p-8 text-center md:grid-cols-4">
+              {[
+                { value: "50+", label: "Project Selesai" },
+                { value: "3+", label: "Tahun Pengalaman" },
+                { value: "100%", label: "SEO-Ready" },
+                { value: "24jam", label: "Response Time" },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-heading text-3xl font-black text-blue-600">{stat.value}</p>
+                  <p className="mt-1 text-sm text-slate-500">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="pb-20 md:pb-28">
           <div className="container-shell rounded-[2rem] border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
-              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">
-                Mau mulai project?
+              <h2 className="font-heading text-3xl font-black tracking-[-0.03em] text-white drop-shadow-sm md:text-5xl">
+                Mau website yang bukan cuma bagus, tapi juga bekerja untuk bisnis kamu?
               </h2>
               <p className="text-lg leading-8 text-white">
-                Ceritakan kebutuhan kamu. Kami bantu rekomendasi solusi yang paling masuk akal.
+                Ceritakan kebutuhan kamu. Kami bantu mapping solusi paling masuk akal: mulai dari website, SEO, sampai automation.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
+                <LinkButton href={whatsappHref}>
                   Konsultasi Gratis <ArrowRight size={16} />
                 </LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">

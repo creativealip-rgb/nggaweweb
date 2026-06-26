@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { Accordion } from "@/components/ui/accordion";
 import { LinkButton } from "@/components/ui/button";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { whatsappHref } from "@/content/site";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "FAQ Website, SEO, dan Automation — Nggawe Web",
@@ -67,6 +68,9 @@ export default function FaqPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }} />
       <SiteHeader />
       <main>
+        <div className="container-shell py-4">
+          <Breadcrumbs items={[{ label: "FAQ" }]} />
+        </div>
         <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Badge>FAQ</Badge>
@@ -80,10 +84,9 @@ export default function FaqPage() {
           <div className="container-shell">
             <div className="mx-auto max-w-3xl space-y-4">
               {faqs.map((faq) => (
-                <Card key={faq.q} className="p-6">
-                  <h3 className="font-heading text-lg font-bold">{faq.q}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-400">{faq.a}</p>
-                </Card>
+                <Accordion key={faq.q} title={faq.q}>
+                  {faq.a}
+                </Accordion>
               ))}
             </div>
           </div>

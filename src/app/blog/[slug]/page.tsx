@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +10,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { getPublishedPosts, getPostBySlug } from "@/lib/blog-store";
 import { whatsappHref, siteConfig } from "@/content/site";
-import { ArrowRight, Clock, MessageCircle, FileText } from "lucide-react";
+import { Clock, MessageCircle, FileText } from "lucide-react";
 import { ViewCounter } from "@/components/blog/view-counter";
 import { BlogAnalytics } from "@/components/blog/blog-analytics";
 
@@ -82,12 +83,19 @@ export default async function BlogDetailPage({ params }: Props) {
       <SiteHeader />
       <main>
         {/* Hero */}
-        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-16 md:py-20">
+        <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell max-w-5xl space-y-6">
             <Breadcrumbs items={[{ label: "Beranda", href: "/" }, { label: "Blog", href: "/blog" }, { label: post.title }]} />
             {post.image && (
               <div className="overflow-hidden rounded-2xl border border-slate-200">
-                <img src={post.image} alt={post.title} className="w-full object-cover max-h-[400px]" />
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={960}
+                  height={480}
+                  priority
+                  className="max-h-[400px] w-full object-cover"
+                />
               </div>
             )}
             <div className="flex items-center gap-3">
@@ -116,10 +124,10 @@ export default async function BlogDetailPage({ params }: Props) {
 
                 {/* Bottom CTA */}
                 <div className="mt-12 rounded-2xl border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8">
-                  <h3 className="font-heading text-2xl font-bold">Butuh bantuan untuk project kamu?</h3>
+                  <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">Butuh bantuan untuk project kamu?</h2>
                   <p className="mt-3 text-white/90">Ceritakan kebutuhanmu. Kami bantu rekomendasi solusi yang tepat.</p>
                   <div className="mt-6 flex gap-3">
-                    <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
+                    <LinkButton href={whatsappHref}>
                       Konsultasi Gratis
                     </LinkButton>
                     <LinkButton href="/brief-project" variant="secondary">
@@ -138,7 +146,7 @@ export default async function BlogDetailPage({ params }: Props) {
                           <div className="rounded-2xl border border-slate-200 bg-white/70 p-5 transition hover:border-blue-300">
                             {r.image && (
                               <div className="mb-3 overflow-hidden rounded-xl">
-                                <img src={r.image} alt={r.title} className="h-28 w-full object-cover" />
+                                <Image src={r.image} alt={r.title} width={360} height={160} className="h-28 w-full object-cover" />
                               </div>
                             )}
                             <Badge>{r.category}</Badge>
@@ -165,7 +173,7 @@ export default async function BlogDetailPage({ params }: Props) {
                         <p className="text-xs text-slate-600">Chat langsung via WhatsApp</p>
                       </div>
                     </div>
-                    <LinkButton href={whatsappHref} className="w-full bg-emerald-500 hover:bg-emerald-500 text-slate-900 shadow-none">
+                    <LinkButton href={whatsappHref} className="w-full">
                       💬 Konsultasi Gratis
                     </LinkButton>
                     <LinkButton href="/brief-project" variant="secondary" className="w-full">
@@ -195,7 +203,7 @@ export default async function BlogDetailPage({ params }: Props) {
                           <Link href={`/blog/${r.slug}`} key={r.slug} className="group flex gap-3">
                             {r.image ? (
                               <div className="h-14 w-14 shrink-0 overflow-hidden rounded-lg bg-slate-100">
-                                <img src={r.image} alt={r.title} className="h-full w-full object-cover" />
+                                <Image src={r.image} alt={r.title} width={80} height={80} className="h-full w-full object-cover" />
                               </div>
                             ) : (
                               <div className="h-14 w-14 shrink-0 rounded-lg bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />

@@ -6,7 +6,6 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { whatsappHref } from "@/content/site";
 import { ArrowRight, CheckCircle2, XCircle } from "lucide-react";
-import type { LucideIcon } from "lucide-react";
 
 export type ServicePageData = {
   relatedServices?: { label: string; href: string; description: string }[];
@@ -104,7 +103,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               {data.problems.map((p) => (
                 <Card key={p.title}>
                   <XCircle className="mb-5 text-red-400" />
-                  <h3 className="font-heading text-xl font-bold tracking-[-0.03em]">{p.title}</h3>
+                  <h3 className="font-heading text-2xl font-bold tracking-[-0.03em]">{p.title}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">{p.body}</p>
                 </Card>
               ))}
@@ -123,7 +122,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               <p className="text-lg leading-8 text-slate-700">{data.valueProp.body}</p>
             </div>
             <Card>
-              <h3 className="mb-6 font-heading text-xl font-bold">Yang kamu dapat</h3>
+              <h3 className="mb-6 font-heading text-2xl font-bold">Yang kamu dapat</h3>
               <ul className="space-y-4">
                 {data.deliverables.map((d) => (
                   <li className="flex gap-3 text-slate-600" key={d}>
@@ -144,7 +143,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               {data.processSteps.map((step, i) => (
                 <Card key={step.title}>
                   <p className="font-mono text-sm text-blue-600">0{i + 1}</p>
-                  <h3 className="mt-3 font-heading text-xl font-bold">{step.title}</h3>
+                  <h3 className="mt-3 font-heading text-2xl font-bold">{step.title}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">{step.body}</p>
                 </Card>
               ))}
@@ -161,7 +160,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 <a key={item.name} href={`/portfolio/${toSlug(item.name)}`} className="group block">
                   <Card className="transition group-hover:border-cyan-400/40">
                     <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
-                    <h3 className="font-bold group-hover:text-blue-600 transition">{item.name}</h3>
+                    <h3 className="font-heading text-2xl font-bold group-hover:text-blue-600 transition">{item.name}</h3>
                     <p className="mt-2 text-sm text-slate-400">{item.description}</p>
                   </Card>
                 </a>
@@ -177,10 +176,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           <section className="bg-white/40 py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Cocok untuk siapa" title={`${data.eyebrow} cocok untuk bisnis seperti apa?`} />
-              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
+              <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {data.fitFor.map((item) => (
                   <Card key={item.title} className="p-6">
-                    <h3 className="font-heading text-lg font-bold text-slate-900">{item.title}</h3>
+                    <h3 className="font-heading text-2xl font-bold text-slate-900">{item.title}</h3>
                     <p className="mt-3 text-sm leading-7 text-slate-400">{item.body}</p>
                   </Card>
                 ))}
@@ -194,7 +193,9 @@ export function ServicePage({ data }: { data: ServicePageData }) {
           <section className="py-20 md:py-28">
             <div className="container-shell space-y-12">
               <SectionHeader align="center" eyebrow="Perbandingan" title="Pilih opsi yang paling sesuai dengan kebutuhan" />
-              <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white/70">
+              <div className="relative">
+                <div className="pointer-events-none absolute right-0 top-0 bottom-0 z-10 w-8 bg-gradient-to-l from-white to-transparent md:hidden" />
+                <div className="overflow-x-auto rounded-3xl border border-slate-200 bg-white/70">
                 <table className="w-full min-w-[760px] text-left text-sm">
                   <thead className="bg-white/5 text-slate-700">
                     <tr>
@@ -214,11 +215,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                   </tbody>
                 </table>
               </div>
+              </div>
             </div>
           </section>
         )}
-
-        {/* Proof Blocks */}
         {data.proofBlocks && data.proofBlocks.length > 0 && (
           <section className="bg-white/40 py-20 md:py-28">
             <div className="container-shell space-y-12">
@@ -226,7 +226,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               <div className="grid gap-5 lg:grid-cols-3">
                 {data.proofBlocks.map((item) => (
                   <Card key={item.project} className="p-7">
-                    <h3 className="font-heading text-xl font-bold text-slate-900">{item.project}</h3>
+                    <h3 className="font-heading text-2xl font-bold text-slate-900">{item.project}</h3>
                     <div className="mt-5 space-y-4 text-sm leading-7 text-slate-700">
                       <p><strong className="text-red-300">Challenge:</strong> {item.challenge}</p>
                       <p><strong className="text-blue-600">Solution:</strong> {item.solution}</p>
@@ -247,7 +247,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
               <div className="mx-auto max-w-4xl space-y-10">
                 {data.pillarSections.map((section) => (
                   <Card key={section.title} className="p-7 md:p-9">
-                    <h2 className="font-heading text-2xl font-black tracking-[-0.04em] text-slate-900 md:text-3xl">{section.title}</h2>
+                    <h2 className="font-heading text-2xl font-black tracking-[-0.04em] text-slate-900 md:text-4xl">{section.title}</h2>
                     <p className="mt-4 text-base leading-8 text-slate-700">{section.body}</p>
                     {section.points && section.points.length > 0 && (
                       <ul className="mt-6 space-y-3">
@@ -289,7 +289,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
             <div className="mx-auto max-w-3xl space-y-4">
               {data.faqs.map((faq) => (
                 <Card key={faq.question} className="p-6">
-                  <h3 className="font-heading text-lg font-bold">{faq.question}</h3>
+                  <h3 className="font-heading text-2xl font-bold">{faq.question}</h3>
                   <p className="mt-3 text-sm leading-7 text-slate-400">{faq.answer}</p>
                 </Card>
               ))}
@@ -307,7 +307,7 @@ export function ServicePage({ data }: { data: ServicePageData }) {
                 {data.relatedServices.map((svc) => (
                   <a key={svc.href} href={svc.href} className="group block">
                     <Card className="transition group-hover:border-cyan-400/40">
-                      <h3 className="font-bold group-hover:text-blue-600 transition">{svc.label}</h3>
+                      <h3 className="font-heading text-2xl font-bold group-hover:text-blue-600 transition">{svc.label}</h3>
                       <p className="mt-2 text-sm text-slate-400">{svc.description}</p>
                     </Card>
                   </a>
@@ -320,10 +320,10 @@ export function ServicePage({ data }: { data: ServicePageData }) {
         <section className="pb-20 md:pb-28">
           <div className="container-shell rounded-[2rem] border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
-              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] md:text-5xl">{data.finalCta.heading}</h2>
-              <p className="text-lg leading-8 text-white">{data.finalCta.body}</p>
+              <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">Mau website yang bukan cuma bagus, tapi juga bekerja untuk bisnis kamu?</h2>
+              <p className="text-lg leading-8 text-white">Ceritakan kebutuhan kamu. Kami bantu mapping solusi paling masuk akal: mulai dari website, SEO, sampai automation.</p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>Konsultasi Gratis</LinkButton>
+                <LinkButton href={whatsappHref}>Konsultasi Gratis</LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">Isi Brief Project</LinkButton>
               </div>
             </div>

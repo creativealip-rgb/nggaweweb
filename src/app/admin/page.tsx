@@ -2,6 +2,7 @@ import Link from "next/link";
 import { isAuthenticated } from "@/lib/admin-auth";
 import { redirect } from "next/navigation";
 import { getAllPosts, getCategories } from "@/lib/blog-store";
+import AdminShell from "@/components/admin/admin-shell";
 
 export const dynamic = "force-dynamic";
 
@@ -11,39 +12,121 @@ export default async function AdminDashboard() {
   const posts = getAllPosts();
   const categories = getCategories();
   const totalViews = posts.reduce((sum, p) => sum + (p.views || 0), 0);
+  const published = posts.filter((p) => p.status === "published").length;
+  const drafts = posts.filter((p) => p.status === "draft").length;
+
+  const stats = [
+    { label: "Total Artikel", value: posts.length, icon: "📝", color: "from-blue-500 to-blue-600", bg: "bg-blue-50", text: "text-blue-700" },
+    { label: "Published", value: published, icon: "✅", color: "from-emerald-500 to-emerald-600", bg: "bg-emerald-50", text: "text-emerald-700" },
+    { label: "Draft", value: drafts, icon: "📄", color: "from-amber-500 to-amber-600", bg: "bg-amber-50", text: "text-amber-700" },
+    { label: "Total Views", value: totalViews, icon: "👁️", color: "from-purple-500 to-purple-600", bg: "bg-purple-50", text: "text-purple-700" },
+    { label: "Kategori", value: categories.length, icon: "🏷️", color: "from-cyan-500 to-cyan-600", bg: "bg-cyan-50", text: "text-cyan-700" },
+  ];
+
+  const quickLinks = [
+    { href: "/admin/blog", icon: "📝", label: "Blog Posts", desc: "Kelola artikel", count: posts.length },
+    { href: "/admin/gallery", icon: "🖼️", label: "Gallery", desc: "Kelola gambar" },
+    { href: "/admin/categories", icon: "🏷️", label: "Kategori", desc: "Tambah/hapus", count: categories.length },
+    { href: "/api/admin/backup", icon: "💾", label: "Backup", desc: "Download data", isApi: true },
+    { href: "/admin/analytics", icon: "📈", label: "Analytics", desc: "Traffic & leads" },
+  ];
+
+  // Recent posts
+  const recentPosts = posts
+    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())
+    .slice(0, 5);
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <header className="border-b border-slate-200 px-6 py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <h1 className="text-xl font-bold">NggaweWeb Admin</h1>
-          <div className="flex items-center gap-3">
-            <a href="/" target="_blank" className="text-sm text-slate-400 hover:text-slate-900 transition">🌐 Lihat Website</a>
-            <form action="/api/admin/logout" method="POST"><button className="text-sm text-red-400 hover:text-red-300 transition">Logout</button></form>
-          </div>
+    <AdminShell>
+      <div className="space-y-8">
+        {/* Header */}
+        <div>
+          <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
+          <p className="text-sm text-slate-500 mt-1">Overview website dan konten kamu</p>
         </div>
-      </header>
-      <main className="max-w-4xl mx-auto px-6 py-8 space-y-8">
-        <h2 className="text-2xl font-bold">Dashboard</h2>
 
         {/* Stats */}
-        <div className="grid grid-cols-5 gap-4">
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-blue-600">{posts.length}</p><p className="text-xs text-slate-400">Artikel</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-green-400">{posts.filter((p) => p.status === "published").length}</p><p className="text-xs text-slate-400">Published</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-yellow-400">{posts.filter((p) => p.status === "draft").length}</p><p className="text-xs text-slate-400">Draft</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-purple-600">{totalViews}</p><p className="text-xs text-slate-400">Views</p></div>
-          <div className="p-4 rounded-xl bg-white border border-slate-200"><p className="text-2xl font-bold text-orange-400">{categories.length}</p><p className="text-xs text-slate-400">Kategori</p></div>
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-white rounded-xl border border-slate-200 p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-2xl">{stat.icon}</span>
+                <span className={`text-[10px] font-medium px-2 py-0.5 rounded-full ${stat.bg} ${stat.text}`}>{stat.label}</span>
+              </div>
+              <p className="text-3xl font-bold text-slate-900">{stat.value}</p>
+            </div>
+          ))}
         </div>
 
-        {/* Quick links */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <Link href="/admin/blog" className="p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 transition"><h3 className="text-lg font-bold">📝 Blog Posts</h3><p className="text-sm text-slate-400 mt-1">Kelola artikel</p></Link>
-          <Link href="/admin/gallery" className="p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 transition"><h3 className="text-lg font-bold">🖼️ Gallery</h3><p className="text-sm text-slate-400 mt-1">Kelola gambar</p></Link>
-          <Link href="/admin/categories" className="p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 transition"><h3 className="text-lg font-bold">🏷️ Kategori</h3><p className="text-sm text-slate-400 mt-1">Tambah/hapus kategori</p></Link>
-          <a href="/api/admin/backup" className="p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 transition"><h3 className="text-lg font-bold">💾 Backup</h3><p className="text-sm text-slate-400 mt-1">Download data</p></a>
-          <Link href="/admin/analytics" className="p-5 rounded-xl bg-white border border-slate-200 hover:border-blue-400 transition"><h3 className="text-lg font-bold">📊 Analytics</h3><p className="text-sm text-slate-400 mt-1">Traffic & leads</p></Link>
+        {/* Quick Links */}
+        <div>
+          <h2 className="text-lg font-semibold text-slate-900 mb-4">Quick Actions</h2>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {quickLinks.map((link) => {
+              const Wrapper = link.isApi ? "a" : Link;
+              return (
+                <Wrapper
+                  key={link.label}
+                  href={link.href}
+                  className="group bg-white rounded-xl border border-slate-200 p-5 hover:border-blue-300 hover:shadow-md transition-all"
+                >
+                  <span className="text-3xl block mb-3">{link.icon}</span>
+                  <h3 className="font-semibold text-slate-900 group-hover:text-blue-700 transition">{link.label}</h3>
+                  <p className="text-xs text-slate-400 mt-1">{link.desc}</p>
+                  {link.count !== undefined && (
+                    <p className="text-xs font-medium text-blue-600 mt-2">{link.count} items</p>
+                  )}
+                </Wrapper>
+              );
+            })}
+          </div>
         </div>
-      </main>
-    </div>
+
+        {/* Recent Posts */}
+        <div>
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-slate-900">Artikel Terbaru</h2>
+            <Link href="/admin/blog" className="text-sm text-blue-600 hover:text-blue-700 font-medium">Lihat semua →</Link>
+          </div>
+          <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-slate-100">
+                  <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3">Judul</th>
+                  <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3 hidden md:table-cell">Kategori</th>
+                  <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3 hidden md:table-cell">Status</th>
+                  <th className="text-left text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3 hidden lg:table-cell">Views</th>
+                  <th className="text-right text-xs font-medium text-slate-400 uppercase tracking-wider px-5 py-3">Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                {recentPosts.map((post) => (
+                  <tr key={post.id} className="border-b border-slate-50 hover:bg-slate-50 transition">
+                    <td className="px-5 py-3">
+                      <p className="text-sm font-medium text-slate-900 truncate max-w-xs">{post.title}</p>
+                      <p className="text-xs text-slate-400 mt-0.5">{post.publishedAt}</p>
+                    </td>
+                    <td className="px-5 py-3 hidden md:table-cell">
+                      <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">{post.category}</span>
+                    </td>
+                    <td className="px-5 py-3 hidden md:table-cell">
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${post.status === "published" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}>
+                        {post.status}
+                      </span>
+                    </td>
+                    <td className="px-5 py-3 hidden lg:table-cell">
+                      <span className="text-sm text-slate-600">{post.views || 0}</span>
+                    </td>
+                    <td className="px-5 py-3 text-right">
+                      <Link href={`/admin/blog/${post.id}/edit`} className="text-xs text-blue-600 hover:text-blue-700 font-medium">Edit</Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </AdminShell>
   );
 }

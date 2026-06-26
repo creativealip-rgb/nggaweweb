@@ -1,11 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { LinkButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { whatsappHref } from "@/content/site";
-import { ArrowRight, Calculator, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Calculator } from "lucide-react";
 
 type Option = { value: string; label: string; price: number };
 
@@ -57,8 +56,6 @@ export function WebsiteCostCalculator() {
       prev.includes(value) ? prev.filter((v) => v !== value) : [...prev, value]
     );
   };
-
-  const step = !websiteType ? 0 : !pageCount ? 1 : 2;
 
   return (
     <div className="grid gap-8 lg:grid-cols-[1fr_0.8fr]">
@@ -135,7 +132,7 @@ export function WebsiteCostCalculator() {
       </div>
 
       {/* Estimate Card */}
-      <div className="sticky top-28 self-start rounded-2xl border border-slate-200 bg-white/80 p-6 backdrop-blur">
+      <div className="sticky top-28 max-h-[calc(100vh-8rem)] overflow-y-auto self-start rounded-2xl border border-slate-200 bg-white/80 p-6 backdrop-blur">
         <div className="flex items-center gap-3 mb-6">
           <Calculator className="text-blue-600" size={24} />
           <h3 className="font-heading text-lg font-bold text-slate-900">Estimasi Biaya</h3>

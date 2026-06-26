@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { BriefForm } from "@/components/forms/brief-form";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Brief Project Website, SEO, atau Automation — Nggawe Web",
@@ -15,6 +16,9 @@ export default function BriefProjectPage() {
     <>
       <SiteHeader />
       <main>
+        <div className="container-shell py-4">
+          <Breadcrumbs items={[{ label: "Brief Project" }]} />
+        </div>
         <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell grid items-start gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div className="space-y-8">

@@ -4,13 +4,12 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { LinkButton } from "@/components/ui/button";
-import { SectionHeader } from "@/components/ui/section-header";
 import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { portfolioItems } from "@/content/portfolio";
 import { whatsappHref } from "@/content/site";
-import { ArrowRight, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Portfolio Website dan Digital Product — Nggawe Web",
@@ -61,6 +60,7 @@ export default function PortfolioPage() {
               ))}
             </div>
 
+            <h2 className="font-heading text-3xl font-black tracking-[-0.03em] text-slate-900 md:text-4xl">Project Pilihan</h2>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               {portfolioItems.map((item) => (
                 <Link href={`/portfolio/${item.slug}`} key={item.slug}>
@@ -70,7 +70,7 @@ export default function PortfolioPage() {
                     </div>
                     <div className="flex flex-wrap gap-2">
                       <Badge>{item.projectType}</Badge>
-                      <Badge className="border-purple-400/20 bg-purple-400/10 text-purple-100">{item.industry}</Badge>
+                      <Badge className="border-purple-400/20 bg-purple-50 text-purple-700">{item.industry}</Badge>
                     </div>
                     <h3 className="mt-4 font-heading text-xl font-bold tracking-[-0.03em] group-hover:text-blue-600 transition">
                       {item.name}
@@ -90,13 +90,13 @@ export default function PortfolioPage() {
           <div className="container-shell rounded-[2rem] border-2 border-blue-400 bg-gradient-to-r from-blue-600 to-cyan-500 shadow-xl shadow-blue-500/20 p-8 md:p-14">
             <div className="max-w-3xl space-y-6">
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">
-                Mau buat project serupa?
+                Mau website yang bukan cuma bagus, tapi juga bekerja untuk bisnis kamu?
               </h2>
               <p className="text-lg leading-8 text-white">
-                Ceritakan kebutuhan project kamu. Kami bantu rekomendasi solusi dan estimasi yang sesuai.
+                Ceritakan kebutuhan kamu. Kami bantu mapping solusi paling masuk akal: mulai dari website, SEO, sampai automation.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>
+                <LinkButton href={whatsappHref}>
                   Konsultasi Gratis
                 </LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">

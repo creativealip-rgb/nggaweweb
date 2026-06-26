@@ -1,18 +1,25 @@
 "use client";
 
+declare global {
+  interface Window {
+    plausible?: (name: string, options?: { props?: Record<string, string> }) => void;
+    gtag?: (command: "event", name: string, props?: Record<string, string>) => void;
+  }
+}
+
 // Track custom events for Plausible and GA4
 export function trackEvent(
   name: string,
   props?: Record<string, string>
 ) {
   // Plausible
-  if (typeof window !== "undefined" && (window as any).plausible) {
-    (window as any).plausible(name, { props });
+  if (typeof window !== "undefined" && window.plausible) {
+    window.plausible(name, { props });
   }
 
   // GA4
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", name, props);
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", name, props);
   }
 }
 

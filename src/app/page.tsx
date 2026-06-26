@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight, CheckCircle2, Database, Mail, MessageCircle, Send, Workflow, XCircle, ChevronRight } from "lucide-react";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -16,7 +17,6 @@ const painPoints = [
   ["Tidak ada sistem growth", "Website tidak terhubung dengan analytics, automation, dan proses bisnis yang jelas."],
 ];
 
-const portfolio = ["Cubiqlo", "Monev.app", "Contenly.app", "Ganesha Travel", "Whale Dive Centre"];
 const process: [string, string][] = [
   ["Discovery", "Pahami bisnis, target, dan kebutuhan."],
   ["Strategy", "Rancang struktur, konten, dan SEO plan."],
@@ -36,7 +36,7 @@ export default function Home() {
             <div className="space-y-8">
               <Badge>Jasa Website, SEO, dan Automation</Badge>
               <div className="space-y-6">
-                <h1 className="font-heading text-5xl font-black leading-[0.95] tracking-[-0.07em] text-slate-900 md:text-7xl">
+                <h1 className="font-heading text-5xl font-black leading-[1.05] tracking-[-0.07em] text-slate-900 md:text-7xl">
                   Website premium, <span className="text-gradient">SEO-ready</span>, dan automation buat bisnis yang mau tumbuh lebih rapi.
                 </h1>
                 <p className="max-w-2xl text-lg leading-8 text-slate-700 md:text-xl">
@@ -66,7 +66,7 @@ export default function Home() {
                     <div className="h-8 w-3/4 rounded-full bg-white/12" />
                     <div className="h-4 w-full rounded-full bg-white/8" />
                     <div className="h-4 w-2/3 rounded-full bg-white/8" />
-                    <div className="grid grid-cols-3 gap-3 pt-4">
+                    <div className="grid grid-cols-3 gap-2 pt-4 sm:gap-3">
                       <div className="h-24 rounded-2xl bg-blue-50" />
                       <div className="h-24 rounded-2xl bg-cyan-500/20" />
                       <div className="h-24 rounded-2xl bg-purple-50" />
@@ -82,6 +82,17 @@ export default function Home() {
                 <Workflow className="text-blue-300" size={22} />
                 <div><p className="text-sm font-bold">Automation ready</p><p className="text-xs text-slate-400">n8n workflow</p></div>
               </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-10">
+          <div className="container-shell">
+            <p className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-slate-400">Dipercaya oleh</p>
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+              {["Cubiqlo", "Whale Dive Centre", "Ganesha Travel", "Monev", "Contenly"].map((brand) => (
+                <span key={brand} className="text-lg font-bold text-slate-300 select-none">{brand}</span>
+              ))}
             </div>
           </div>
         </section>
@@ -157,15 +168,30 @@ export default function Home() {
         <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Portfolio" title="Beberapa project yang sudah dibangun." description="Dari website bisnis service sampai platform aplikasi, setiap project dibuat dengan fokus pada tampilan, performa, struktur, dan kebutuhan bisnis." />
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-5">
-              {["Cubiqlo", "Monev.app", "Contenly.app", "Ganesha Travel", "Whale Dive Centre"].map((item) => {
-                const slug = item.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 justify-items-center">
+              {[
+                { name: "Cubiqlo", desc: "Client operations hub — kelola client, project, invoice, dan portal dalam satu workspace.", screenshot: "/screenshots/cubiqlo.webp" },
+                { name: "Monev.app", desc: "AI financial assistant — catat transaksi dalam 2 detik, auto-kategorisasi, dan insight keuangan.", screenshot: "/screenshots/monev-app.webp" },
+                { name: "Contenly.app", desc: "AI content automation — riset, tulis, dan publish konten SEO otomatis ke WordPress.", screenshot: "/screenshots/contenly-app.webp" },
+                { name: "Ganesha Travel", desc: "Website travel bilingual (ID/EN) dengan tour catalog, booking flow, dan SEO lokal.", screenshot: "/screenshots/ganesha-travel.webp" },
+                { name: "Whale Dive Centre", desc: "Scuba diving centre — kursus, peralatan, trip schedule, dan portal member.", screenshot: "/screenshots/whale-dive-centre.webp" },
+              ].map((item) => {
+                const slug = item.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-+$/, "");
                 return (
-                  <Link href={`/portfolio/${slug}`} key={item}>
-                    <Card className="min-h-40 group cursor-pointer hover:border-blue-300 transition">
-                      <div className="mb-5 h-20 rounded-2xl bg-gradient-to-br from-blue-500/25 to-cyan-300/10" />
-                      <h3 className="font-bold group-hover:text-blue-600 transition">{item}</h3>
-                      <p className="mt-2 text-sm text-slate-400">Project showcase</p>
+                  <Link href={`/portfolio/${slug}`} key={item.name} className="w-full max-w-sm">
+                    <Card className="group cursor-pointer overflow-hidden w-full">
+                      <div className="-mx-6 -mt-6 mb-5 h-40 overflow-hidden bg-slate-100">
+                        <Image
+                          src={item.screenshot}
+                          alt={item.name}
+                          width={480}
+                          height={300}
+                          sizes="(min-width: 1024px) 384px, (min-width: 768px) 50vw, 100vw"
+                          className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                      <h3 className="font-bold group-hover:text-blue-600 transition">{item.name}</h3>
+                      <p className="mt-2 text-sm text-slate-400">{item.desc}</p>
                     </Card>
                   </Link>
                 );
@@ -177,7 +203,7 @@ export default function Home() {
         <section className="py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Process" title="Proses kerja jelas dari strategi sampai launch." />
-            <div className="grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+            <div className="grid gap-4 md:grid-cols-3">
               {process.map(([step, desc], index) => <Card className="p-5" key={step}><p className="text-sm font-mono text-blue-600">0{index + 1}</p><h3 className="mt-3 font-bold">{step}</h3><p className="mt-2 text-sm text-slate-400">{desc}</p></Card>)}
             </div>
           </div>
@@ -186,7 +212,7 @@ export default function Home() {
         <section className="bg-white/40 py-20 md:py-28">
           <div className="container-shell space-y-12">
             <SectionHeader align="center" eyebrow="Testimonial" title="Klien bilang apa tentang hasil kerja kami." description="Feedback real dari bisnis yang sudah merasakan dampak website yang dikerjakan dengan serius." />
-            <div className="grid gap-6 md:grid-cols-3">
+            <div className="flex flex-wrap justify-center gap-6">
               {[
                 { name: "Budi Santoso", role: "Owner, Ganesha Travel", quote: "Website baru bikin inquiry dari Google naik drastis. Tim Nggawe Web paham banget soal SEO dan struktur website untuk bisnis travel.", stars: 5 },
                 { name: "Sarah K.", role: "Founder, Cubiqlo", quote: "Design-nya clean, profesional, dan loading cepat. Customer langsung percaya begitu lihat website. Prosesnya juga rapi dari awal sampai launch.", stars: 5 },
@@ -194,13 +220,13 @@ export default function Home() {
                 { name: "Dewi Lestari", role: "Owner, UMKM Fashion", quote: "Sebelumnya cuma jualan di Instagram. Setelah punya website dari Nggawe Web, order dari Google Maps dan search naik signifikan. Harga juga masuk akal untuk UMKM.", stars: 5 },
                 { name: "Andi Wijaya", role: "Digital Agency, Jakarta", quote: "Kami pakai Nggawe Web sebagai partner build untuk beberapa project klien. Hasilnya konsisten, komunikasi lancar, dan selalu on-time. Recommended untuk white-label.", stars: 5 },
               ].map((t) => (
-                <Card key={t.name}>
+                <Card key={t.name} className="w-full max-w-sm">
                   <div className="flex gap-1 mb-4">
                     {Array.from({ length: t.stars }).map((_, i) => (
                       <span key={i} className="text-yellow-400">★</span>
                     ))}
                   </div>
-                  <p className="text-sm leading-7 text-slate-700 italic">"{t.quote}"</p>
+                  <p className="text-sm leading-7 text-slate-700 italic">&ldquo;{t.quote}&rdquo;</p>
                   <div className="mt-6 flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-gradient-to-br from-cyan-500 to-blue-600 flex items-center justify-center text-slate-900 font-bold text-sm">
                       {t.name.split(" ").map((n) => n[0]).join("")}
@@ -222,7 +248,7 @@ export default function Home() {
               <h2 className="font-heading text-3xl font-black tracking-[-0.04em] text-white drop-shadow-sm md:text-5xl">Mau website yang bukan cuma bagus, tapi juga bekerja untuk bisnis kamu?</h2>
               <p className="text-lg leading-8 text-white">Ceritakan kebutuhan kamu. Kami bantu mapping solusi paling masuk akal: mulai dari website, SEO, sampai automation.</p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <LinkButton className="bg-emerald-500 text-white shadow-lg shadow-emerald-500/30 hover:bg-emerald-600" href={whatsappHref}>Konsultasi Gratis</LinkButton>
+                <LinkButton href={whatsappHref}>Konsultasi Gratis</LinkButton>
                 <LinkButton href="/brief-project" variant="secondary">Isi Brief Project</LinkButton>
               </div>
             </div>

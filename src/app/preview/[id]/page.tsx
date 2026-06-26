@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { getPostById, getPublishedPosts } from "@/lib/blog-store";
+import { getPostById } from "@/lib/blog-store";
 import { Badge } from "@/components/ui/badge";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";

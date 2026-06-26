@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useRouter, useParams } from "next/navigation";
-import Link from "next/link";
+import AdminShell from "@/components/admin/admin-shell";
 import HtmlEditor from "@/components/admin/html-editor";
 
 export default function EditBlogPage() {
@@ -86,53 +86,106 @@ export default function EditBlogPage() {
     setDeleting(false);
   };
 
-  if (loading) return <div className="min-h-screen bg-white flex items-center justify-center text-slate-400">Loading...</div>;
+  if (loading) {
+    return (
+      <AdminShell>
+        <div className="flex items-center justify-center py-20">
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
+        </div>
+      </AdminShell>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <header className="border-b border-slate-200 px-6 py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link href="/admin/blog" className="text-xl font-bold hover:text-blue-600">← Edit Artikel</Link>
+    <AdminShell>
+      <div className="max-w-4xl space-y-6">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl font-bold text-slate-900">Edit Artikel</h1>
+            <p className="text-sm text-slate-500 mt-1">👁️ {form.views} views</p>
+          </div>
           <div className="flex items-center gap-3">
-            <span className="text-sm text-slate-400">👁️ {form.views} views</span>
-            {form.status === "draft" && <Link href={`/preview/${id}`} target="_blank" className="px-3 py-2 bg-cyan-900 hover:bg-cyan-800 text-blue-600 text-sm rounded-lg transition">Preview</Link>}
-            <button onClick={handleDelete} disabled={deleting} className="px-4 py-2 bg-red-900 hover:bg-red-800 text-red-200 text-sm rounded-lg transition disabled:opacity-50">{deleting ? "Menghapus..." : "Hapus"}</button>
-            <button onClick={handleSave} disabled={saving} className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 text-slate-900 font-medium rounded-lg transition disabled:opacity-50">{saving ? "Menyimpan..." : "Simpan"}</button>
+            {form.status === "draft" && (
+              <a href={`/preview/${id}`} target="_blank" className="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-sm font-medium rounded-lg transition">Preview</a>
+            )}
+            <button
+              onClick={handleDelete}
+              disabled={deleting}
+              className="px-4 py-2.5 bg-red-50 hover:bg-red-100 text-red-600 text-sm font-medium rounded-lg transition disabled:opacity-50"
+            >
+              {deleting ? "Menghapus..." : "Hapus"}
+            </button>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white text-sm font-medium rounded-lg shadow-sm transition-all disabled:opacity-50"
+            >
+              {saving ? "Menyimpan..." : "Simpan"}
+            </button>
           </div>
         </div>
-      </header>
-      <main className="max-w-4xl mx-auto px-6 py-8 space-y-5">
-        {/* Basic Info */}
-        <section className="space-y-4">
-          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">Info Artikel</h2>
-          <div><label className="block text-sm text-slate-600 mb-1">Judul</label><input value={form.title} onChange={(e) => update("title", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
-          <div className="grid grid-cols-2 gap-4">
-            <div><label className="block text-sm text-slate-600 mb-1">Slug</label><input value={form.slug} onChange={(e) => update("slug", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-600 mb-1">Kategori</label>
-              <select value={form.category} onChange={(e) => update("category", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500">
+
+        {/* Info */}
+        <section className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
+          <h2 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+            <span className="w-6 h-6 rounded bg-blue-100 text-blue-700 flex items-center justify-center text-xs">1</span>
+            Info Artikel
+          </h2>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Judul</label>
+            <input value={form.title} onChange={(e) => update("title", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Slug</label>
+              <input value={form.slug} onChange={(e) => update("slug", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Kategori</label>
+              <select value={form.category} onChange={(e) => update("category", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500">
                 {categories.map((c) => <option key={c} value={c}>{c}</option>)}
               </select>
             </div>
           </div>
-          <div><label className="block text-sm text-slate-600 mb-1">Excerpt</label><textarea value={form.excerpt} onChange={(e) => update("excerpt", e.target.value)} rows={2} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
-          <div className="grid grid-cols-4 gap-4">
-            <div><label className="block text-sm text-slate-600 mb-1">Tags (koma)</label><input value={form.tags} onChange={(e) => update("tags", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-600 mb-1">Read Time</label><input value={form.readTime} onChange={(e) => update("readTime", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-600 mb-1">Author</label><input value={form.author} onChange={(e) => update("author", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500 text-sm" /></div>
-            <div><label className="block text-sm text-slate-600 mb-1">Status</label>
-              <select value={form.status} onChange={(e) => update("status", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500"><option value="draft">Draft</option><option value="published">Published</option></select>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Excerpt</label>
+            <textarea value={form.excerpt} onChange={(e) => update("excerpt", e.target.value)} rows={2} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Tags</label>
+              <input value={form.tags} onChange={(e) => update("tags", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Read Time</label>
+              <input value={form.readTime} onChange={(e) => update("readTime", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Author</label>
+              <input value={form.author} onChange={(e) => update("author", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1.5">Status</label>
+              <select value={form.status} onChange={(e) => update("status", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500">
+                <option value="draft">Draft</option><option value="published">Published</option>
+              </select>
             </div>
           </div>
-          <div><label className="block text-sm text-slate-600 mb-1">⏰ Schedule Publish</label>
-            <input type="datetime-local" value={form.scheduledAt} onChange={(e) => update("scheduledAt", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" />
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">⏰ Schedule Publish</label>
+            <input type="datetime-local" value={form.scheduledAt} onChange={(e) => update("scheduledAt", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
           </div>
         </section>
 
         {/* Content */}
-        <section className="space-y-3">
-          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">Konten</h2>
-          <div className="flex items-center gap-3">
-            <label className="px-4 py-2 bg-slate-100 hover:bg-slate-100 text-sm rounded-lg cursor-pointer transition">
+        <section className="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+              <span className="w-6 h-6 rounded bg-blue-100 text-blue-700 flex items-center justify-center text-xs">2</span>
+              Konten
+            </h2>
+            <label className="inline-flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-sm rounded-lg cursor-pointer transition">
               {uploading ? "Uploading..." : "📷 Upload Gambar"}
               <input ref={fileRef} type="file" accept="image/*" onChange={handleUpload} className="hidden" disabled={uploading} />
             </label>
@@ -141,24 +194,44 @@ export default function EditBlogPage() {
         </section>
 
         {/* SEO */}
-        <section className="space-y-4">
-          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">🔍 SEO Settings</h2>
-          <div><label className="block text-sm text-slate-600 mb-1">Focus Keyword</label><input value={form.focusKeyword} onChange={(e) => update("focusKeyword", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
-          <div><label className="block text-sm text-slate-600 mb-1">Meta Title</label><input value={form.metaTitle} onChange={(e) => update("metaTitle", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" maxLength={60} /><p className="text-xs text-slate-400 mt-1">{form.metaTitle.length}/60</p></div>
-          <div><label className="block text-sm text-slate-600 mb-1">Meta Description</label><textarea value={form.metaDescription} onChange={(e) => update("metaDescription", e.target.value)} rows={2} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" maxLength={160} /><p className="text-xs text-slate-400 mt-1">{form.metaDescription.length}/160</p></div>
-          <div><label className="block text-sm text-slate-600 mb-1">OG Image URL</label><input value={form.ogImage} onChange={(e) => update("ogImage", e.target.value)} className="w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-cyan-500" /></div>
+        <section className="bg-white rounded-xl border border-slate-200 p-6 space-y-5">
+          <h2 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+            <span className="w-6 h-6 rounded bg-blue-100 text-blue-700 flex items-center justify-center text-xs">3</span>
+            SEO Settings
+          </h2>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Focus Keyword</label>
+            <input value={form.focusKeyword} onChange={(e) => update("focusKeyword", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Meta Title</label>
+            <input value={form.metaTitle} onChange={(e) => update("metaTitle", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" maxLength={60} />
+            <p className="text-xs text-slate-400 mt-1">{form.metaTitle.length}/60</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">Meta Description</label>
+            <textarea value={form.metaDescription} onChange={(e) => update("metaDescription", e.target.value)} rows={2} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" maxLength={160} />
+            <p className="text-xs text-slate-400 mt-1">{form.metaDescription.length}/160</p>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1.5">OG Image URL</label>
+            <input value={form.ogImage} onChange={(e) => update("ogImage", e.target.value)} className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-lg text-slate-900 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500" />
+          </div>
         </section>
 
         {/* Google Preview */}
-        <section className="space-y-2">
-          <h2 className="text-lg font-bold text-blue-600 border-b border-slate-200 pb-2">Google Preview</h2>
-          <div className="p-4 bg-white rounded-lg">
+        <section className="bg-white rounded-xl border border-slate-200 p-6 space-y-3">
+          <h2 className="text-base font-semibold text-slate-900 flex items-center gap-2">
+            <span className="w-6 h-6 rounded bg-blue-100 text-blue-700 flex items-center justify-center text-xs">4</span>
+            Google Preview
+          </h2>
+          <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
             <p className="text-blue-800 text-lg font-medium truncate">{form.metaTitle || form.title || "Judul"}</p>
             <p className="text-green-700 text-xs">nggawe.web.id/blog/{form.slug || "slug"}</p>
             <p className="text-gray-600 text-sm mt-1 line-clamp-2">{form.metaDescription || form.excerpt || "Deskripsi..."}</p>
           </div>
         </section>
-      </main>
-    </div>
+      </div>
+    </AdminShell>
   );
 }

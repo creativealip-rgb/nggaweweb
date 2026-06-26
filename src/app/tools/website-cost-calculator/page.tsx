@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { WebsiteCostCalculator } from "@/components/calculators/website-cost-calculator";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
 
 export const metadata: Metadata = {
   title: "Kalkulator Biaya Website — Nggawe Web",
@@ -15,6 +16,9 @@ export default function WebsiteCostCalculatorPage() {
     <>
       <SiteHeader />
       <main>
+        <div className="container-shell py-4">
+          <Breadcrumbs items={[{ label: "Kalkulator Biaya Website" }]} />
+        </div>
         <section className="relative overflow-hidden border-b border-slate-200 bg-grid py-20 md:py-28">
           <div className="container-shell space-y-8">
             <Badge>Tools</Badge>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
-type ButtonVariant = "primary" | "secondary" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "secondaryOnLight" | "ghost";
 
 type SharedProps = {
   variant?: ButtonVariant;
@@ -18,11 +18,12 @@ const variants: Record<ButtonVariant, string> = {
     "bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-[0_16px_44px_rgba(37,99,235,0.34)] hover:-translate-y-0.5 hover:shadow-[0_20px_56px_rgba(37,99,235,0.42)]",
   secondary:
     "border-2 border-white/40 bg-white/20 text-white backdrop-blur-sm hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/30",
+  secondaryOnLight: "border-2 border-slate-200 bg-white text-slate-900 hover:border-blue-300 hover:text-blue-600 hover:bg-blue-50/50",
   ghost: "text-blue-700 hover:text-slate-900 hover:bg-white/[0.06]",
 };
 
 const base =
-  "inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 text-sm font-bold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex h-12 items-center justify-center gap-2 rounded-full px-5 text-base font-bold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cyan-300 disabled:pointer-events-none disabled:opacity-50";
 
 export function Button({ variant = "primary", className, children, ...props }: ButtonProps) {
   return (
